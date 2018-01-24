@@ -2,7 +2,10 @@ package entity.user;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 
 /**
@@ -10,15 +13,16 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class User {
     private Long id;
     private String firstName;
     private String lastName;
-
-    public User(Long id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    private String email;
+    private String password;
+    private String phone;
+    private String address;
+    private LocalDate registrationDate;
+    private Role role;
 }

@@ -7,7 +7,4 @@ import entity.user.User;
  */
 public class UserDao {
 
-    public User get(Long id) {
-        return new User(id, "Arnold", "Schwarzenegger");
-    }
 }
