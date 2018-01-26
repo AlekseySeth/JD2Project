@@ -1,58 +1,53 @@
 CREATE DATABASE sport_nutrition;
 USE sport_nutrition;
 
-CREATE TABLE roles (
-  id   INT,
-  name VARCHAR(15),
-  PRIMARY KEY (id)
-);
-
-INSERT INTO roles (id, name) VALUES (0, 'Гость');
-INSERT INTO roles (id, name) VALUES (1, 'Администратор');
-INSERT INTO roles (id, name) VALUES (2, 'Маркетолог');
-INSERT INTO roles (id, name) VALUES (3, 'Покупатель');
-
 CREATE TABLE users (
   id                INT AUTO_INCREMENT,
   first_name        VARCHAR(50)         NOT NULL,
   last_name         VARCHAR(50),
   email             VARCHAR(100) UNIQUE NOT NULL,
   password          VARCHAR(50)         NOT NULL,
-  phone             VARCHAR(20)         NOT NULL,
+  mobile            VARCHAR(20)         NOT NULL,
   address           VARCHAR(100)        NOT NULL,
   registration_date TIMESTAMP,
-  role_id           INT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (role_id) REFERENCES roles (id)
+  role              VARCHAR(15)         NOT NULL,
+  PRIMARY KEY (id)
 )
   AUTO_INCREMENT = 1000;
 
-INSERT INTO users (id, first_name, email, password, phone, address, registration_date, role_id)
+INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
 VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by',
-        '2017-12-01', 1);
-INSERT INTO users (id, first_name, email, password, phone, address, registration_date, role_id)
+        '2017-12-01', 'ADMIN');
+INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
 VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by',
-        'marketer@sportpit.by', '2017-12-01', 2);
+        'marketer@sportpit.by', '2017-12-01', 'MARKETER');
 
 CREATE TABLE categories (
   id          INT AUTO_INCREMENT,
-  name        VARCHAR(30) NOT NULL,
+  name        VARCHAR(30) UNIQUE NOT NULL,
   description TEXT,
-  parent_id   INT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (parent_id) REFERENCES categories (id)
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE brands (
+  id          INT AUTO_INCREMENT,
+  name        VARCHAR(30)UNIQUE NOT NULL,
+  logo_url TEXT,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE products (
-  id          INT          AUTO_INCREMENT,
-  name        VARCHAR(100) UNICODE NOT NULL,
-  description TEXT,
-  price       DOUBLE               NOT NULL,
-  qty         INT                  NOT NULL,
-  category_id INT,
-  image_url   VARCHAR(100) DEFAULT '/images/default.png',
+  id           INT          AUTO_INCREMENT,
+  title        VARCHAR(100) UNIQUE NOT NULL,
+  description  TEXT,
+  price        DOUBLE              NOT NULL,
+  qty_in_stock INT                 NOT NULL,
+  category     INT,
+  brand        INT,
+  image_url    VARCHAR(100) DEFAULT '/images/default.png',
   PRIMARY KEY (id),
-  FOREIGN KEY (category_id) REFERENCES categories (id)
+  FOREIGN KEY (category) REFERENCES categories (id),
+  FOREIGN KEY (brand) REFERENCES brands (id)
 )
   AUTO_INCREMENT = 1000;
 
@@ -235,38 +230,11 @@ INSERT INTO categories (id, name, description) VALUES (7, 'Жиросжигат�
 которые способствуют эффективному снижению массы тела за счет редукции жировых отложений спортсмена. Кроме того с их
 помощью легче концентрироваться на выполнении упражнений и облегчаются тренировки.');
 
-INSERT INTO categories (id, name, parent_id) VALUES (11, 'Biotech', 1);
-INSERT INTO categories (id, name, parent_id) VALUES (12, 'QNT', 1);
-INSERT INTO categories (id, name, parent_id) VALUES (13, 'Olimp', 1);
-INSERT INTO categories (id, name, parent_id) VALUES (14, 'ActivLab', 1);
-INSERT INTO categories (id, name, parent_id) VALUES (15, 'IronMaxx', 1);
-
-INSERT INTO categories (id, name, parent_id) VALUES (21, 'Biotech', 2);
-INSERT INTO categories (id, name, parent_id) VALUES (22, 'QNT', 2);
-INSERT INTO categories (id, name, parent_id) VALUES (23, 'Olimp', 2);
-
-INSERT INTO categories (id, name, parent_id) VALUES (31, 'Biotech', 3);
-INSERT INTO categories (id, name, parent_id) VALUES (32, 'QNT', 3);
-INSERT INTO categories (id, name, parent_id) VALUES (33, 'Olimp', 3);
-INSERT INTO categories (id, name, parent_id) VALUES (34, 'IronMaxx', 3);
-
-INSERT INTO categories (id, name, parent_id) VALUES (41, 'Biotech', 4);
-INSERT INTO categories (id, name, parent_id) VALUES (42, 'QNT', 4);
-INSERT INTO categories (id, name, parent_id) VALUES (43, 'Olimp', 4);
-INSERT INTO categories (id, name, parent_id) VALUES (44, 'IronMaxx', 4);
-
-INSERT INTO categories (id, name, parent_id) VALUES (51, 'Biotech', 5);
-INSERT INTO categories (id, name, parent_id) VALUES (52, 'QNT', 5);
-INSERT INTO categories (id, name, parent_id) VALUES (53, 'Olimp', 5);
-INSERT INTO categories (id, name, parent_id) VALUES (54, 'IronMaxx', 5);
-
-INSERT INTO categories (id, name, parent_id) VALUES (61, 'Biotech', 6);
-INSERT INTO categories (id, name, parent_id) VALUES (62, 'QNT', 6);
-INSERT INTO categories (id, name, parent_id) VALUES (63, 'Olimp', 6);
-
-INSERT INTO categories (id, name, parent_id) VALUES (71, 'Biotech', 7);
-INSERT INTO categories (id, name, parent_id) VALUES (72, 'QNT', 7);
-INSERT INTO categories (id, name, parent_id) VALUES (73, 'Olimp', 7);
+INSERT INTO brands (id, name, logo_url) VALUES (11, 'Biotech', '');
+INSERT INTO brands (id, name, logo_url) VALUES (12, 'QNT', '');
+INSERT INTO brands (id, name, logo_url) VALUES (13, 'Olimp', '');
+INSERT INTO brands (id, name, logo_url) VALUES (14, 'ActivLab', '');
+INSERT INTO brands (id, name, logo_url) VALUES (15, 'IronMaxx', '');
 
 #Protein
 #Biotech
