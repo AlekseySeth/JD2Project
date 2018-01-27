@@ -1,4 +1,4 @@
-package entity.product;
+package entity.order;
 
 import entity.util.IdentifiableEntity;
 import lombok.Getter;
@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  * @author a.shestovsky
@@ -16,12 +17,12 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "brands")
-public class Brand extends IdentifiableEntity {
+@Table(name = "deliveries")
+public class Delivery extends IdentifiableEntity {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "logo_url")
-    private String logoURL;
+    @Column(name = "cost", nullable = false)
+    private BigDecimal cost;
 }

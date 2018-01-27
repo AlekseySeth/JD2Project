@@ -1,12 +1,13 @@
 package entity.product;
 
-import entity.IdentifiableEntity;
+import entity.util.IdentifiableEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
@@ -33,10 +34,12 @@ public class Product extends IdentifiableEntity {
     @Column(name = "qty_in_stock", nullable = false)
     private int qtyInStock;
 
-    @Column(name = "category")
+    @ManyToOne
+    @Column(name = "category_id", nullable = false)
     private Category category;
 
-    @Column(name = "brand")
+    @ManyToOne
+    @Column(name = "brand_id", nullable = false)
     private Brand brand;
 
     @Column(name = "image_url")

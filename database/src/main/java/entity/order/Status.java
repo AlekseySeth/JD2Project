@@ -1,30 +1,33 @@
-package entity.user;
+package entity.order;
 
 import entity.util.EnumAsString;
 
 /**
  * @author a.shestovsky
  */
-public enum Role implements EnumAsString {
-    GUEST {
+public enum Status implements EnumAsString {
+    OPEN {
         @Override
         public String getAsString() {
-            return "Гость";
+            return "Открыт";
         }
-    }, ADMIN {
+    },
+    IN_PROGRESS {
         @Override
         public String getAsString() {
-            return "Администратор";
+            return "В обработке";
         }
-    }, MARKETER {
+    },
+    COMPLETED {
         @Override
         public String getAsString() {
-            return "Маркетолог";
+            return "Доставлен";
         }
-    }, CUSTOMER {
+    },
+    CLOSED {
         @Override
         public String getAsString() {
-            return "Покупатель";
+            return "Отменен";
         }
     }
 }

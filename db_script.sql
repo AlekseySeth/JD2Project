@@ -2,52 +2,45 @@ CREATE DATABASE sport_nutrition;
 USE sport_nutrition;
 
 CREATE TABLE users (
-  id                INT AUTO_INCREMENT,
+  id                BIGINT AUTO_INCREMENT,
   first_name        VARCHAR(50)         NOT NULL,
   last_name         VARCHAR(50),
   email             VARCHAR(100) UNIQUE NOT NULL,
   password          VARCHAR(50)         NOT NULL,
   mobile            VARCHAR(20)         NOT NULL,
   address           VARCHAR(100)        NOT NULL,
-  registration_date TIMESTAMP,
+  registration_date DATE,
   role              VARCHAR(15)         NOT NULL,
   PRIMARY KEY (id)
 )
   AUTO_INCREMENT = 1000;
 
-INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
-VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by',
-        '2017-12-01', 'ADMIN');
-INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
-VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by',
-        'marketer@sportpit.by', '2017-12-01', 'MARKETER');
-
 CREATE TABLE categories (
-  id          INT AUTO_INCREMENT,
+  id          BIGINT AUTO_INCREMENT,
   name        VARCHAR(30) UNIQUE NOT NULL,
   description TEXT,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE brands (
-  id          INT AUTO_INCREMENT,
-  name        VARCHAR(30)UNIQUE NOT NULL,
+  id       BIGINT AUTO_INCREMENT,
+  name     VARCHAR(30) UNIQUE NOT NULL,
   logo_url TEXT,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE products (
-  id           INT          AUTO_INCREMENT,
+  id           BIGINT       AUTO_INCREMENT,
   title        VARCHAR(100) UNIQUE NOT NULL,
   description  TEXT,
   price        DOUBLE              NOT NULL,
   qty_in_stock INT                 NOT NULL,
-  category     INT,
-  brand        INT,
+  category_id  BIGINT              NOT NULL,
+  brand_id     BIGINT              NOT NULL,
   image_url    VARCHAR(100) DEFAULT '/images/default.png',
   PRIMARY KEY (id),
-  FOREIGN KEY (category) REFERENCES categories (id),
-  FOREIGN KEY (brand) REFERENCES brands (id)
+  FOREIGN KEY (category_id) REFERENCES categories (id),
+  FOREIGN KEY (brand_id) REFERENCES brands (id)
 )
   AUTO_INCREMENT = 1000;
 
@@ -58,37 +51,23 @@ CREATE TABLE deliveries (
   PRIMARY KEY (id)
 );
 
-INSERT INTO deliveries (name, cost) VALUES ('Самовывоз', 0.0);
-INSERT INTO deliveries (name, cost) VALUES ('Стандартная доставка', 3.50);
-INSERT INTO deliveries (name, cost) VALUES ('Экспресс доставка', 5.00);
-
-CREATE TABLE statuses (
-  id   INT AUTO_INCREMENT,
-  name VARCHAR(15) UNIQUE NOT NULL,
-  PRIMARY KEY (id)
-);
-
-INSERT INTO statuses (name) VALUES ('Открыт');
-INSERT INTO statuses (name) VALUES ('В обработке');
-INSERT INTO statuses (name) VALUES ('Доставлен');
-INSERT INTO statuses (name) VALUES ('Отменен');
-
 CREATE TABLE orders (
-  id          INT AUTO_INCREMENT,
-  status_id   INT    NOT NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                DEFAULT 1,
-  total_price DOUBLE NOT NULL,
-  delivery_id INT    NOT NULL,
-  open_date   TIMESTAMP,
-  close_date  TIMESTAMP,
+  id          BIGINT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  AUTO_INCREMENT,
+  user_id     BIGINT      NOT NULL,
+  status      VARCHAR(15) NOT NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                DEFAULT 1,
+  total_price DOUBLE      NOT NULL,
+  delivery_id BIGINT      NOT NULL,
+  open_date   DATETIME,
+  close_date  DATETIME,
   PRIMARY KEY (id),
-  FOREIGN KEY (delivery_id) REFERENCES deliveries (id),
-  FOREIGN KEY (status_id) REFERENCES statuses (id)
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (delivery_id) REFERENCES deliveries (id)
 )
   AUTO_INCREMENT = 1000;
 
 CREATE TABLE orders_products (
-  order_id    INT,
-  product_id  INT,
+  order_id    BIGINT,
+  product_id  BIGINT,
   product_qty INT NOT NULL,
   PRIMARY KEY (order_id, product_id),
   FOREIGN KEY (order_id) REFERENCES orders (id),
@@ -109,91 +88,19 @@ CREATE TABLE pages (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE roles_pages (
-  role_id INT,
-  page_id INT,
-  FOREIGN KEY (role_id) REFERENCES roles (id),
-  FOREIGN KEY (page_id) REFERENCES pages (id)
-);
+
+INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
+VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by',
+        '2017-12-01', 'ADMIN');
+INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
+VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by',
+        'marketer@sportpit.by', '2017-12-01', 'MARKETER');
+
+INSERT INTO deliveries (name, cost) VALUES ('Самовывоз', 0.0);
+INSERT INTO deliveries (name, cost) VALUES ('Стандартная доставка', 3.50);
+INSERT INTO deliveries (name, cost) VALUES ('Экспресс доставка', 5.00);
 
 ##Permissions##
-INSERT INTO pages (url) VALUES ('/admin');
-INSERT INTO pages (url) VALUES ('/cart');
-INSERT INTO pages (url) VALUES ('/download-order');
-INSERT INTO pages (url) VALUES ('/login');
-INSERT INTO pages (url) VALUES ('/log-out');
-INSERT INTO pages (url) VALUES ('/marketer');
-INSERT INTO pages (url) VALUES ('/my-account');
-INSERT INTO pages (url) VALUES ('/order');
-INSERT INTO pages (url) VALUES ('/order-placed');
-INSERT INTO pages (url) VALUES ('/orders-list');
-INSERT INTO pages (url) VALUES ('/products-list');
-INSERT INTO pages (url) VALUES ('/registration');
-INSERT INTO pages (url) VALUES ('/update-order');
-INSERT INTO pages (url) VALUES ('/update-password');
-INSERT INTO pages (url) VALUES ('/update-product');
-INSERT INTO pages (url) VALUES ('/update-profile');
-INSERT INTO pages (url) VALUES ('/update-user');
-INSERT INTO pages (url) VALUES ('/user');
-INSERT INTO pages (url) VALUES ('/users-list');
-INSERT INTO pages (url) VALUES ('/add-product');
-INSERT INTO pages (url) VALUES ('/remove-from-cart');
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 1);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 2);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 3);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 5);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 6);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 7);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 8);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 9);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 10);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 11);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 13);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 14);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 15);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 16);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 17);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 18);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 19);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 20);
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 21);
-
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 2);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 3);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 4);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 6);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 9);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 12);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 16);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 20);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 21);
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 1);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 2);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 3);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 4);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 9);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 12);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 16);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 17);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 18);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 19);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 21);
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 1);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 4);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 6);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 10);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 11);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 12);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 13);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 15);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 17);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 18);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 19);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 20);
 
 ##Products##
 

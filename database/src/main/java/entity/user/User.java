@@ -1,7 +1,7 @@
 package entity.user;
 
-import entity.IdentifiableEntity;
-import lombok.EqualsAndHashCode;
+import entity.order.Order;
+import entity.util.IdentifiableEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,8 +10,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author a.shestovsky
@@ -19,7 +22,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "users")
 public class User extends IdentifiableEntity {
@@ -48,5 +50,8 @@ public class User extends IdentifiableEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
 
 }

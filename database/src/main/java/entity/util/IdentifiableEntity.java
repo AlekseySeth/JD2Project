@@ -1,4 +1,4 @@
-package entity;
+package entity.util;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
