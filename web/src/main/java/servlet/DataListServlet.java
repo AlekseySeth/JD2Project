@@ -1,8 +1,5 @@
 package servlet;
 
-import entity.user.User;
-import service.UserService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,20 +9,14 @@ import java.io.IOException;
 
 import static util.ServletUtil.getPath;
 
-/**
- * @author a.shestovsky
- */
-
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
+@WebServlet(name = "/data-list")
+public class DataListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserService();
-        User userById = userService.getUserById(1L);
-        req.setAttribute("user", userById);
+
         req.getServletContext()
-                .getRequestDispatcher(getPath("user"))
+                .getRequestDispatcher(getPath("data-list"))
                 .forward(req, resp);
     }
 }

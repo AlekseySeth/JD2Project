@@ -75,11 +75,19 @@ CREATE TABLE orders_products (
 );
 
 CREATE TABLE users_orders (
-  user_id  INT,
-  order_id INT,
+  user_id  BIGINT,
+  order_id BIGINT,
   PRIMARY KEY (user_id, order_id),
   FOREIGN KEY (user_id) REFERENCES users (id),
   FOREIGN KEY (order_id) REFERENCES orders (id)
+);
+
+CREATE TABLE promotions (
+  id          BIGINT AUTO_INCREMENT,
+  name        VARCHAR(100),
+  is_active   BOOLEAN,
+  promo_value DOUBLE,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE pages (
@@ -145,7 +153,7 @@ INSERT INTO brands (id, name, logo_url) VALUES (15, 'IronMaxx', '');
 
 #Protein
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, image_url)
 VALUES ('Protein Power Biotech USA 1000',
         'Protein Power – превосходный протеиновый порошок для целеустремлённых атлетов, которым необходимы продукты с высоким содержанием белка.
         Как и вся продукция BioTech USA, Protein Power содержит только безопасные для здоровья и тщательно отобранные ингредиенты.
@@ -155,7 +163,7 @@ VALUES ('Protein Power Biotech USA 1000',
         47.70, 100, 11,
         '/images/Protein Power Biotech USA 1000.png');
 
-INSERT INTO products (name, description, price, qty, category_id, image_url)
+INSERT INTO products (title, description, price, qty, category_id, image_url)
 VALUES ('Iso Whey Zero Biotech USA 908',
         'Iso Whey Zero  от  BioTechUSA  -  чистейший изолят сывороточного белка. Чрезвычайно высокая биологическая ценность,  высокая скорость  усваивания белков делает Iso Whey Zero  абсолютно уникальным.
         Продукт Не содержит лактозы, трансжиров и сахара. Iso Whey Zero изготовлен из безопасных для здоровья и тщательно отобранных нутриентов. Никаких лишних или скрытых нутриентов, которые могут откладываться в виде жира. Только  протеин в каждой порции!
@@ -164,7 +172,7 @@ VALUES ('Iso Whey Zero Biotech USA 908',
         89.90, 100, 11,
         '/images/Iso Whey Zero Biotech USA 908.png');
 
-INSERT INTO products (name, description, price, qty, category_id, image_url)
+INSERT INTO products (title, description, price, qty, category_id, image_url)
 VALUES ('Biotech Iso Whey Zero lact free 500g',
         'Iso Whey ZERO состоит из чистейшего изолята сывороточного протеина, полученного методом микрофильтрации в поперечном потоке. НЕ СОДЕРЖИТ лактозы, трансжиров и сахара. Iso Whey ZERO, как и вся продукция BioTech USA, изготовлен из безопасных для здоровья и тщательно отобранных нутриентов.
         Некоторым хочется быть стройнее
@@ -174,7 +182,7 @@ VALUES ('Biotech Iso Whey Zero lact free 500g',
         49.90, 100, 11, '/images/Biotech Iso Whey Zero lact free 500g.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, image_url)
+INSERT INTO products (title, description, price, qty, category_id, image_url)
 VALUES ('Delicious Whey Protein QNT',
         'Как всем известно, белок – это главный строительный материал, а протеин Delicious Whey Protein является его отличным источником. Компания QNT разработала продукт, который специально предназначен для обеспечения спортсмена питательными веществами для максимального роста мышечной массы.
         По мнению многих специалистов, протеин Delicious Whey Protein является оптимальным соотношением цена/качество. Данный продукт отлично усваивается организмом и имеет хорошую растворимость. С помощью разработки специалистов QNT вы сможете сделать ощутимый шаг на пути к своей идеальной форме.
