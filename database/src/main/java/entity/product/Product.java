@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
@@ -35,11 +36,11 @@ public class Product extends IdentifiableEntity {
     private int qtyInStock;
 
     @ManyToOne
-    @Column(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToOne
-    @Column(name = "brand_id", nullable = false)
+    @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
     @Column(name = "image_url")

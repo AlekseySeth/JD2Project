@@ -23,8 +23,8 @@
                 ${product.title}
                 ${product.price}
                 ${product.qtyInStock}
-                ${product.category}
-                ${product.brand}
+                ${product.category.name}
+                ${product.brand.name}
             </p>
         </c:forEach>
     <h1>Categories</h1>

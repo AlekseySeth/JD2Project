@@ -2,7 +2,11 @@ package dao;
 
 import entity.order.Order;
 import lombok.NoArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +16,7 @@ import java.util.List;
 public class OrderDao {
 
     private static OrderDao INSTANCE;
+    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
 
     public static OrderDao newInstance() {
         if (INSTANCE == null) {
@@ -25,7 +30,12 @@ public class OrderDao {
     }
 
     public List<Order> getAll() {
-        return null;
+        List<Order> orders = new ArrayList<>();
+        Session session = SESSION_FACTORY.openSession();
+        orders.add(session.get(Order.class, 1000L));
+        orders.add(session.get(Order.class, 1001L));
+        orders.add(session.get(Order.class, 1002L));
+        return orders;
     }
 
 }

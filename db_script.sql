@@ -52,9 +52,9 @@ CREATE TABLE deliveries (
 );
 
 CREATE TABLE orders (
-  id          BIGINT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  AUTO_INCREMENT,
+  id          BIGINT AUTO_INCREMENT,
   user_id     BIGINT      NOT NULL,
-  status      VARCHAR(15) NOT NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                DEFAULT 1,
+  status      VARCHAR(15) NOT NULL DEFAULT 1,
   total_price DOUBLE      NOT NULL,
   delivery_id BIGINT      NOT NULL,
   open_date   DATETIME,
@@ -68,7 +68,7 @@ CREATE TABLE orders (
 CREATE TABLE orders_products (
   order_id    BIGINT,
   product_id  BIGINT,
-  product_qty INT NOT NULL,
+#   product_qty INT NOT NULL,
   PRIMARY KEY (order_id, product_id),
   FOREIGN KEY (order_id) REFERENCES orders (id),
   FOREIGN KEY (product_id) REFERENCES products (id)
@@ -163,7 +163,7 @@ VALUES ('Protein Power Biotech USA 1000',
         47.70, 100, 1, 1,
         '/images/Protein Power Biotech USA 1000.png');
 
-INSERT INTO products (title, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Iso Whey Zero Biotech USA 908',
         'Iso Whey Zero  от  BioTechUSA  -  чистейший изолят сывороточного белка. Чрезвычайно высокая биологическая ценность,  высокая скорость  усваивания белков делает Iso Whey Zero  абсолютно уникальным.
         Продукт Не содержит лактозы, трансжиров и сахара. Iso Whey Zero изготовлен из безопасных для здоровья и тщательно отобранных нутриентов. Никаких лишних или скрытых нутриентов, которые могут откладываться в виде жира. Только  протеин в каждой порции!
@@ -172,7 +172,7 @@ VALUES ('Iso Whey Zero Biotech USA 908',
         89.90, 100, 1, 1,
         '/images/Iso Whey Zero Biotech USA 908.png');
 
-INSERT INTO products (title, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Biotech Iso Whey Zero lact free 500g',
         'Iso Whey ZERO состоит из чистейшего изолята сывороточного протеина, полученного методом микрофильтрации в поперечном потоке. НЕ СОДЕРЖИТ лактозы, трансжиров и сахара. Iso Whey ZERO, как и вся продукция BioTech USA, изготовлен из безопасных для здоровья и тщательно отобранных нутриентов.
         Некоторым хочется быть стройнее
@@ -182,7 +182,7 @@ VALUES ('Biotech Iso Whey Zero lact free 500g',
         49.90, 100, 1, 1, '/images/Biotech Iso Whey Zero lact free 500g.png');
 
 #QNT
-INSERT INTO products (title, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Delicious Whey Protein QNT',
         'Как всем известно, белок – это главный строительный материал, а протеин Delicious Whey Protein является его отличным источником. Компания QNT разработала продукт, который специально предназначен для обеспечения спортсмена питательными веществами для максимального роста мышечной массы.
         По мнению многих специалистов, протеин Delicious Whey Protein является оптимальным соотношением цена/качество. Данный продукт отлично усваивается организмом и имеет хорошую растворимость. С помощью разработки специалистов QNT вы сможете сделать ощутимый шаг на пути к своей идеальной форме.
@@ -194,7 +194,7 @@ VALUES ('Delicious Whey Protein QNT',
         '/images/Delicious Whey Protein QNT.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Whey Protein Complex 100% 700 g',
         'Сывороточный протеин является наиболее распространённым продуктом спортивного питания, т.к. обладает очень высокой биологической ценностью и скоростью усвоения. Olimp Whey Protein Complex 100% обеспечивает быструю подпитку ваших мышц аминокислотами, тем самым обеспечивая быстрый рост мышц и восстановление.
         Сывороточный протеин Whey Protein Complex 100% Olimp чрезвычайно богат разветвленными аминокислотами BCAA, глютамином, а также другими аминокислотами, обеспечивающими запуск анаболических процессов в организме. Каждый прием этого протеина сопровождается быстрым высвобождением аминокислот в кровь и их транспортировкой к мышечным клеткам. Именно поэтому сывороточный протеин отлично подходит для приема после тренировки и утром, после сна – когда в организме наблюдается белковое окно.
@@ -203,7 +203,7 @@ VALUES ('Whey Protein Complex 100% 700 g',
         '/images/Whey Protein Complex 100 700 g.png');
 
 #ActivLab
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('MUSCLE UP Protein ActivLab 2000',
         'MUSCLE UP Protein ActivLab – это чистый сывороточный протеин, который ускоряет рост мышечной массы и повышает качество восстановительных процессов. Данная добавка может приниматься как во время набора массы, так и во время сушки. Muscle UP помогает спортсменам улучшать рельефность тела и делать свои тренировки более эффективными. Протеин можно принимать как мужчинам, так и женщинам.
         Преимущество MUSCLE UP Protein ActivLab в том, что данный препарат помимо сывороточного белка содержит также креатин моногидрат и таурин, которые помогают увеличивать силовые показатели и защищают мышцы от катаболизма.
@@ -216,7 +216,7 @@ VALUES ('MUSCLE UP Protein ActivLab 2000',
         '/images/MUSCLE UP Protein ActivLab 2000.png');
 
 #IronMaxx
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('100% Whey Protein 900',
         'Когда обычные протеиновые коктейли смешиваются с водой, часто страдает вкус. Задачи перед разработчиками IronMaxx ® были поставлено чётко: Новый протеин должен быть потрясающе вкусным даже при смешивании с водой. И новый 100% сывороточный протеин 100% Whey Protein, разработаный для смешивания с водой, во много раз превзошёл все ожидания. В Вашем распоряжении 14 потрясающих и неповторимых вкусов нового 100% сывороточного протеина от IronMaxx: печенье-взбитые сливки, вишня-йогурт, лимон-йогурт, арбуз, апельсин-маракуйя, клубника, малина, латте-макиато, белый шоколад, флорида-грейпфрут, фисташки-кокос, ананас, яблоко-корица,черная смородина-йогурт, банан-йогурт, тёмный шоколад, киви-йогурт, фундук.
         Новый сывороточный протеин марки IronMaxx ® не только черезвычайно вкусен, он также обладает отличной питательной ценностью и потрясающим соотношением цены и качества. Каждая порция 100% Whey Protein IronMaxx ® обеспечит Вас 38,5 г чистого, бытроусваиваемого сывороточного белка с очень низким содержанием жира, холестерина и лактозы. Это идеальный белок после тренировки, помогающий Вам эффективно наращивать мышцы и восстанавливаться.',
@@ -225,7 +225,7 @@ VALUES ('100% Whey Protein 900',
 
 #Gainer
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Biotech CARBOX 1000',
         'В 1 ПОРЦИИ:
         50 г смеси Multi-Interval Carbox™
@@ -234,14 +234,14 @@ VALUES ('Biotech CARBOX 1000',
         18.40, 100, 2, 1,
         '/images/Biotech CARBOX 1000.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Hyper Mass 5000 Biotech USA',
         'Гейнеры Biotech Hyper Mass 5000 отлично подойдут тем спортсменам-бодибилдерам, которые активно тренируются на протяжении долгого времени. В состав продукта включены протеины и углеводы – все это потребуется вам для успешных тренировок, и для скорейшего достижения поставленной цели. Креатин, который содержится в продукте, позволяет увеличить силу и выносливость организма, а также – ускорит восстановление.',
         87.90, 100, 2, 1,
         '/images/Hyper Mass 5000 Biotech USA.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('QNT 3000 MuscleMass',
         'Высококалорийный Muscle Mass 3000 является идеально сбалансированной углеводно-протеиновой смесью, содержащей необходимые аминокислоты, микроэлементы, а также комплекс витаминов для лучшего усвоения основных питательных веществ.
         Присутствующие в составе гейнера Muscle Mass 3000 быстрые и медленные углеводы играют важную роль в обеспечении организма спортсмена энергией и восстановлении ресурсов гликогена, истраченного в процессе тренировки. Благодаря углеводной «подпитке» организм получает энергию извне и активизирует внутренние источники энергии, которая дает прилив физических сил и тонус для тренировок, а также обеспечивает более короткий и эффективный период восстановления.
@@ -250,7 +250,7 @@ VALUES ('QNT 3000 MuscleMass',
         '/images/QNT 3000 MuscleMass.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Olimp Gain Bolic 6000',
         'GainBolic 6000 – белково-углеводная витаминизированная смесь, предназначенная для людей, которые занимаются , ведут активный образ жизни и которые хотят увеличить общий вес тела. В состав углеводной матрицы входят сахара с высоким и низким гликемическим индексом, благодаря чему гейнер становится разнонаправленным - организм повышает свой энергетический запас и повышается масса тела. В состав белка входит смесь протеинов: сывороточный, казеиновый и яичный. В гейнер добавлены также креатин, таурин и витаминный комплекс. Gain Bolic 6000 обеспечивает организм равномерным и постоянным притоком калорий , тем самым предотвращая катаболизм.',
         97.90, 100, 2, 3,
@@ -258,14 +258,14 @@ VALUES ('Olimp Gain Bolic 6000',
 
 #Amino
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Mega Amino 3200 Biotech USA - 300',
         'Mega Amino 3200 аминокислоты высшего качества, помогают в поддержании положительного азотистого баланса, способствуют сжиганию жировой прослойки, увеличивают работоспособность организма в период интенсивных тренировок.
         Каждая таблетка Mega Amino 3200 поставляет аминокислоты, которые могут быть сразу абсорбированы кровяным потоком, для поддержания позитивного азотного баланса, увеличивать анаболический рост мышц и уменьшать жир в организме.
         В человеческом организме аминокислоты не только формируют блоки нашей свободной, или скелетной, мышечной ткани, такие как бицепсы, квадрицепсы и т.п., но они также формируют блоки непроизвольных мышц, таких как сердце. Исследования показали, что нехватка развитой разветвленной цепи аминокислот вместе с повышенными физическими требованиями к телу, могут привести к использованию здоровых мышечных тканей для обеспечения организма азотом. В функции цепи аминокислот, наряду с другими, входят транспортирование диетического жира в клетки для выработки энергии стимуляция слизистой выделять увеличенное количество гормонов, отвечающих за развитие слабой мышечной ткани, а также за мобилизацию жирных кислот из жировой ткани (т.е. сброс жира организма); обеспечения тела азотом. Mega Amino 3200 всасываются очень быстро, они легко попадают в кровяной поток и помогают гармонизировать и ферментизировать продукцию.',
         52.90, 100, 3, 1, '/images/Mega Amino 3200 Biotech USA - 300.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Biotech AAKG Shock 1000 ml',
         'В 1 ПОРЦИИ:
         6000 мг аргинина альфа-кетоглутарата
@@ -275,7 +275,7 @@ VALUES ('Biotech AAKG Shock 1000 ml',
         '/images/Biotech AAKG Shock 1000 ml.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('AAKG4000 QNT',
         'ХАРАКТЕРИСТИКИ:
         • поддержка мышц
@@ -286,7 +286,7 @@ VALUES ('AAKG4000 QNT',
         '/images/AAKG4000 QNT.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('1250 Extreme Mega Caps',
         'Аргинин альфа-кетоглутарат (ААКГ) — это L-аргнинин в легкоусваиваемой форме и в большой дозировке. AAKG Extreme 1250 Mega Caps от Olimp — идеальный продукт для увеличения силы, роста мышечной массы, формирования рельефа, а также для поддержки сексуальной функции.
         Действие AAKG 1250 Extreme Mega Caps Olimp
@@ -301,7 +301,7 @@ VALUES ('1250 Extreme Mega Caps',
         '/images/1250 Extreme Mega Caps.png');
 
 #IronMaxx
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Green Amino',
         'Green Amino в капсулах снабжает Вашу мускулатуру расщеплёнными под воздействием ферментов компонентами белка и способствует росту мышечной массы с помощью быстро усваиваемых аминокислот. Отличие этого продукта от белковых порошков легко объяснить: прежде чем наше тело сможет использовать белок, он должен перевариться в желудочно-кишечном тракте и расщепиться на отдельные компоненты. В отличие от этого аминокислоты Green Amino уже расщеплены под воздействием ферментов, то есть уже разобраны на отдельные составляющие. В результате чего аминокислоты Green Amino гораздо быстрее попадают в кровь и моментально начинают участвовать во всех процессах организма. Поэтому поддержите Ваши мышцы аминокислотами Green Amino, чтобы достичь решающих успехов в наращивании мышечной массы!',
         56.40, 100, 3, 5,
@@ -309,27 +309,27 @@ VALUES ('Green Amino',
 
 #BCAA
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('BCAA B6 Biotech USA - 100',
         'Препарат BCAA + B6 в таблетках содержит аминокислоты лейцин, изолейцин и валин в соотношении 2:1:1. Кроме того, он дополнен витамином B6, который способствует нормальному обмену белка и гликогенов, а также снижает утомляемость. Как и все продукты BioTech USA, BCAA + B6 340 tabs состоит из безопасных для здоровья и тщательно отобранных компонентов.',
         28.90, 100, 4, 1,
         '/images/BCAA B6 Biotech USA - 100.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Amino Liquid BCAA Biotech USA',
         'BioTechLiquid BCAA - это самая важная группа незаменимых аминокислот в жидкой форме для атлета. BCAA помогают поддерживать положительный баланс азота, сохраняют мышечную ткань даже в условиях жесткой диеты, обеспечивают мышцы дополнительной энергией во время тренировок. Исследования свидетельствуют, что недостаток BCAA наряду с интенсивными физическими нагрузками приводит к разрушению мышечной ткани. Среди функций BCAA можно отметить транспортировку жиров внутрь клетки для последующего получения из них энергии, усиление секреции гормона роста, мобилизацию жирных кислот из адипозной ткани (подкожного жира), снабжение организма азотом.',
         46.90, 100, 4, 1,
         '/images/Amino Liquid BCAA Biotech USA.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Matrix QNT',
         'BCAA аминокислоты очень быстро усваиваются организмом и при этом попадают непосредственно в мышечную ткань. В пиковую нагрузку на тренировке они могут выступать в качестве дополнительного источника энергии и способствовать достижению максимального результата. Комплекс BCAA от QNT служит надежным помощником и эффективным восстановителем для спортсменов любого уровня.',
         50.90, 100, 4, 2,
         '/images/Matrix QNT.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('BCAA Xplode 280 g',
         'Olimp BCAA XPLODE обогащен также глютамином, который крайне важен для активации иммунных клеток крови. Кроме того, данная аминокислота наряду с глюкозой является источником энергии, вызывает подъем уровня гормона роста, подавляет секрецию кортизола, ускоряет восстановление и предотвращает развитие перетренированности. В общем и целом, глютамин усиливает и поддерживает воздействие BCAA на организм.
         Имеется в составе данного продукта и витамин B6 (пиридоксин), который поддерживает обмен аминокислот, являющихся строительным материалом для тканей тела, поэтому если вы строите свой рацион из белковой пищи, то вам следует увеличивать потребление данного витамина. Кроме того, пиридоксин уменьшает ночные спазмы и судороги мышц и поддерживает оптимальное функционирование нервной системы.',
@@ -337,7 +337,7 @@ VALUES ('BCAA Xplode 280 g',
         '/images/BCAA Xplode 280 g.png');
 
 #IronMaxx
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('BCAAs Glutamin 800',
         'БЦААс+Глутамин 1200 - аминокислоты с разветвлённой цепочкой и глютамин в свободной несвязанной форме!
         Для создания протеина и/или тканей нашему телу необходимы BCАА (аминокислоты с разветвлённой цепочкой) и L-глютамин. Эти аминокислоты являются незаменимыми, абсолютно необходимыми для человека органическими соединениями. В то время как другие незаменимые аминокислоты прежде всего служат для создания биологически-активных молекул, например, гормонов, BCAA являются в первую очередь строительным материалом для органов и мышц.',
@@ -346,7 +346,7 @@ VALUES ('BCAAs Glutamin 800',
 
 #Creatine
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Biotech 100 Creatine Monohydrate 500 bank',
         'BioTech 100% Creatine Monohydrate - увеличивает задержку воды в клетках мускул, тем самым обеспечивает все необходимые условия для синтеза белков после физических нагрузок.
         Из научных трудов ученых Лемона, Боска и Бредля в 1995 году нам стала известна способность моногидрата креатина к увеличению силы. С тех пор моногидрат креатина - самая популярная и часто используемая в мире спортивная пищевая добавка.
@@ -355,7 +355,7 @@ VALUES ('Biotech 100 Creatine Monohydrate 500 bank',
         Постоянный контроль  за препаратом гарантирует Вам надежное формирование мускулатуры! В производстве креатиновых препаратов семейства BioTech используется исключительно 100%-но чистый, молотый до микронных размеров моногидрат креатина.',
         31.90, 100, 5, 1, '/images/Biotech 100 Creatine Monohydrate 500 bank.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Creatine pHX Biotech USA 90',
         'Креатин Creatine pHX - не требует никакого цикла загрузки, это идеальный продукт для увеличения работоспособности и силы. Употребляя 1.5 грамма Creatine pHX, ежедневно Вы можете многократно увеличить запас креатина в организме.
         После добавления воды или жидкости к обычному креатину, его существенная часть быстро превращается в креатинин. Только небольшой процент того, что потребляется, - все еще креатин, который может использовать организм. В течение тренировочного процесса молекулы креатина синтезируются с веществами резервного запаса, увеличивая pH фактор выше 12.
@@ -366,21 +366,21 @@ VALUES ('Creatine pHX Biotech USA 90',
         '/images/Creatine pHX Biotech USA 90.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('CREATINE X3',
         'Сверхэффектвная креатиновая матрица Креатин X3 обеспечивает тройную силу для неограниченного увеличения прочности и производительности. Испытания Креатин Х3 показали увеличение максимальной мощности и силы до 15% и увеличение жима лежа до 20%. Креатин X3  работает быстро, сочетая количество активных ингредиентов и скоростной выброс их непосредственно в мышцу. Каждая порция содержит точное количество углеводов и повышено производительные соединения для максимального всасывания питательных веществ для приведения вашего тела в состояние постоянного мышечного роста. Креатин X3 поможет Вам активировать анаболические процессы и сделает возможным значительное увеличение размера и силы мускулов, который вы заметите, всего за 4 недели.',
         48.90, 100, 5, 2,
         '/images/CREATINE X3.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Olimp Xplode powder 500 g',
         'В составе Creatine Xplode Powder используется смесь 6 самых популярных и самых эффективных форм креатина, используемых в настоящее время во всем мире, а именно: креатин малат, этиловый эфир, альфа-КГ, пируват, цитрат и креатин хелат магния (креатин Magna Power). Использование этих форм креатина обеспечивает высокие достижения в спорте.  Очень хорошо помогает в том числе обогащение продукта Creatine Xplode Powder таурином, который помогает эффективно тренироваться и способствует увеличению спортивных показателей, уменьшая при этом время восстановления после тренировки.',
         75.60, 100, 5, 3,
         '/images/Olimp Xplode powder 500 g.png');
 
 #IronMaxx
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Krea7 Superalkaline 180',
         'Новая формула креатина- технология для увеличения силы и быстрого роста мышц!
         Благодаря слиянию использованных инновационных форм креатина и специального буфера фаза загрузки уходит в прошлое. Буферизованный креатин Superalkaline Krea7 достигает полной концентрации в мышечных клетках и обеспечивает значительную и длительную мышечную нагрузку. Уже через несколько минут после приёма в распоряжение мускулатуры попадает значительный заряд креатина, который повышает интенсивность тренировки до максимального уровня. Таким образом, вы можете достичь чрезвычайной силы и огромную выносливость!',
@@ -389,7 +389,7 @@ VALUES ('Krea7 Superalkaline 180',
 
 #Vitamin
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Mens ArginMax Biotech USA',
         'Mens Arginmax - научно разработанный стимулирующий продукт c эксклюзивной формулой, которая обладает свойствами растений и ключевых аминокислот, которые увеличивают приток крови к гениталиям, половое влечение и сексуальную эффективность.
         В состав входит 3 грамма аминокислоты L-аргинина, один из ключевых компонентов в превосходной формуле Arginmax. L-аргинин является строительным материалом для окиси азота, который помогает поддерживать тонус кровеносных сосудов.
@@ -397,7 +397,7 @@ VALUES ('Mens ArginMax Biotech USA',
         30.70, 100, 6, 1,
         '/images/Mens ArginMax Biotech USA.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Multivitamin for Women Biotech USA',
         'Не секрет, что мужской и женский организмы друг от друга отличаются. Поэтому, и витаминно-минеральные комплексы могут давать больший эффект, если  рассчитаны именно для женщин, или именно для мужчин.
         Женские витаминные комплексы имеют ряд отличий относительно других.
@@ -412,7 +412,7 @@ VALUES ('Multivitamin for Women Biotech USA',
         Это приводит к еще большей эффективности.',
         26.90, 100, 6, 1, '/images/Multivitamin for Women Biotech USA.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Vitabolic Biotech USA',
         'Vitabolic представляет собой комплекс поливитаминов и минеральных формул, разработанных для атлетов. Витамины улучшают обмен веществ, регулируют процесс выделения энергии, стимулируют рост клеток, сдерживают накопление жира и снижение мышечной массы, укрепляют нервную и иммунную системы, улучшают состояние кожи, волос, ногтей.
         Vitabolic - высококачественный, чистый, сбалансированный и натуральный продукт без химических и других добавок. Содержит максимум витаминов, минералов и антиоксидантов, чтобы в полной мере обеспечить Вас питательными веществами.
@@ -422,7 +422,7 @@ VALUES ('Vitabolic Biotech USA',
         '/images/Vitabolic Biotech USA.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('QNT Omega 3',
         'Омега 3 - группа ненасыщенных жирных кислот,при недостатке которых могут  возникнуть биохимические и физиологические нарушения.
         Омега-3 имеют широкий спектр действия, не только для спортсменов-бодибилдеров, но и для людей, не имеющих отношения к спорту.
@@ -431,7 +431,7 @@ VALUES ('QNT Omega 3',
         '/images/QNT Omega 3.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Olimp ZMA 120',
         'ZMA от Olimp способствует повышению уровня и активности тестостерона и увеличивает уровень IGF-I и лептина, который отвечает за более эффективное использования энергии, повышает силовые показатели и увеличивает выносливость организма.
         Препарат уменьшает катаболизм белка, поддерживает построение мышечной массы, предотвращает спазмы мышц, облегчает болевые ощущения в мышцах, вызванные физической нагрузкой.
@@ -442,7 +442,7 @@ VALUES ('Olimp ZMA 120',
 
 #FatBurn
 #Biotech
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Super Fat Burner Biotech USA',
         'Super Fat Burner - формула, которая поможет вам понизить уровень жира и воды в организме.
         SuperFatBurner разработан, чтобы помочь оптимизации метаболизма жировых клеток, сжигания подкожного жира и повышения рельефности тела. Он содержит активные ключевые ингредиенты, такие как L-карнитин, потенцирующее средство инсулина, естественные энерджайзеры и эмульгирующие жир липотропики.
@@ -451,7 +451,7 @@ VALUES ('Super Fat Burner Biotech USA',
         '/images/Super Fat Burner Biotech USA.png');
 
 #QNT
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Stack Force QNT',
         'Каждая быстродействующая доза укомплектована научно разработанными ингредиентами, чтобы помочь достичь максимальной прорисовки мышц с его мощными многофазными активаторами жиросжигания.
         Фаза 1 запускает усиление термогенеза. Это повышение температуры тела сожжет давно накопившиеся жировые массы.
@@ -460,14 +460,14 @@ VALUES ('Stack Force QNT',
         54.20, 100, 7, 2,
         '/images/Stack Force QNT.png');
 
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Thermo Booster QNT',
         'Напиток (Thermo Booster) Термо Бустер идеален перед любой физической активностью. Он не содержит калорий и сахара! Этот напиток - активатор потери веса, придающий  мощную энергию и силы во время тренировок.',
         2.90, 100, 7, 2,
         '/images/Thermo Booster QNT.png');
 
 #Olimp
-INSERT INTO products (name, description, price, qty, category_id, brand_id, image_url)
+INSERT INTO products (title, description, price, qty_in_stock, category_id, brand_id, image_url)
 VALUES ('Olimp Chitosan chromium',
         'Благодаря свойству хитозана связываться с молекулами жира, можно ограничить усвоение жиров, потребляемых с пищей. Хром же действует как регулятор уровня сахара в крови, а также помогает избавить от чувства чрезмерного аппетита.
         Olimp Chitosan + Chromium:
@@ -480,5 +480,16 @@ VALUES ('Olimp Chitosan chromium',
         Хром усиливает эффект от приема хитозана. Данный микроэлемент ценен тем, что помогает организму регулировать уровень сахара в крови, поддерживая тем самым правильное усвоение глюкозы и уменьшая приступы голода.',
         12.20, 100, 7, 3,
         '/images/Olimp Chitosan chromium.png');
+
+# DROP TABLE users;
+# DROP TABLE categories;
+# DROP TABLE deliveries;
+# DROP TABLE orders_products;
+# DROP TABLE users_orders;
+# DROP TABLE pages;
+# DROP TABLE brands;
+# DROP TABLE products;
+# DROP TABLE orders;
+# DROP TABLE promotions;
 
 #DROP DATABASE nutrition_store;

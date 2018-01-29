@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static util.ServletUtil.getPath;
 
-@WebServlet(name = "/data-list")
+@WebServlet("/data-list")
 public class DataListServlet extends HttpServlet {
 
     @Override
@@ -26,7 +26,7 @@ public class DataListServlet extends HttpServlet {
         req.setAttribute("deliveries", dataListService.getAllDeliveries());
 
         req.getServletContext()
-                .getRequestDispatcher(getPath("data-list"))
+                .getRequestDispatcher("/WEB-INF/html/data-list.jsp")
                 .forward(req, resp);
     }
 }
