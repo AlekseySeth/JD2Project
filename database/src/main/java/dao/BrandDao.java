@@ -1,6 +1,6 @@
 package dao;
 
-import entity.user.User;
+import entity.product.Brand;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -9,22 +9,22 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class UserDao {
+public class BrandDao {
 
-    private static UserDao INSTANCE;
+    private static BrandDao INSTANCE;
 
-    public static UserDao newInstance() {
+    public static BrandDao newInstance() {
         if (INSTANCE == null) {
-            synchronized (UserDao.class) {
+            synchronized (CategoryDao.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new UserDao();
+                    INSTANCE = new BrandDao();
                 }
             }
         }
         return INSTANCE;
     }
 
-    public List<User> getAll() {
+    public List<Brand> getAll() {
         return null;
     }
 
