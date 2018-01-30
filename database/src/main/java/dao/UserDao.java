@@ -35,7 +35,24 @@ public class UserDao {
         users.add(session.get(User.class, 1L));
         users.add(session.get(User.class, 2L));
         users.add(session.get(User.class, 3L));
+        session.close();
+        SESSION_FACTORY.close();
         return users;
+    }
+
+    public void save(User user) {
+        Session session = SESSION_FACTORY.openSession();
+        session.save(user);
+        session.close();
+        SESSION_FACTORY.close();
+    }
+
+    public User get(Long id) {
+        Session session = SESSION_FACTORY.openSession();
+        User user = session.get(User.class, id);
+        session.close();
+        SESSION_FACTORY.close();
+        return user;
     }
 
 }

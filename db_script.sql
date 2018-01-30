@@ -29,6 +29,14 @@ CREATE TABLE brands (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE promotions (
+id  BIGINT AUTO_INCREMENT,
+name VARCHAR(50) UNIQUE NOT NULL,
+is_active BOOLEAN,
+promo_value DOUBLE NOT NULL,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE products (
   id           BIGINT       AUTO_INCREMENT,
   title        VARCHAR(100) UNIQUE NOT NULL,

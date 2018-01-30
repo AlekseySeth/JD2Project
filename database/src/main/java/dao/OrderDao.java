@@ -38,4 +38,19 @@ public class OrderDao {
         return orders;
     }
 
+    public void save(Order order) {
+        Session session = SESSION_FACTORY.openSession();
+        session.save(order);
+        session.close();
+        SESSION_FACTORY.close();
+    }
+
+    public Order get(Long id) {
+        Session session = SESSION_FACTORY.openSession();
+        Order order = session.get(Order.class, id);
+        session.close();
+        SESSION_FACTORY.close();
+        return order;
+    }
+
 }

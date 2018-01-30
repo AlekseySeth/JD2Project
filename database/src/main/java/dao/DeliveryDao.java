@@ -38,4 +38,19 @@ public class DeliveryDao {
         return deliveries;
     }
 
+    public void save(Delivery delivery) {
+        Session session = SESSION_FACTORY.openSession();
+        session.save(delivery);
+        session.close();
+        SESSION_FACTORY.close();
+    }
+
+    public Delivery get(Long id) {
+        Session session = SESSION_FACTORY.openSession();
+        Delivery delivery = session.get(Delivery.class, id);
+        session.close();
+        SESSION_FACTORY.close();
+        return delivery;
+    }
+
 }

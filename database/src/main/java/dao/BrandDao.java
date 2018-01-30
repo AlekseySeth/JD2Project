@@ -37,4 +37,19 @@ public class BrandDao {
         brands.add(session.get(Brand.class, 3L));
         return brands;
     }
+
+    public void save(Brand brand) {
+        Session session = SESSION_FACTORY.openSession();
+        session.save(brand);
+        session.close();
+        SESSION_FACTORY.close();
+    }
+
+    public Brand get(Long id) {
+        Session session = SESSION_FACTORY.openSession();
+        Brand brand = session.get(Brand.class, id);
+        session.close();
+        SESSION_FACTORY.close();
+        return brand;
+    }
 }

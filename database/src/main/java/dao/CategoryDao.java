@@ -38,4 +38,19 @@ public class CategoryDao {
         return categories;
     }
 
+    public void save(Category category) {
+        Session session = SESSION_FACTORY.openSession();
+        session.save(category);
+        session.close();
+        SESSION_FACTORY.close();
+    }
+
+    public Category get(Long id) {
+        Session session = SESSION_FACTORY.openSession();
+        Category category = session.get(Category.class, id);
+        session.close();
+        SESSION_FACTORY.close();
+        return category;
+    }
+
 }

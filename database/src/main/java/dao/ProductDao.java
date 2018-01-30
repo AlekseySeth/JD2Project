@@ -35,7 +35,24 @@ public class ProductDao {
         products.add(session.get(Product.class, 1000L));
         products.add(session.get(Product.class, 1001L));
         products.add(session.get(Product.class, 1002L));
+        session.close();
+        SESSION_FACTORY.close();
         return products;
+    }
+
+    public void save(Product product) {
+        Session session = SESSION_FACTORY.openSession();
+        session.save(product);
+        session.close();
+        SESSION_FACTORY.close();
+    }
+
+    public Product get(Long id) {
+        Session session = SESSION_FACTORY.openSession();
+        Product product = session.get(Product.class, id);
+        session.close();
+        SESSION_FACTORY.close();
+        return product;
     }
 
 }
