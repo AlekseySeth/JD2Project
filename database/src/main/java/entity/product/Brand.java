@@ -22,7 +22,7 @@ public class Brand extends IdentifiableEntity {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "logo_url")
+    @Column(name = "logo_url", unique = true,nullable = false)
     private String logoURL;
 
     public Brand(String name, String logoURL) {

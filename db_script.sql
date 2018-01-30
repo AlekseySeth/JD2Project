@@ -62,7 +62,7 @@ CREATE TABLE deliveries (
 CREATE TABLE orders (
   id          BIGINT AUTO_INCREMENT,
   user_id     BIGINT      NOT NULL,
-  status      VARCHAR(15) NOT NULL DEFAULT 1,
+  status      VARCHAR(15) NOT NULL,
   total_price DOUBLE      NOT NULL,
   delivery_id BIGINT      NOT NULL,
   open_date   DATETIME,

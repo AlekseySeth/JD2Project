@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product extends IdentifiableEntity {
 
-    @Column(name = "title", unique = false, nullable = false)
+    @Column(name = "title", unique = true, nullable = false)
     private String title;
 
     @Column(name = "description")
