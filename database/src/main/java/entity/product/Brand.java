@@ -24,4 +24,9 @@ public class Brand extends IdentifiableEntity {
 
     @Column(name = "logo_url")
     private String logoURL;
+
+    public Brand(String name, String logoURL) {
+        this.name = name;
+        this.logoURL = logoURL;
+    }
 }

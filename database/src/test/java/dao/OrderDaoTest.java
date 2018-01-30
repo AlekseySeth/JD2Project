@@ -7,8 +7,7 @@ import static org.junit.Assert.*;
 /**
  * @author a.shestovsky
  */
-public class UserDaoTest extends BaseTest {
-
+public class OrderDaoTest extends BaseTest {
     @Test
     public void save() throws Exception {
     }
