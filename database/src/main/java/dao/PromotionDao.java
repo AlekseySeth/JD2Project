@@ -1,7 +1,6 @@
 package dao;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 /**
  * @author a.shestovsky
@@ -9,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 public class PromotionDao {
 
     private static BrandDao INSTANCE;
-    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    private SessionFactory SESSION_FACTORY;
 
     public static BrandDao newInstance() {
         if (INSTANCE == null) {

@@ -16,7 +16,7 @@ import java.util.List;
 public class OrderDao {
 
     private static OrderDao INSTANCE;
-    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    private SessionFactory SESSION_FACTORY;
 
     public static OrderDao newInstance() {
         if (INSTANCE == null) {
@@ -32,12 +32,13 @@ public class OrderDao {
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        orders = session.createQuery("select o from orders o").list();
+        orders = session.createQuery("select o from Order o").list();
         session.close();
         return orders;
     }
 
     public void save(Order order) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         session.save(order);
         session.close();
@@ -45,11 +46,11 @@ public class OrderDao {
     }
 
     public Order get(Long id) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         Order order = session.get(Order.class, id);
         session.close();
         SESSION_FACTORY.close();
         return order;
     }
-
 }

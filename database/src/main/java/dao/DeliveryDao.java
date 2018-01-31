@@ -33,7 +33,7 @@ public class DeliveryDao {
         SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         List<Delivery> deliveries = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        deliveries = session.createQuery("select d from deliveries d").list();
+        deliveries = session.createQuery("select d from Delivery d").list();
         session.close();
         return deliveries;
     }

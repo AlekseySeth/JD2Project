@@ -2,43 +2,33 @@ package dao;
 
 import entity.product.Brand;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 
-import java.io.Serializable;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author a.shestovsky
  */
 public class BrandDaoTest extends BaseTest {
     @Test
-    public void saveAndGetFromDb() throws Exception {
-        Brand brand = new Brand("test", "/test");
+    public void save() throws Exception {
+        Brand brand = new Brand("testBrand_1", "/testBrand_1");
         BrandDao brandDao = BrandDao.newInstance();
         brandDao.save(brand);
-
         Session session = SESSION_FACTORY.openSession();
-        Brand result = session.get(Brand.class, 1L);
+        Brand resultSave = session.get(Brand.class, 2L);
         session.close();
-        assertEquals("test", result.getName());
+        assertEquals("testBrand_1", resultSave.getName());
     }
 
     @Test
     public void get() throws Exception {
-        Brand brand = new Brand("test", "/test");
+        Brand brand = new Brand("testBrand_2", "/testBrand_2");
         Session session = SESSION_FACTORY.openSession();
-
         session.save(brand);
-
         session.close();
-        SESSION_FACTORY.close();
-
         BrandDao brandDao = BrandDao.newInstance();
-        Brand result = brandDao.get(1L);
-        assertEquals("test", result.getName());
+        Brand resultGet = brandDao.get(1L);
+        assertEquals("testBrand_2", resultGet.getName());
     }
-
 }
-

@@ -33,12 +33,13 @@ public class CategoryDao {
         SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         List<Category> categories = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        categories = session.createQuery("select c from categories b").list();
+        categories = session.createQuery("select c from Category c").list();
         session.close();
         return categories;
     }
 
     public void save(Category category) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         session.save(category);
         session.close();
@@ -46,6 +47,7 @@ public class CategoryDao {
     }
 
     public Category get(Long id) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         Category category = session.get(Category.class, id);
         session.close();

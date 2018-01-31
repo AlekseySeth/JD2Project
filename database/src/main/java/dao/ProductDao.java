@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductDao {
 
     private static ProductDao INSTANCE;
-    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    private SessionFactory SESSION_FACTORY;
 
     public static ProductDao newInstance() {
         if (INSTANCE == null) {
@@ -32,15 +32,14 @@ public class ProductDao {
     public List<Product> getAll() {
         List<Product> products = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        products.add(session.get(Product.class, 1000L));
-        products.add(session.get(Product.class, 1001L));
-        products.add(session.get(Product.class, 1002L));
+        products = session.createQuery("select p from Product p").list();
         session.close();
         SESSION_FACTORY.close();
         return products;
     }
 
     public void save(Product product) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         session.save(product);
         session.close();
@@ -48,6 +47,7 @@ public class ProductDao {
     }
 
     public Product get(Long id) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         Product product = session.get(Product.class, id);
         session.close();
