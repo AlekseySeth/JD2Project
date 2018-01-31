@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -38,11 +39,8 @@ public class User extends IdentifiableEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "mobile", nullable = false)
-    private String mobile;
-
-    @Column(name = "address", nullable = false)
-    private String address;
+    @Embedded
+    private ContactDetails contactDetails;
 
     @Column(name = "registration_date")
     private LocalDate registrationDate;
