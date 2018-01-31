@@ -30,4 +30,9 @@ public class Category extends IdentifiableEntity {
 
     @OneToMany(mappedBy = "category")
     private Set<Product> products = new HashSet<>();
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

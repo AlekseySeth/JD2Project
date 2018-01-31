@@ -4,6 +4,7 @@ import entity.product.Brand;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class BrandDao {
 
         List<Brand> brands = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        brands = session.createQuery("select b from brands b").list();
+        brands = session.createQuery("select b from Brand b").list();
         session.close();
         return brands;
     }

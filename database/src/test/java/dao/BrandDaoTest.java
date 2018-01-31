@@ -2,6 +2,7 @@ package dao;
 
 import entity.product.Brand;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Test;
 
 import java.io.Serializable;
@@ -28,8 +29,11 @@ public class BrandDaoTest extends BaseTest {
     public void get() throws Exception {
         Brand brand = new Brand("test", "/test");
         Session session = SESSION_FACTORY.openSession();
+
         session.save(brand);
+
         session.close();
+        SESSION_FACTORY.close();
 
         BrandDao brandDao = BrandDao.newInstance();
         Brand result = brandDao.get(1L);

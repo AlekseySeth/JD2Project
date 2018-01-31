@@ -40,13 +40,19 @@ public class Order extends IdentifiableEntity {
     @JoinColumn(name = "delivery_id", nullable = false)
     private Delivery delivery;
 
-    @ManyToMany
-    @JoinTable(
-            name = "orders_products",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_qty")
-    )
-    @MapKeyJoinColumn(name = "product_id")
+//    @ManyToMany
+//    @JoinTable(
+//            name = "orders_products",
+//            joinColumns = @JoinColumn(name = "order_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_qty")
+//    )
+//    @MapKeyJoinColumn(name = "product_id")
+
+    @ElementCollection
+    @CollectionTable(name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"))
+    @Column(name = "product_qty")
+    @MapKeyJoinColumn(name = "product_id", referencedColumnName = "id")
     private Map<Product, Integer> products = new HashMap<>();
 
     @Column(name = "total_price")

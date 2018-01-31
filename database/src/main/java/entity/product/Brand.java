@@ -1,6 +1,7 @@
 package entity.product;
 
 import entity.util.IdentifiableEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
