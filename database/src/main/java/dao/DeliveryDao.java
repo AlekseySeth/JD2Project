@@ -16,7 +16,7 @@ import java.util.List;
 public class DeliveryDao {
 
     private static DeliveryDao INSTANCE;
-    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    private SessionFactory SESSION_FACTORY;
 
     public static DeliveryDao newInstance() {
         if (INSTANCE == null) {
@@ -30,15 +30,16 @@ public class DeliveryDao {
     }
 
     public List<Delivery> getAll() {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         List<Delivery> deliveries = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        deliveries.add(session.get(Delivery.class, 1L));
-        deliveries.add(session.get(Delivery.class, 2L));
-        deliveries.add(session.get(Delivery.class, 3L));
+        deliveries = session.createQuery("select d from deliveries d").list();
+        session.close();
         return deliveries;
     }
 
     public void save(Delivery delivery) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         session.save(delivery);
         session.close();
@@ -46,6 +47,7 @@ public class DeliveryDao {
     }
 
     public Delivery get(Long id) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         Delivery delivery = session.get(Delivery.class, id);
         session.close();

@@ -76,7 +76,7 @@ CREATE TABLE orders (
 CREATE TABLE orders_products (
   order_id    BIGINT,
   product_id  BIGINT,
-#   product_qty INT NOT NULL,
+  product_qty INT NOT NULL,
   PRIMARY KEY (order_id, product_id),
   FOREIGN KEY (order_id) REFERENCES orders (id),
   FOREIGN KEY (product_id) REFERENCES products (id)
@@ -92,10 +92,21 @@ CREATE TABLE users_orders (
 
 CREATE TABLE promotions (
   id          BIGINT AUTO_INCREMENT,
-  name        VARCHAR(100),
+  name        VARCHAR(100) UNIQUE NOT NULL,
   is_active   BOOLEAN,
-  promo_value DOUBLE,
   PRIMARY KEY (id)
+);
+
+CREATE TABLE percentage_discount_promos (
+  promo_id    BIGINT,
+  discount_value DOUBLE NOT NULL,
+  FOREIGN KEY (promo_id) REFERENCES promotions (id)
+);
+
+CREATE TABLE fixed_price_promos (
+  promo_id    BIGINT,
+  fixed_price DOUBLE NOT NULL,
+  FOREIGN KEY (promo_id) REFERENCES promotions (id)
 );
 
 CREATE TABLE pages (

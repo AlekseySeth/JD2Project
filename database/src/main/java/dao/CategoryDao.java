@@ -16,7 +16,7 @@ import java.util.List;
 public class CategoryDao {
 
     private static CategoryDao INSTANCE;
-    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    private SessionFactory SESSION_FACTORY;
 
     public static CategoryDao newInstance() {
         if (INSTANCE == null) {
@@ -30,11 +30,11 @@ public class CategoryDao {
     }
 
     public List<Category> getAll() {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         List<Category> categories = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        categories.add(session.get(Category.class, 1L));
-        categories.add(session.get(Category.class, 2L));
-        categories.add(session.get(Category.class, 3L));
+        categories = session.createQuery("select c from categories b").list();
+        session.close();
         return categories;
     }
 

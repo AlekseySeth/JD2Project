@@ -32,9 +32,8 @@ public class OrderDao {
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        orders.add(session.get(Order.class, 1000L));
-        orders.add(session.get(Order.class, 1001L));
-        orders.add(session.get(Order.class, 1002L));
+        orders = session.createQuery("select o from orders o").list();
+        session.close();
         return orders;
     }
 

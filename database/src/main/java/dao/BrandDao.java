@@ -16,7 +16,7 @@ import java.util.List;
 public class BrandDao {
 
     private static BrandDao INSTANCE;
-    private SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    private SessionFactory SESSION_FACTORY;
 
     public static BrandDao newInstance() {
         if (INSTANCE == null) {
@@ -30,15 +30,17 @@ public class BrandDao {
     }
 
     public List<Brand> getAll() {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+
         List<Brand> brands = new ArrayList<>();
         Session session = SESSION_FACTORY.openSession();
-        brands.add(session.get(Brand.class, 1L));
-        brands.add(session.get(Brand.class, 2L));
-        brands.add(session.get(Brand.class, 3L));
+        brands = session.createQuery("select b from brands b").list();
+        session.close();
         return brands;
     }
 
     public void save(Brand brand) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         session.save(brand);
         session.close();
@@ -46,6 +48,7 @@ public class BrandDao {
     }
 
     public Brand get(Long id) {
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
         Brand brand = session.get(Brand.class, id);
         session.close();
