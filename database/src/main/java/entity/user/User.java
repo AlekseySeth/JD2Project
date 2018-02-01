@@ -52,4 +52,13 @@ public class User extends IdentifiableEntity {
     @OneToMany(mappedBy = "user")
     private Set<Order> orders = new HashSet<>();
 
+    public User(String firstName, String lastName, String email, String password, ContactDetails contactDetails, LocalDate registrationDate, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.contactDetails = contactDetails;
+        this.registrationDate = registrationDate;
+        this.role = role;
+    }
 }

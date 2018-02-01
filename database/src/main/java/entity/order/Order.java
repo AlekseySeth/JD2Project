@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class Order extends IdentifiableEntity {
 
     @Column
-    private LocalDate openDate;
+    private LocalDateTime openDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -59,5 +60,15 @@ public class Order extends IdentifiableEntity {
     private BigDecimal totalPrice;
 
     @Column(name = "close_date")
-    private LocalDate closeDate;
+    private LocalDateTime closeDate;
+
+    @Transient
+    public void addProduct(Product product, int qty) {
+        products.put(product, qty);
+    }
+
+    @Transient
+    public void removeProduct(Product product, int qty) {
+        products.remove(product, qty);
+    }
 }
