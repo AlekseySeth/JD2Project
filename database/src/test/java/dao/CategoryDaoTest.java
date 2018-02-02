@@ -12,24 +12,18 @@ import static org.junit.Assert.assertEquals;
 public class CategoryDaoTest extends BaseTest {
     @Test
     public void save() throws Exception {
-        Category category = new Category("testCategory_1", "/testCategory_1");
+        Category category = new Category("Category_2", "/Category_2");
         CategoryDao categoryDao = CategoryDao.newInstance();
         categoryDao.save(category);
-        Session session = SESSION_FACTORY.openSession();
-        Category resultSave = session.get(Category.class, 1L);
+        Session session = sessionFactory.openSession();
+        Category resultSave = session.get(Category.class, 2L);
         session.close();
-        assertEquals("testCategory_1", resultSave.getName());
+        assertEquals("Category_2", resultSave.getName());
     }
 
     @Test
     public void get() throws Exception {
-        Category category = new Category("testCategory_2", "/testCategory_2");
-        Session session = SESSION_FACTORY.openSession();
-        session.save(category);
-        session.close();
-        CategoryDao categoryDao = CategoryDao.newInstance();
-        Category result = categoryDao.get(1L);
-        assertEquals("testCategory_2", result.getName());
+        Category result = CategoryDao.newInstance().get(1L);
+        assertEquals("Category", result.getName());
     }
-
 }

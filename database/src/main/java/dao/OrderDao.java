@@ -1,12 +1,11 @@
 package dao;
 
 import entity.order.Order;
+import entity.product.Product;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import util.SessionFactoryManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +15,6 @@ import java.util.List;
 public class OrderDao {
 
     private static OrderDao INSTANCE;
-    private SessionFactory SESSION_FACTORY;
 
     public static OrderDao newInstance() {
         if (INSTANCE == null) {
@@ -30,27 +28,24 @@ public class OrderDao {
     }
 
     public List<Order> getAll() {
-        List<Order> orders = new ArrayList<>();
-        Session session = SESSION_FACTORY.openSession();
-        orders = session.createQuery("select o from Order o").list();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
+        List<Order> orders = session
+                .createQuery("select o from Order o", Order.class)
+                .getResultList();
         session.close();
         return orders;
     }
 
     public void save(Order order) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.save(order);
         session.close();
-        SESSION_FACTORY.close();
     }
 
     public Order get(Long id) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         Order order = session.get(Order.class, id);
         session.close();
-        SESSION_FACTORY.close();
         return order;
     }
 }

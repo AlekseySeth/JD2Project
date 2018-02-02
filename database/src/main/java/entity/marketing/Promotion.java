@@ -10,10 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +21,7 @@ import java.util.Set;
 @Entity
 @Table(name = "promotions")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class BasicPromo extends IdentifiableEntity {
+public abstract class Promotion extends IdentifiableEntity {
 
     @Column(name = "name", unique = true, nullable = false)
     protected String name;
@@ -29,6 +29,11 @@ public abstract class BasicPromo extends IdentifiableEntity {
     @Column(name = "is_active")
     protected boolean isActive;
 
-    protected Set<Product> promotedProducts = new HashSet<>();
+    @OneToMany(mappedBy = "promotion")
+    protected List<Product> promotedProducts = new ArrayList<>();
 
+    protected Promotion(String name, boolean isActive) {
+        this.name = name;
+        this.isActive = isActive;
+    }
 }

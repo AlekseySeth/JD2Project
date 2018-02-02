@@ -14,11 +14,15 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "percentage_discount_promos")
+@Table(name = "fixed_price_promos")
 @PrimaryKeyJoinColumn(name = "promo_id")
-public class PercentageDiscountPromo extends BasicPromo {
+public class FixedPricePromotion extends Promotion {
 
-    @Column(name = "discount_value", nullable = false)
-    private BigDecimal discountValue;
+    @Column(name = "fixed_price", nullable = false)
+    private BigDecimal fixedPrice;
 
+    public FixedPricePromotion(String name, boolean isActive, BigDecimal fixedPrice) {
+        super(name, isActive);
+        this.fixedPrice = fixedPrice;
+    }
 }

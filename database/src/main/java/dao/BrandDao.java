@@ -3,11 +3,8 @@ package dao;
 import entity.product.Brand;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import util.SessionFactoryManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +14,6 @@ import java.util.List;
 public class BrandDao {
 
     private static BrandDao INSTANCE;
-    private SessionFactory SESSION_FACTORY;
 
     public static BrandDao newInstance() {
         if (INSTANCE == null) {
@@ -31,29 +27,22 @@ public class BrandDao {
     }
 
     public List<Brand> getAll() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-
-        List<Brand> brands = new ArrayList<>();
-        Session session = SESSION_FACTORY.openSession();
-        brands = session.createQuery("select b from Brand b").list();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
+        List<Brand> brands = session.createQuery("select b from Brand b", Brand.class).getResultList();
         session.close();
         return brands;
     }
 
     public void save(Brand brand) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.save(brand);
         session.close();
-        SESSION_FACTORY.close();
     }
 
     public Brand get(Long id) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         Brand brand = session.get(Brand.class, id);
         session.close();
-        SESSION_FACTORY.close();
         return brand;
     }
 }

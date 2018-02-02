@@ -16,32 +16,28 @@ import static org.junit.Assert.assertEquals;
 public class ProductDaoTest extends BaseTest {
     @Test
     public void save() throws Exception {
-        Brand brand = new Brand("Brand", "/Brand");
-        BrandDao.newInstance().save(brand);
+        Session session = sessionFactory.openSession();
+        Brand brand = session.get(Brand.class, 1L);
+        Category category = session.get(Category.class, 1L);
 
-        Category category = new Category("Category", "/Category");
-        CategoryDao.newInstance().save(category);
-
-        Product product = new Product("Product", "Description", new BigDecimal(10.0),
-                10, category, brand, "image");
+        Product product = new Product("Product_2", "Description_2", new BigDecimal(10.0),
+                10, category, brand, null, "image_2");
         ProductDao.newInstance().save(product);
 
-        Session session = SESSION_FACTORY.openSession();
-        Product result = session.get(Product.class, 1L);
-
-        String title = result.getTitle();
-        String brandName = result.getBrand().getName();
-        String categoryName = result.getCategory().getName();
-
+        Product result = session.get(Product.class, 2L);
         session.close();
 
-        assertEquals("Product", title);
-        assertEquals("Brand", brandName);
-        assertEquals("Category", categoryName);
+        assertEquals("Product_2", result.getTitle());
+        assertEquals("Brand", result.getBrand().getName());
+        assertEquals("Category", result.getCategory().getName());
     }
 
     @Test
     public void get() throws Exception {
+        Product product = ProductDao.newInstance().get(1L);
+        assertEquals("Product", product.getTitle());
+        assertEquals("Brand", product.getBrand().getName());
+        assertEquals("Category", product.getCategory().getName());
+        assertEquals("PercentageDiscountPromo", product.getPromotion().getName());
     }
-
 }

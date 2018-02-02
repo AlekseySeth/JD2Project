@@ -3,10 +3,8 @@ package dao;
 import entity.product.Category;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import util.SessionFactoryManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +14,6 @@ import java.util.List;
 public class CategoryDao {
 
     private static CategoryDao INSTANCE;
-    private SessionFactory SESSION_FACTORY;
 
     public static CategoryDao newInstance() {
         if (INSTANCE == null) {
@@ -30,29 +27,24 @@ public class CategoryDao {
     }
 
     public List<Category> getAll() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        List<Category> categories = new ArrayList<>();
-        Session session = SESSION_FACTORY.openSession();
-        categories = session.createQuery("select c from Category c").list();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
+        List<Category> categories = session
+                .createQuery("select c from Category c", Category.class)
+                .getResultList();
         session.close();
         return categories;
     }
 
     public void save(Category category) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.save(category);
         session.close();
-        SESSION_FACTORY.close();
     }
 
     public Category get(Long id) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         Category category = session.get(Category.class, id);
         session.close();
-        SESSION_FACTORY.close();
         return category;
     }
-
 }

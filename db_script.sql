@@ -37,6 +37,7 @@ CREATE TABLE products (
   qty_in_stock INT                 NOT NULL,
   category_id  BIGINT              NOT NULL,
   brand_id     BIGINT              NOT NULL,
+  promotion_id BIGINT,
   image_url    VARCHAR(100) DEFAULT '/images/default.png',
   PRIMARY KEY (id),
   FOREIGN KEY (category_id) REFERENCES categories (id),
@@ -91,7 +92,7 @@ CREATE TABLE promotions (
 
 CREATE TABLE percentage_discount_promos (
   promo_id    BIGINT,
-  discount_value DOUBLE NOT NULL,
+  discount_value INT NOT NULL,
   FOREIGN KEY (promo_id) REFERENCES promotions (id)
 );
 

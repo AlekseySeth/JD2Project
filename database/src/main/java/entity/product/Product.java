@@ -1,5 +1,6 @@
 package entity.product;
 
+import entity.marketing.Promotion;
 import entity.util.IdentifiableEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +45,10 @@ public class Product extends IdentifiableEntity {
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
 
     @Column(name = "image_url")
     private String imageURL;

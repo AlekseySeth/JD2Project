@@ -49,9 +49,9 @@ public class Order extends IdentifiableEntity {
 //    )
 //    @MapKeyJoinColumn(name = "product_id")
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "orders_products",
-            joinColumns = @JoinColumn(name = "order_id"))
+            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
     @Column(name = "product_qty")
     @MapKeyJoinColumn(name = "product_id", referencedColumnName = "id")
     private Map<Product, Integer> products = new HashMap<>();

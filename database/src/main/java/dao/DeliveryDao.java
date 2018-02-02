@@ -3,10 +3,8 @@ package dao;
 import entity.order.Delivery;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import util.SessionFactoryManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +14,6 @@ import java.util.List;
 public class DeliveryDao {
 
     private static DeliveryDao INSTANCE;
-    private SessionFactory SESSION_FACTORY;
 
     public static DeliveryDao newInstance() {
         if (INSTANCE == null) {
@@ -30,29 +27,24 @@ public class DeliveryDao {
     }
 
     public List<Delivery> getAll() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        List<Delivery> deliveries = new ArrayList<>();
-        Session session = SESSION_FACTORY.openSession();
-        deliveries = session.createQuery("select d from Delivery d").list();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
+        List<Delivery> deliveries = session
+                .createQuery("select d from Delivery d", Delivery.class)
+                .getResultList();
         session.close();
         return deliveries;
     }
 
     public void save(Delivery delivery) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.save(delivery);
         session.close();
-        SESSION_FACTORY.close();
     }
 
     public Delivery get(Long id) {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        Session session = SESSION_FACTORY.openSession();
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
         Delivery delivery = session.get(Delivery.class, id);
         session.close();
-        SESSION_FACTORY.close();
         return delivery;
     }
-
 }

@@ -18,6 +18,9 @@
     <mapping class="entity.product.Brand"/>
     <mapping class="entity.product.Category"/>
     <mapping class="entity.product.Product"/>
+    <mapping class="entity.marketing.FixedPricePromotion"/>
+    <mapping class="entity.marketing.PercentageDiscountPromotion"/>
+    <mapping class="entity.marketing.Promotion"/>
 
   </session-factory>
 </hibernate-configuration>
