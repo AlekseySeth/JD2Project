@@ -5,7 +5,9 @@ import dao.CategoryDao;
 import dao.DeliveryDao;
 import dao.OrderDao;
 import dao.ProductDao;
+import dao.PromotionDao;
 import dao.UserDao;
+import entity.marketing.Promotion;
 import entity.order.Delivery;
 import entity.order.Order;
 import entity.product.Brand;
@@ -36,33 +38,30 @@ public class DataListService {
     }
 
     public List<User> getAllUsers() {
-        UserDao userDao = UserDao.newInstance();
-        return userDao.getAll();
+        return UserDao.newInstance().getAll();
     }
 
     public List<Product> getAllProducts() {
-        ProductDao productDao = ProductDao.newInstance();
-        return productDao.getAll();
+        return ProductDao.newInstance().getAll();
     }
 
     public List<Order> getAllOrders() {
-        OrderDao orderDao = OrderDao.newInstance();
-        return orderDao.getAll();
+        return OrderDao.newInstance().getAll();
     }
 
     public List<Delivery> getAllDeliveries() {
-        DeliveryDao deliveryDao = DeliveryDao.newInstance();
-        return deliveryDao.getAll();
+        return DeliveryDao.newInstance().getAll();
     }
 
     public List<Category> getAllCategories() {
-        CategoryDao categoryDao = CategoryDao.newInstance();
-        return categoryDao.getAll();
+        return CategoryDao.newInstance().getAll();
     }
 
     public List<Brand> getAllBrands() {
-        BrandDao brandDao = BrandDao.newInstance();
-        return brandDao.getAll();
+        return BrandDao.newInstance().getAll();
     }
 
+    public List<Promotion> getAllPromotions() {
+        return PromotionDao.newInstance().getAllPromotions();
+    }
 }

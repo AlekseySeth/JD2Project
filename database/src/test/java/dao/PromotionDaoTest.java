@@ -2,10 +2,12 @@ package dao;
 
 import entity.marketing.FixedPricePromotion;
 import entity.marketing.PercentageDiscountPromotion;
+import entity.marketing.Promotion;
 import org.hibernate.Session;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,6 +15,13 @@ import static org.junit.Assert.assertEquals;
  * @author a.shestovsky
  */
 public class PromotionDaoTest extends BaseTest {
+
+    @Test
+    public void getAllPromotions() {
+        List<Promotion> allPromotions = PromotionDao.newInstance().getAllPromotions();
+        assertEquals(true, allPromotions.get(1).isActive());
+    }
+
     @Test
     public void saveFixedPricePromotion() throws Exception {
         FixedPricePromotion fixedPricePromotion = new FixedPricePromotion("FixedPricePromo_2", false, new BigDecimal(10));

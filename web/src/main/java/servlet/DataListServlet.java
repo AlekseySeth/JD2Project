@@ -24,9 +24,10 @@ public class DataListServlet extends HttpServlet {
         req.setAttribute("categories", dataListService.getAllCategories());
         req.setAttribute("brands", dataListService.getAllBrands());
         req.setAttribute("deliveries", dataListService.getAllDeliveries());
+        req.setAttribute("promotions", dataListService.getAllPromotions());
 
         req.getServletContext()
-                .getRequestDispatcher("/WEB-INF/html/data-list.jsp")
+                .getRequestDispatcher(getPath("data-list"))
                 .forward(req, resp);
     }
 }
