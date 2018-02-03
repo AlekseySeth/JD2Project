@@ -56,7 +56,7 @@
             <p>
                 ${promotion.id}
                 ${promotion.name}
-                ${promotion.isActive}
+                ${promotion.active}
             </p>
         </c:forEach>
 </body>

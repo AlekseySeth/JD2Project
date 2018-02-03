@@ -26,14 +26,14 @@ public abstract class Promotion extends IdentifiableEntity {
     @Column(name = "name", unique = true, nullable = false)
     protected String name;
 
-    @Column(name = "is_active")
-    protected boolean isActive;
+    @Column(name = "active")
+    protected boolean active;
 
     @OneToMany(mappedBy = "promotion")
     protected List<Product> promotedProducts = new ArrayList<>();
 
     protected Promotion(String name, boolean isActive) {
         this.name = name;
-        this.isActive = isActive;
+        this.active = isActive;
     }
 }

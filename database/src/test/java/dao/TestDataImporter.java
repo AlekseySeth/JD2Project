@@ -49,10 +49,13 @@ public final class TestDataImporter {
         Delivery delivery = new Delivery("Delivery",  new BigDecimal(2.50));
         Brand brand = new Brand("Brand", "/Brand");
         Category category = new Category("Category", "/Category");
+
         FixedPricePromotion fixedPricePromotion = new FixedPricePromotion("FixedPricePromo", false, new BigDecimal(20));
         PercentageDiscountPromotion percentageDiscountPromotion = new PercentageDiscountPromotion("PercentageDiscountPromo", true, 50);
+
         Product product = new Product("Product", "Description", new BigDecimal(10.55),
                 10, category, brand, percentageDiscountPromotion, "image");
+
         Order order = new Order();
         order.setOpenDate(LocalDateTime.now());
         order.setUser(user);

@@ -86,7 +86,7 @@ CREATE TABLE users_orders (
 CREATE TABLE promotions (
   id          BIGINT AUTO_INCREMENT,
   name        VARCHAR(100) UNIQUE NOT NULL,
-  is_active   BOOLEAN,
+  active   BOOLEAN,
   PRIMARY KEY (id)
 );
 
