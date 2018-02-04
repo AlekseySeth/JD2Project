@@ -11,17 +11,17 @@ import java.util.List;
  */
 public class OrderContentDao {
 
-    private static OrderContentDao INSTANCE;
+    private static OrderContentDao instance;
 
     public static OrderContentDao newInstance() {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (OrderContentDao.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new OrderContentDao();
+                if (instance == null) {
+                    instance = new OrderContentDao();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 
     public List<OrderContent> getByOrder(Long orderId) {

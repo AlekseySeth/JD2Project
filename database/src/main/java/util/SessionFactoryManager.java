@@ -1,6 +1,5 @@
 package util;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -8,21 +7,21 @@ import org.hibernate.cfg.Configuration;
  * @author a.shestovsky
  */
 
-public class SessionFactoryManager {
+public final class SessionFactoryManager {
 
-    private static SessionFactory SESSION_FACTORY;
+    private static SessionFactory sessionFactory;
 
     private SessionFactoryManager() {
     }
 
     public static SessionFactory getSessionFactory() {
-        if (SESSION_FACTORY == null) {
+        if (sessionFactory == null) {
             synchronized (SessionFactory.class) {
-                if (SESSION_FACTORY == null) {
-                    SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+                if (sessionFactory == null) {
+                    sessionFactory = new Configuration().configure().buildSessionFactory();
                 }
             }
         }
-        return SESSION_FACTORY;
+        return sessionFactory;
     }
 }

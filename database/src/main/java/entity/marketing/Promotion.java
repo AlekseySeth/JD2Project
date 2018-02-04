@@ -24,13 +24,13 @@ import java.util.List;
 public abstract class Promotion extends IdentifiableEntity {
 
     @Column(name = "name", unique = true, nullable = false)
-    protected String name;
+    private String name;
 
     @Column(name = "active")
-    protected boolean active;
+    private boolean active;
 
     @OneToMany(mappedBy = "promotion")
-    protected List<Product> promotedProducts = new ArrayList<>();
+    private List<Product> promotedProducts = new ArrayList<>();
 
     protected Promotion(String name, boolean isActive) {
         this.name = name;

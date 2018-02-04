@@ -13,17 +13,17 @@ import java.util.List;
  */
 public class PromotionDao {
 
-    private static PromotionDao INSTANCE;
+    private static PromotionDao instance;
 
     public static PromotionDao newInstance() {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (PromotionDao.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new PromotionDao();
+                if (instance == null) {
+                    instance = new PromotionDao();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 
     public List<Promotion> getAllPromotions() {

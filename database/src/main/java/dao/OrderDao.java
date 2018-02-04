@@ -1,7 +1,6 @@
 package dao;
 
 import entity.order.Order;
-import entity.product.Product;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import util.SessionFactoryManager;
@@ -14,17 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDao {
 
-    private static OrderDao INSTANCE;
+    private static OrderDao instance;
 
     public static OrderDao newInstance() {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (OrderDao.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new OrderDao();
+                if (instance == null) {
+                    instance = new OrderDao();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 
     public List<Order> getAll() {

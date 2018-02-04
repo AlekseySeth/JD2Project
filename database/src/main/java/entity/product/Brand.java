@@ -1,7 +1,6 @@
 package entity.product;
 
 import entity.util.IdentifiableEntity;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +22,7 @@ public class Brand extends IdentifiableEntity {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "logo_url", unique = true,nullable = false)
+    @Column(name = "logo_url", unique = true, nullable = false)
     private String logoURL;
 
     public Brand(String name, String logoURL) {

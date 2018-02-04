@@ -13,17 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDao {
 
-    private static UserDao INSTANCE;
+    private static UserDao instance;
 
     public static UserDao newInstance() {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (UserDao.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new UserDao();
+                if (instance == null) {
+                    instance = new UserDao();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 
     public List<User> getAll() {
