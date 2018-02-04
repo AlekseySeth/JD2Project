@@ -51,13 +51,5 @@
                 ${delivery.name}
             </p>
         </c:forEach>
-    <h1>Promotions</h1>
-        <c:forEach var="promotion" items="${requestScope.promotions}">
-            <p>
-                ${promotion.id}
-                ${promotion.name}
-                ${promotion.active}
-            </p>
-        </c:forEach>
 </body>
 </html>
