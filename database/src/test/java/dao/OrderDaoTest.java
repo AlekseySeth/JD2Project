@@ -4,31 +4,24 @@ import entity.order.Delivery;
 import entity.order.Order;
 import entity.order.OrderContent;
 import entity.order.Status;
-import entity.product.Brand;
-import entity.product.Category;
 import entity.product.Product;
-import entity.user.ContactDetails;
-import entity.user.Role;
 import entity.user.User;
 import org.hibernate.Session;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author a.shestovsky
  */
-public class OrderDaoTest extends BaseTest {
+public class OrderDaoTest {
     @Test
     public void save() throws Exception {
-        Session session = sessionFactory.openSession();
+        Session session = ATest.sessionFactory.openSession();
         User user = session.get(User.class, 1L);
         Delivery delivery = session.get(Delivery.class, 1L);
         Product product = session.get(Product.class, 1L);

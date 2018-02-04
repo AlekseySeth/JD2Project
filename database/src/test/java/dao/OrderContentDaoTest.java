@@ -6,15 +6,15 @@ import entity.product.Product;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author a.shestovsky
  */
-public class OrderContentDaoTest extends BaseTest {
+public class OrderContentDaoTest {
     @Test
     public void save() throws Exception {
-        Session session = sessionFactory.openSession();
+        Session session = ATest.sessionFactory.openSession();
 
         Product product = session.get(Product.class, 1L);
         Order order = session.get(Order.class, 1L);

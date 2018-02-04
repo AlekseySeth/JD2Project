@@ -3,7 +3,7 @@ package util;
 /**
  * @author a.shestovsky
  */
-public class ServletUtil {
+public final class ServletUtil {
 
     private static final String PREFIX = "/WEB-INF/html/";
     private static final String SUFFIX = ".jsp";

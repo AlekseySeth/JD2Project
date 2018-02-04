@@ -24,17 +24,17 @@ import java.util.List;
 @NoArgsConstructor
 public class DataListService {
 
-    private static DataListService INSTANCE;
+    private static DataListService instance;
 
     public static DataListService newInstance() {
-        if (INSTANCE == null) {
+        if (instance == null) {
             synchronized (DataListService.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new DataListService();
+                if (instance == null) {
+                    instance = new DataListService();
                 }
             }
         }
-        return INSTANCE;
+        return instance;
     }
 
     public List<User> getAllUsers() {

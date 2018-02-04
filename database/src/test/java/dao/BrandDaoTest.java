@@ -4,12 +4,14 @@ import entity.product.Brand;
 import org.hibernate.Session;
 import org.junit.Test;
 
+import static dao.ATest.sessionFactory;
 import static org.junit.Assert.assertEquals;
 
 /**
  * @author a.shestovsky
  */
-public class BrandDaoTest extends BaseTest {
+
+public class BrandDaoTest {
 
     @Test
     public void save() throws Exception {

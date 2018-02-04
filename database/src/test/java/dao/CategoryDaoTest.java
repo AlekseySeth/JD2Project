@@ -9,13 +9,13 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author a.shestovsky
  */
-public class CategoryDaoTest extends BaseTest {
+public class CategoryDaoTest {
     @Test
     public void save() throws Exception {
         Category category = new Category("Category_2", "/Category_2");
         CategoryDao categoryDao = CategoryDao.newInstance();
         categoryDao.save(category);
-        Session session = sessionFactory.openSession();
+        Session session = ATest.sessionFactory.openSession();
         Category resultSave = session.get(Category.class, 2L);
         session.close();
         assertEquals("Category_2", resultSave.getName());

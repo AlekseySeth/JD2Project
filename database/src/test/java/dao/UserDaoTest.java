@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author a.shestovsky
  */
-public class UserDaoTest extends BaseTest {
+public class UserDaoTest {
 
     @Test
     public void save() throws Exception {
@@ -24,7 +24,7 @@ public class UserDaoTest extends BaseTest {
 
         UserDao.newInstance().save(user);
 
-        Session session = sessionFactory.openSession();
+        Session session = ATest.sessionFactory.openSession();
         User result = session.get(User.class, 2L);
 
         assertEquals("FirstName_2", result.getFirstName());
