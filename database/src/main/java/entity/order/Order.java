@@ -41,36 +41,21 @@ public class Order extends IdentifiableEntity {
     @JoinColumn(name = "delivery_id", nullable = false)
     private Delivery delivery;
 
-//    @ManyToMany
-//    @JoinTable(
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(
 //            name = "orders_products",
-//            joinColumns = @JoinColumn(name = "order_id"),
-//            inverseJoinColumns = @JoinColumn(name = "product_qty")
+//            joinColumns = @JoinColumn(name = "order_id")
 //    )
-//    @MapKeyJoinColumn(name = "product_id")
+//    @MapKeyJoinColumn(name = "product_id", referencedColumnName = "id")
+//    @Column(name = "product_qty")
+//    private Map<Product, Integer> products = new HashMap<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "orders_products",
-            joinColumns = @JoinColumn(name = "order_id")
-    )
-    @MapKeyJoinColumn(name = "product_id", referencedColumnName = "id")
-    @Column(name = "product_qty")
-    private Map<Product, Integer> products = new HashMap<>();
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private List<OrderContent> orderContent = new ArrayList<>();
 
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
     @Column(name = "close_date")
     private LocalDateTime closeDate;
-
-    @Transient
-    public void addProduct(Product product, int qty) {
-        products.put(product, qty);
-    }
-
-    @Transient
-    public void removeProduct(Product product, int qty) {
-        products.remove(product, qty);
-    }
 }

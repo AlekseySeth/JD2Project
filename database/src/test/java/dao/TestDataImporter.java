@@ -4,6 +4,7 @@ import entity.marketing.FixedPricePromotion;
 import entity.marketing.PercentageDiscountPromotion;
 import entity.order.Delivery;
 import entity.order.Order;
+import entity.order.OrderContent;
 import entity.order.Status;
 import entity.product.Brand;
 import entity.product.Category;
@@ -57,12 +58,15 @@ public final class TestDataImporter {
                 10, category, brand, percentageDiscountPromotion, "image");
 
         Order order = new Order();
+
+        OrderContent orderContent = new OrderContent(product, 5, order);
+
         order.setOpenDate(LocalDateTime.now());
         order.setUser(user);
         order.setStatus(Status.OPEN);
         order.setDelivery(delivery);
-        order.addProduct(product, 5);
         order.setTotalPrice(new BigDecimal(10.55));
+
 
         session.save(user);
         session.save(delivery);
@@ -72,6 +76,7 @@ public final class TestDataImporter {
         session.save(percentageDiscountPromotion);
         session.save(product);
         session.save(order);
+        session.save(orderContent);
 
         session.close();
 

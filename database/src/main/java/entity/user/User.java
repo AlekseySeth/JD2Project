@@ -14,7 +14,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -50,7 +52,7 @@ public class User extends IdentifiableEntity {
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    private Set<Order> orders = new HashSet<>();
+    private List<Order> orders = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String password, ContactDetails contactDetails, LocalDate registrationDate, Role role) {
         this.firstName = firstName;

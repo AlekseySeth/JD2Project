@@ -66,11 +66,23 @@ CREATE TABLE orders (
 )
   AUTO_INCREMENT = 1000;
 
-CREATE TABLE orders_products (
-  order_id    BIGINT,
-  product_id  BIGINT,
-  product_qty INT NOT NULL,
-  PRIMARY KEY (order_id, product_id),
+## Many to many via Map<Product, Integer> realization ##
+#
+# CREATE TABLE orders_products (
+#   order_id    BIGINT,
+#   product_id  BIGINT,
+#   product_qty INT NOT NULL,
+#   PRIMARY KEY (order_id, product_id),
+#   FOREIGN KEY (order_id) REFERENCES orders (id),
+#   FOREIGN KEY (product_id) REFERENCES products (id)
+# );
+
+CREATE TABLE order_content (
+  id          BIGINT AUTO_INCREMENT,
+  order_id    BIGINT NOT NULL,
+  product_id  BIGINT NOT NULL,
+  prosuct_qty INT    NOT NULL,
+  PRIMARY KEY (id),
   FOREIGN KEY (order_id) REFERENCES orders (id),
   FOREIGN KEY (product_id) REFERENCES products (id)
 );
@@ -84,14 +96,14 @@ CREATE TABLE users_orders (
 );
 
 CREATE TABLE promotions (
-  id          BIGINT AUTO_INCREMENT,
-  name        VARCHAR(100) UNIQUE NOT NULL,
-  active   BOOLEAN,
+  id     BIGINT AUTO_INCREMENT,
+  name   VARCHAR(100) UNIQUE NOT NULL,
+  active BOOLEAN,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE percentage_discount_promos (
-  promo_id    BIGINT,
+  promo_id       BIGINT,
   discount_value INT NOT NULL,
   FOREIGN KEY (promo_id) REFERENCES promotions (id)
 );
@@ -107,7 +119,6 @@ CREATE TABLE pages (
   url VARCHAR(50),
   PRIMARY KEY (id)
 );
-
 
 # INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
 # VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by',

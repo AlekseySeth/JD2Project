@@ -9,7 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,7 +31,7 @@ public class Category extends IdentifiableEntity {
     private String description;
 
     @OneToMany(mappedBy = "category")
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products = new ArrayList<>();
 
     public Category(String name, String description) {
         this.name = name;
