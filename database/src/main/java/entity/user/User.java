@@ -52,7 +52,8 @@ public class User extends IdentifiableEntity {
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
-    public User(String firstName, String lastName, String email, String password, ContactDetails contactDetails, LocalDate registrationDate, Role role) {
+    public User(String firstName, String lastName, String email, String password, ContactDetails contactDetails,
+                LocalDate registrationDate, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

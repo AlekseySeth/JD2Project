@@ -24,5 +24,4 @@ public class PercentageDiscountPromotion extends Promotion {
         super(name, isActive);
         this.discountValue = discountValue;
     }
-
 }

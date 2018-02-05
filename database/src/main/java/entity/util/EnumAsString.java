@@ -6,4 +6,3 @@ package entity.util;
 public interface EnumAsString {
         String getAsString();
 }
-

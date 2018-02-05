@@ -36,5 +36,4 @@ public class TestSuite extends TestCase {
     public static void finish() {
         sessionFactory.close();
     }
-
 }
