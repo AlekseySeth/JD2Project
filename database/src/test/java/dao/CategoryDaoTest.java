@@ -15,7 +15,7 @@ public class CategoryDaoTest {
         Category category = new Category("Category_2", "/Category_2");
         CategoryDao categoryDao = CategoryDao.newInstance();
         categoryDao.save(category);
-        Session session = ATest.sessionFactory.openSession();
+        Session session = TestSuite.sessionFactory.openSession();
         Category resultSave = session.get(Category.class, 2L);
         session.close();
         assertEquals("Category_2", resultSave.getName());

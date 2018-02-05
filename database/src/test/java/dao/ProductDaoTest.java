@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class ProductDaoTest {
     @Test
     public void save() throws Exception {
-        Session session = ATest.sessionFactory.openSession();
+        Session session = TestSuite.sessionFactory.openSession();
         Brand brand = session.get(Brand.class, 1L);
         Category category = session.get(Category.class, 1L);
 

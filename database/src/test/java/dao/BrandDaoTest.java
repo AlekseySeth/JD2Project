@@ -4,7 +4,7 @@ import entity.product.Brand;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import static dao.ATest.sessionFactory;
+import static dao.TestSuite.sessionFactory;
 import static org.junit.Assert.assertEquals;
 
 /**

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 public class OrderDaoTest {
     @Test
     public void save() throws Exception {
-        Session session = ATest.sessionFactory.openSession();
+        Session session = TestSuite.sessionFactory.openSession();
         User user = session.get(User.class, 1L);
         Delivery delivery = session.get(Delivery.class, 1L);
         Product product = session.get(Product.class, 1L);

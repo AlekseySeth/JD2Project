@@ -24,7 +24,7 @@ public class UserDaoTest {
 
         UserDao.newInstance().save(user);
 
-        Session session = ATest.sessionFactory.openSession();
+        Session session = TestSuite.sessionFactory.openSession();
         User result = session.get(User.class, 2L);
 
         assertEquals("FirstName_2", result.getFirstName());
