@@ -27,7 +27,7 @@ public class BrandDaoTest {
     @Test
     public void get() throws Exception {
         BrandDao brandDao = BrandDao.newInstance();
-        Brand resultGet = brandDao.get(1L);
+        Brand resultGet = brandDao.findById(1L);
         assertEquals("Brand", resultGet.getName());
     }
 }

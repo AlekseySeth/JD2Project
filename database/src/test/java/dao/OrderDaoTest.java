@@ -55,7 +55,7 @@ public class OrderDaoTest {
 
     @Test
     public void get() throws Exception {
-        Order order = OrderDao.newInstance().get(1L);
+        Order order = OrderDao.newInstance().findById(1L);
         List<OrderContent> orderContent = order.getOrderContent();
 
         assertEquals("FirstName", order.getUser().getFirstName());

@@ -34,7 +34,7 @@ public class ProductDaoTest {
 
     @Test
     public void get() throws Exception {
-        Product product = ProductDao.newInstance().get(1L);
+        Product product = ProductDao.newInstance().findById(1L);
         assertEquals("Product", product.getTitle());
         assertEquals("Brand", product.getBrand().getName());
         assertEquals("Category", product.getCategory().getName());

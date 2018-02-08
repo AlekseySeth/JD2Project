@@ -23,7 +23,7 @@ public class CategoryDaoTest {
 
     @Test
     public void get() throws Exception {
-        Category result = CategoryDao.newInstance().get(1L);
+        Category result = CategoryDao.newInstance().findById(1L);
         assertEquals("Category", result.getName());
     }
 }

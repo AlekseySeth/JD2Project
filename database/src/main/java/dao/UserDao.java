@@ -11,7 +11,7 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class UserDao {
+public class UserDao extends GenericDao<User> {
 
     private static UserDao instance;
 
@@ -26,25 +26,4 @@ public class UserDao {
         return instance;
     }
 
-    public List<User> getAll() {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<User> users = session
-                .createQuery("select u from User u", User.class)
-                .getResultList();
-        session.close();
-        return users;
-    }
-
-    public void save(User user) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        session.save(user);
-        session.close();
-    }
-
-    public User get(Long id) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        session.close();
-        return user;
-    }
 }

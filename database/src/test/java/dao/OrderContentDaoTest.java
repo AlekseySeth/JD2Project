@@ -30,7 +30,7 @@ public class OrderContentDaoTest {
 
     @Test
     public void get() throws Exception {
-        OrderContent orderContent = OrderContentDao.newInstance().get(1L);
+        OrderContent orderContent = OrderContentDao.newInstance().findById(1L);
 
         assertEquals("Product", orderContent.getProduct().getTitle());
         assertEquals(Integer.valueOf(5), orderContent.getProductQty());

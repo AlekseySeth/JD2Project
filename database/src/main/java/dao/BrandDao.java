@@ -11,7 +11,7 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class BrandDao {
+public class BrandDao extends GenericDao<Brand> {
 
     private static BrandDao instance;
 
@@ -26,23 +26,4 @@ public class BrandDao {
         return instance;
     }
 
-    public List<Brand> getAll() {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<Brand> brands = session.createQuery("select b from Brand b", Brand.class).getResultList();
-        session.close();
-        return brands;
-    }
-
-    public void save(Brand brand) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        session.save(brand);
-        session.close();
-    }
-
-    public Brand get(Long id) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        Brand brand = session.get(Brand.class, id);
-        session.close();
-        return brand;
-    }
 }

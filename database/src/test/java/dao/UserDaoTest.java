@@ -33,7 +33,7 @@ public class UserDaoTest {
 
     @Test
     public void get() throws Exception {
-        User user = UserDao.newInstance().get(1L);
+        User user = UserDao.newInstance().findById(1L);
         assertEquals("FirstName", user.getFirstName());
         assertEquals("Mobile", user.getContactDetails().getMobile());
     }

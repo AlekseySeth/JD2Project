@@ -18,15 +18,15 @@ import static org.junit.Assert.assertEquals;
 public class PercentagePromotionDaoTest {
 
     @Test
-    public void getAllPromotions() {
-        List<Promotion> allPromotions = PromotionDao.newInstance().getAllPromotions();
+    public void findAllPromotions() {
+        List<Promotion> allPromotions = PromotionDao.newInstance().findAllPromotions();
         assertEquals(false, allPromotions.get(0).isActive());
     }
 
     @Test
     public void savePercentageDiscountPromotion() throws Exception {
         PercentageDiscountPromotion percentageDiscountPromotion = new PercentageDiscountPromotion("PercentageDiscountPromo_2", true, 25);
-        PromotionDao.newInstance().savePercentageDiscountPromotion(percentageDiscountPromotion);
+        PercentageDiscountPromotionDao.newInstance().save(percentageDiscountPromotion);
         Session session = sessionFactory.openSession();
         PercentageDiscountPromotion result = session.get(PercentageDiscountPromotion.class, 4L);
         session.close();
@@ -36,7 +36,7 @@ public class PercentagePromotionDaoTest {
 
     @Test
     public void getPercentageDiscountPromotion() throws Exception {
-        PercentageDiscountPromotion result = PromotionDao.newInstance().getPercentageDiscountPromotion(2L);
+        PercentageDiscountPromotion result = PercentageDiscountPromotionDao.newInstance().findById(2L);
         assertEquals("PercentageDiscountPromo", result.getName());
         assertEquals(50, result.getDiscountValue());
     }

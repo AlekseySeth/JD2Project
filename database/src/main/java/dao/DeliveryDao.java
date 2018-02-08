@@ -11,7 +11,7 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class DeliveryDao {
+public class DeliveryDao extends GenericDao<Delivery> {
 
     private static DeliveryDao instance;
 
@@ -26,25 +26,4 @@ public class DeliveryDao {
         return instance;
     }
 
-    public List<Delivery> getAll() {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<Delivery> deliveries = session
-                .createQuery("select d from Delivery d", Delivery.class)
-                .getResultList();
-        session.close();
-        return deliveries;
-    }
-
-    public void save(Delivery delivery) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        session.save(delivery);
-        session.close();
-    }
-
-    public Delivery get(Long id) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        Delivery delivery = session.get(Delivery.class, id);
-        session.close();
-        return delivery;
-    }
 }

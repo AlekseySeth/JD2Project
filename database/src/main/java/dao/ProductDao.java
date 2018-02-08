@@ -11,7 +11,7 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class ProductDao {
+public class ProductDao extends GenericDao<Product> {
 
     private static ProductDao instance;
 
@@ -26,25 +26,4 @@ public class ProductDao {
         return instance;
     }
 
-    public List<Product> getAll() {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<Product> products = session
-                .createQuery("select p from Product p", Product.class)
-                .getResultList();
-        session.close();
-        return products;
-    }
-
-    public void save(Product product) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        session.save(product);
-        session.close();
-    }
-
-    public Product get(Long id) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        Product product = session.get(Product.class, id);
-        session.close();
-        return product;
-    }
 }

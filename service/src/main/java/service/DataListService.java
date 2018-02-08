@@ -38,30 +38,30 @@ public class DataListService {
     }
 
     public List<User> getAllUsers() {
-        return UserDao.newInstance().getAll();
+        return UserDao.newInstance().findAll();
     }
 
     public List<Product> getAllProducts() {
-        return ProductDao.newInstance().getAll();
+        return ProductDao.newInstance().findAll();
     }
 
     public List<Order> getAllOrders() {
-        return OrderDao.newInstance().getAll();
+        return OrderDao.newInstance().findAll();
     }
 
     public List<Delivery> getAllDeliveries() {
-        return DeliveryDao.newInstance().getAll();
+        return DeliveryDao.newInstance().findAll();
     }
 
     public List<Category> getAllCategories() {
-        return CategoryDao.newInstance().getAll();
+        return CategoryDao.newInstance().findAll();
     }
 
     public List<Brand> getAllBrands() {
-        return BrandDao.newInstance().getAll();
+        return BrandDao.newInstance().findAll();
     }
 
     public List<Promotion> getAllPromotions() {
-        return PromotionDao.newInstance().getAllPromotions();
+        return PromotionDao.newInstance().findAllPromotions();
     }
 }
