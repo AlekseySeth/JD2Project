@@ -1,5 +1,7 @@
 package dao;
 
+import entity.product.Brand;
+import entity.product.Category;
 import entity.product.Product;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
@@ -24,6 +26,14 @@ public class ProductDao extends GenericDao<Product> {
             }
         }
         return instance;
+    }
+
+    public List<Product> findByCategory(Category category) {
+        return null;
+    }
+
+    public List<Brand> findByBrand(Brand brand) {
+        return null;
     }
 
 }

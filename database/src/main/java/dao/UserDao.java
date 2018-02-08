@@ -26,4 +26,9 @@ public class UserDao extends GenericDao<User> {
         return instance;
     }
 
+    public User findByEmai(String email) {
+
+        return null;
+    }
+
 }

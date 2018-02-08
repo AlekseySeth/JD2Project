@@ -1,15 +1,13 @@
 package dao;
 
-import entity.marketing.FixedPricePromotion;
 import entity.marketing.PercentageDiscountPromotion;
 import entity.marketing.Promotion;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import static dao.TestSuite.*;
+import static dao.TestSuite.sessionFactory;
 import static org.junit.Assert.assertEquals;
 
 /**

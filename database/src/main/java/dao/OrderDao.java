@@ -1,10 +1,13 @@
 package dao;
 
 import entity.order.Order;
+import entity.product.Product;
+import entity.user.User;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import util.SessionFactoryManager;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**
@@ -24,6 +27,16 @@ public class OrderDao extends GenericDao<Order> {
             }
         }
         return instance;
+    }
+
+    public List<Order> findByCustomer(User user) {
+
+        return null;
+    }
+
+    public List<Order> findByProduct(Product product) {
+
+        return null;
     }
 
 }
