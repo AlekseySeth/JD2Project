@@ -2,10 +2,6 @@ package dao;
 
 import entity.product.Brand;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
-import util.SessionFactoryManager;
-
-import java.util.List;
 
 /**
  * @author a.shestovsky

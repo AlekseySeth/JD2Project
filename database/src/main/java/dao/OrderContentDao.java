@@ -1,11 +1,6 @@
 package dao;
 
-import entity.order.Order;
 import entity.order.OrderContent;
-import org.hibernate.Session;
-import util.SessionFactoryManager;
-
-import java.util.List;
 
 /**
  * @author a.shestovsky

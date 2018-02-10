@@ -1,8 +1,10 @@
 package dao;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import entity.product.Brand;
 import entity.product.Category;
 import entity.product.Product;
+import entity.product.QProduct;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import util.SessionFactoryManager;
@@ -28,33 +30,20 @@ public class ProductDao extends GenericDao<Product> {
         return instance;
     }
 
-    public List<Product> findByCategory(Category category) {
+    public List<Product> searchProducts(Category category, String title, List<Brand> brands, int limit, int offset) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<Product> productsByCategory = session
-                .createQuery("select p from Product where p.category = :productCategory", Product.class)
-                .setParameter("productCategory", category)
-                .getResultList();
-        session.close();
-        return productsByCategory;
-    }
-
-    public List<Product> findByBrand(Brand brand) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<Product> productsByBrand = session
-                .createQuery("select p from Product where p.brand = :productBrand", Product.class)
-                .setParameter("productBrand", brand)
-                .getResultList();
-        session.close();
-        return productsByBrand;
-    }
-
-    public List<Product> findByTitle(String title) {
-        Session session = SessionFactoryManager.getSessionFactory().openSession();
-        List<Product> products = session
-                .createQuery("select p from Product where p.title like %:productTitle%", Product.class)
-                .setParameter(":productTitle", title)
-                .getResultList();
-        session.close();
-        return products;
+        JPAQuery<Product> query = new JPAQuery<>(session);
+        QProduct product = QProduct.product;
+        query.select(product).from(product);
+        if (category != null) {
+            query.where(product.category.eq(category));
+        }
+        if (!title.isEmpty()) {
+            query.where(product.title.like(title));
+        }
+        if (!brands.isEmpty()) {
+            query.where(product.brand.in(brands));
+        }
+        return query.limit(limit).offset(offset).fetchResults().getResults();
     }
 }

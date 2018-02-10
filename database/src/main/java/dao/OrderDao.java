@@ -4,10 +4,7 @@ import entity.order.Order;
 import entity.product.Product;
 import entity.user.User;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
-import util.SessionFactoryManager;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**

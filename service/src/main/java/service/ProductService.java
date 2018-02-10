@@ -26,20 +26,8 @@ public class ProductService {
         return instance;
     }
 
-    public List<Product> findByCategory(Category category) {
-        return  ProductDao.newInstance().findByCategory(category);
-    }
 
-    public List<Product> findByBrands(Brand... brands) {
-        List<Product> result = new ArrayList<>();
-        ProductDao productDao = ProductDao.newInstance();
-        for (Brand brand : brands) {
-            result.addAll(productDao.findByBrand(brand));
-        }
-        return result;
-    }
-
-    public List<Product> findByTitle(String title) {
-        return ProductDao.newInstance().findByTitle(title);
+    public List<Product> searchProducts(Category category, String title, List<Brand> brands, int limit, int offset) {
+        return ProductDao.newInstance().searchProducts(category, title, brands, limit, offset);
     }
 }
