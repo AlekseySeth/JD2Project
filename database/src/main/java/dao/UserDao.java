@@ -2,6 +2,8 @@ package dao;
 
 import entity.user.User;
 import lombok.NoArgsConstructor;
+import org.hibernate.Session;
+import util.SessionFactoryManager;
 
 /**
  * @author a.shestovsky
@@ -22,9 +24,10 @@ public class UserDao extends GenericDao<User> {
         return instance;
     }
 
-    public User findByEmai(String email) {
-
-        return null;
+    public User findByEmail(String email) {
+        Session session = SessionFactoryManager.getSessionFactory().openSession();
+        return session.createQuery("select u from User u where u.email = :email", User.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
-
 }

@@ -1,11 +1,8 @@
 package service;
 
 import dao.ProductDao;
-import entity.product.Brand;
-import entity.product.Category;
 import entity.product.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +24,7 @@ public class ProductService {
     }
 
 
-    public List<Product> searchProducts(Category category, String title, List<Brand> brands, int limit, int offset) {
-        return ProductDao.newInstance().searchProducts(category, title, brands, limit, offset);
+    public List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
+        return ProductDao.newInstance().searchProducts(categoryId, title, brandsId, limit, offset);
     }
 }

@@ -14,12 +14,6 @@ import util.SessionFactoryManager;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         BrandDaoTest.class,
-        CategoryDaoTest.class,
-        OrderContentDaoTest.class,
-        OrderDaoTest.class,
-        ProductDaoTest.class,
-        FixedPricePromotionDaoTest.class,
-        PercentagePromotionDaoTest.class,
         UserDaoTest.class
 })
 public class TestSuite extends TestCase {

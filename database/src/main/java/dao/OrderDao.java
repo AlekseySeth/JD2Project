@@ -25,15 +25,4 @@ public class OrderDao extends GenericDao<Order> {
         }
         return instance;
     }
-
-    public List<Order> findByCustomer(User user) {
-
-        return null;
-    }
-
-    public List<Order> findByProduct(Product product) {
-
-        return null;
-    }
-
 }

@@ -1,8 +1,7 @@
 package dao;
 
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
-import entity.product.Brand;
-import entity.product.Category;
 import entity.product.Product;
 import entity.product.QProduct;
 import lombok.NoArgsConstructor;
@@ -30,19 +29,19 @@ public class ProductDao extends GenericDao<Product> {
         return instance;
     }
 
-    public List<Product> searchProducts(Category category, String title, List<Brand> brands, int limit, int offset) {
+    public List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         JPAQuery<Product> query = new JPAQuery<>(session);
         QProduct product = QProduct.product;
         query.select(product).from(product);
-        if (category != null) {
-            query.where(product.category.eq(category));
+        if (categoryId != null) {
+            query.where(product.category.id.eq(categoryId));
         }
-        if (!title.isEmpty()) {
-            query.where(product.title.like(title));
+        if (title != null) {
+            query.where(product.title.like(Expressions.asString("%").concat(title).concat("%")));
         }
-        if (!brands.isEmpty()) {
-            query.where(product.brand.in(brands));
+        if (brandsId.size() > 0) {
+            query.where(product.brand.id.in(brandsId));
         }
         return query.limit(limit).offset(offset).fetchResults().getResults();
     }

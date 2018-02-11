@@ -42,8 +42,7 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.beginTransaction();
         List<T> resultList = session
-                .createQuery("select o from :tableName o", entityClass)
-                .setParameter("tableName", entityClass.getName())
+                .createQuery("select o from " + entityClass.getSimpleName() + " o", entityClass)
                 .getResultList();
         session.getTransaction().commit();
         session.close();
@@ -65,5 +64,4 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
         session.getTransaction().commit();
         session.close();
     }
-
 }

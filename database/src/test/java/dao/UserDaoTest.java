@@ -37,4 +37,10 @@ public class UserDaoTest {
         assertEquals("FirstName", user.getFirstName());
         assertEquals("Mobile", user.getContactDetails().getMobile());
     }
+
+    @Test
+    public void findByEmail() {
+        User result = UserDao.newInstance().findByEmail("Email");
+        assertEquals("FirstName", result.getFirstName());
+    }
 }
