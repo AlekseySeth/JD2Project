@@ -84,31 +84,25 @@
             </plugin>
             <plugin>
                 <groupId>com.mysema.maven</groupId>
-                <artifactId>maven-apt-plugin</artifactId>
-                <version>1.0.4</version>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.0.9</version>
                 <executions>
                     <execution>
-                        <id>process-common-model</id>
                         <goals>
                             <goal>process</goal>
                         </goals>
-                        <phase>generate-sources</phase>
                         <configuration>
-                            <sourceDirectory>${project.build.directory}/{yourSourceDir}</sourceDirectory>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processors>
+                                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                                <processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
+                            </processors>
+                            <options>
+                                <querydsl.entityAccessors>false</querydsl.entityAccessors>
+                            </options>
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <outputDirectory>target/generated-sources/querydsl</outputDirectory>
-                    <processors>
-                        <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                    </processors>
-                    <options>
-                        <querydsl.entityAccessors>true</querydsl.entityAccessors>
-                        <querydsl.createDefaultVariable>true</querydsl.createDefaultVariable>
-                        <querydsl.packageSuffix>.qdsl</querydsl.packageSuffix>
-                    </options>
-                </configuration>
             </plugin>
         </plugins>
     </build>

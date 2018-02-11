@@ -22,10 +22,14 @@ import static util.ServletUtil.getPath;
 @WebServlet(urlPatterns = "/products")
 public class ProductsServlet extends HttpServlet {
 
+    private static final int DEFAULT_NUMBER_OF_PRODUCTS = 3;
+    private static final int FIVE = 5;
+    private static final int TEN = 10;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        List<Integer> pagesList = Arrays.asList(3, 5, 10);
+        List<Integer> pagesList = Arrays.asList(DEFAULT_NUMBER_OF_PRODUCTS, FIVE, TEN);
         req.setAttribute("pagesList", pagesList);
         DataListService dataListService = DataListService.newInstance();
         List<Category> categories = dataListService.getAllCategories();
@@ -41,14 +45,14 @@ public class ProductsServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String categoryIdString = req.getParameter("category");
         Long categoryId = null;
-        if (categoryIdString != null && !categoryIdString.equals("all")) {
+        if (categoryIdString != null && !"all".equals(categoryIdString)) {
             categoryId = Long.valueOf(categoryIdString);
             session.setAttribute("selectedCategory", categoryId);
-        } else if (categoryIdString.equals("all")) {
+        } else if ("all".equals(categoryIdString)) {
             session.setAttribute("selectedCategory", 0);
         }
         String title = req.getParameter("title");
-        if (title !=null && title.equals("")) {
+        if (title != null && "".equals(title)) {
             title = null;
         }
         String[] brandsString = req.getParameterValues("brand");
@@ -59,7 +63,7 @@ public class ProductsServlet extends HttpServlet {
             }
         }
         String productsOnPageString = req.getParameter("productsOnPage");
-        Integer productsOnPage = 3;
+        Integer productsOnPage = DEFAULT_NUMBER_OF_PRODUCTS;
         if (productsOnPageString != null) {
             productsOnPage = Integer.valueOf(productsOnPageString);
             session.setAttribute("selectedProductsOnPage", productsOnPage);
