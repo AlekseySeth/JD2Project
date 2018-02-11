@@ -31,7 +31,7 @@
                 </c:forEach>
             </select>
             <label for="page">Страница</label>
-            <input style="width: 50px" type="number" name="page" id="page" value="${sessionScope.selectedPage eq "" ? 1 : sessionScope.selectedPage}">
+            <input style="width: 50px" type="number" name="page" id="page" value="${sessionScope.selectedPage eq null ? 1 : sessionScope.selectedPage}">
             <button type="submit">Поиск</button>
         </form>
     </div>

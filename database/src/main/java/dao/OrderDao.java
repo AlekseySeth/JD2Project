@@ -1,11 +1,8 @@
 package dao;
 
-import entity.order.Order;
-import entity.product.Product;
-import entity.user.User;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
+import entity.order.Order;
+import lombok.NoArgsConstructor;
 
 /**
  * @author a.shestovsky

@@ -23,10 +23,10 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
     public Long save(T entity) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(entity);
+        Long id = (Long) session.save(entity);
         session.getTransaction().commit();
         session.close();
-        return entity.getId();
+        return id;
     }
 
     public T findById(Long id) {

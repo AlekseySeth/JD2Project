@@ -44,6 +44,8 @@ public class ProductsServlet extends HttpServlet {
         if (categoryIdString != null && !categoryIdString.equals("all")) {
             categoryId = Long.valueOf(categoryIdString);
             session.setAttribute("selectedCategory", categoryId);
+        } else if (categoryIdString.equals("all")) {
+            session.setAttribute("selectedCategory", 0);
         }
         String title = req.getParameter("title");
         if (title !=null && title.equals("")) {
