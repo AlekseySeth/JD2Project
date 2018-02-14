@@ -13,7 +13,7 @@ public class CategoryDaoTest {
     @Test
     public void save() throws Exception {
         Category category = new Category("Category_2", "/Category_2");
-        CategoryDao categoryDao = CategoryDao.newInstance();
+        CategoryDaoImpl categoryDao = CategoryDaoImpl.newInstance();
         categoryDao.save(category);
         Session session = TestSuite.sessionFactory.openSession();
         Category resultSave = session.get(Category.class, 2L);
@@ -23,7 +23,7 @@ public class CategoryDaoTest {
 
     @Test
     public void get() throws Exception {
-        Category result = CategoryDao.newInstance().findById(1L);
+        Category result = CategoryDaoImpl.newInstance().findById(1L);
         assertEquals("Category", result.getName());
     }
 }

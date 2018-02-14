@@ -20,7 +20,7 @@ public class OrderContentDaoTest {
         Order order = session.get(Order.class, 1L);
         OrderContent orderContent = new OrderContent(product, 8, order);
 
-        OrderContentDao.newInstance().save(orderContent);
+        OrderContentDaoImpl.newInstance().save(orderContent);
 
         OrderContent result = session.get(OrderContent.class, 2L);
 
@@ -30,7 +30,7 @@ public class OrderContentDaoTest {
 
     @Test
     public void get() throws Exception {
-        OrderContent orderContent = OrderContentDao.newInstance().findById(1L);
+        OrderContent orderContent = OrderContentDaoImpl.newInstance().findById(1L);
 
         assertEquals("Product", orderContent.getProduct().getTitle());
         assertEquals(Integer.valueOf(5), orderContent.getProductQty());

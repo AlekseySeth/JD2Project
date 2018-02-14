@@ -2,6 +2,7 @@ package dao;
 
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
+import dao.common.GenericDaoImpl;
 import entity.product.Product;
 import entity.product.QProduct;
 import lombok.NoArgsConstructor;
@@ -14,15 +15,15 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class ProductDao extends GenericDao<Product> {
+public class ProductDaoImpl extends GenericDaoImpl<Product> {
 
-    private static ProductDao instance;
+    private static ProductDaoImpl instance;
 
-    public static ProductDao newInstance() {
+    public static ProductDaoImpl newInstance() {
         if (instance == null) {
-            synchronized (ProductDao.class) {
+            synchronized (ProductDaoImpl.class) {
                 if (instance == null) {
-                    instance = new ProductDao();
+                    instance = new ProductDaoImpl();
                 }
             }
         }

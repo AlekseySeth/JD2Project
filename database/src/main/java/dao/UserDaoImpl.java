@@ -1,5 +1,6 @@
 package dao;
 
+import dao.common.GenericDaoImpl;
 import entity.user.User;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
@@ -9,15 +10,15 @@ import util.SessionFactoryManager;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class UserDao extends GenericDao<User> {
+public class UserDaoImpl extends GenericDaoImpl<User> {
 
-    private static UserDao instance;
+    private static UserDaoImpl instance;
 
-    public static UserDao newInstance() {
+    public static UserDaoImpl newInstance() {
         if (instance == null) {
-            synchronized (UserDao.class) {
+            synchronized (UserDaoImpl.class) {
                 if (instance == null) {
-                    instance = new UserDao();
+                    instance = new UserDaoImpl();
                 }
             }
         }

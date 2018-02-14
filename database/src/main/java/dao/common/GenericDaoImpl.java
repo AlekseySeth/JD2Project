@@ -1,24 +1,35 @@
-package dao;
+package dao.common;
 
 import entity.util.IdentifiableEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.GenericTypeResolver;
 import util.SessionFactoryManager;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
  * @author a.shestovsky
  */
-public abstract class GenericDao<T extends IdentifiableEntity> {
+public abstract class GenericDaoImpl<T extends IdentifiableEntity> implements GenericDao<T> {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     private Class<T> entityClass;
 
-    public GenericDao() {
-        ParameterizedType parameterizedSuperclass
-                = (ParameterizedType) getClass().getGenericSuperclass();
-        entityClass = (Class<T>) parameterizedSuperclass.getActualTypeArguments()[0];
+    @SuppressWarnings("unchecked")
+    public GenericDaoImpl() {
+        this.entityClass = (Class<T>) GenericTypeResolver
+                .resolveTypeArgument(getClass(), GenericDaoImpl.class);
     }
+
+    protected SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    @Override
 
     public Long save(T entity) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
@@ -29,6 +40,7 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
         return id;
     }
 
+    @Override
     public T findById(Long id) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.beginTransaction();
@@ -38,6 +50,7 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
         return result;
     }
 
+    @Override
     public List<T> findAll() {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.beginTransaction();
@@ -49,6 +62,7 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
         return resultList;
     }
 
+    @Override
     public void update(T entity) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.beginTransaction();
@@ -57,6 +71,7 @@ public abstract class GenericDao<T extends IdentifiableEntity> {
         session.close();
     }
 
+    @Override
     public void delete(T entity) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         session.beginTransaction();

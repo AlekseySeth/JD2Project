@@ -22,7 +22,7 @@ public class ProductDaoTest {
 
         Product product = new Product("Product_2", "Description_2", new BigDecimal(10.0),
                 10, category, brand, null, "image_2");
-        ProductDao.newInstance().save(product);
+        ProductDaoImpl.newInstance().save(product);
 
         Product result = session.get(Product.class, 2L);
         session.close();
@@ -34,7 +34,7 @@ public class ProductDaoTest {
 
     @Test
     public void get() throws Exception {
-        Product product = ProductDao.newInstance().findById(1L);
+        Product product = ProductDaoImpl.newInstance().findById(1L);
         assertEquals("Product", product.getTitle());
         assertEquals("Brand", product.getBrand().getName());
         assertEquals("Category", product.getCategory().getName());

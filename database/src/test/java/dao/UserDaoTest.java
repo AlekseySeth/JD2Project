@@ -22,7 +22,7 @@ public class UserDaoTest {
         User user = new User("FirstName_2",  "LastName_2", "Email_2",
                 "Password_2", contactDetails, LocalDate.now(), Role.CUSTOMER);
 
-        UserDao.newInstance().save(user);
+        UserDaoImpl.newInstance().save(user);
 
         Session session = TestSuite.sessionFactory.openSession();
         User result = session.get(User.class, 2L);
@@ -33,14 +33,14 @@ public class UserDaoTest {
 
     @Test
     public void get() throws Exception {
-        User user = UserDao.newInstance().findById(1L);
+        User user = UserDaoImpl.newInstance().findById(1L);
         assertEquals("FirstName", user.getFirstName());
         assertEquals("Mobile", user.getContactDetails().getMobile());
     }
 
     @Test
     public void findByEmail() {
-        User result = UserDao.newInstance().findByEmail("Email");
+        User result = UserDaoImpl.newInstance().findByEmail("Email");
         assertEquals("FirstName", result.getFirstName());
     }
 }

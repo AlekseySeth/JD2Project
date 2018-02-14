@@ -16,7 +16,7 @@ public class FixedPricePromotionDaoTest {
     @Test
     public void saveFixedPricePromotion() throws Exception {
         FixedPricePromotion fixedPricePromotion = new FixedPricePromotion("FixedPricePromo_2", false, new BigDecimal(10));
-        FixedPricePromotionDao.newInstance().save(fixedPricePromotion);
+        FixedPricePromotionDaoImpl.newInstance().save(fixedPricePromotion);
         Session session = sessionFactory.openSession();
         FixedPricePromotion result = session.get(FixedPricePromotion.class, 3L);
         session.close();
@@ -25,7 +25,7 @@ public class FixedPricePromotionDaoTest {
 
     @Test
     public void getFixedPricePromotion() throws Exception {
-        FixedPricePromotion result = FixedPricePromotionDao.newInstance().findById(1L);
+        FixedPricePromotion result = FixedPricePromotionDaoImpl.newInstance().findById(1L);
         assertEquals("FixedPricePromo", result.getName());
     }
 

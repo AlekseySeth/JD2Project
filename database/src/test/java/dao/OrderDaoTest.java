@@ -36,7 +36,7 @@ public class OrderDaoTest {
 
         order.setTotalPrice(new BigDecimal(10.55));
 
-        OrderDao.newInstance().save(order);
+        OrderDaoImpl.newInstance().save(order);
         session.save(orderContentToSave);
 
         Order result = session.get(Order.class, 2L);
@@ -55,7 +55,7 @@ public class OrderDaoTest {
 
     @Test
     public void get() throws Exception {
-        Order order = OrderDao.newInstance().findById(1L);
+        Order order = OrderDaoImpl.newInstance().findById(1L);
         List<OrderContent> orderContent = order.getOrderContent();
 
         assertEquals("FirstName", order.getUser().getFirstName());
