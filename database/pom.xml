@@ -94,8 +94,8 @@
                         <configuration>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
                             <processors>
-                                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                                <processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
+                                <!--<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>-->
+                                <!--<processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>-->
                             </processors>
                             <options>
                                 <querydsl.entityAccessors>false</querydsl.entityAccessors>

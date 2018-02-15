@@ -9,18 +9,6 @@ import lombok.NoArgsConstructor;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class OrderDaoImpl extends GenericDaoImpl<Order> {
+public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
 
-    private static OrderDaoImpl instance;
-
-    public static OrderDaoImpl newInstance() {
-        if (instance == null) {
-            synchronized (OrderDaoImpl.class) {
-                if (instance == null) {
-                    instance = new OrderDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 }

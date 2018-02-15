@@ -12,19 +12,6 @@ import java.util.List;
  */
 public class PromotionDaoImpl extends GenericDaoImpl<Promotion> {
 
-    private static PromotionDaoImpl instance;
-
-    public static PromotionDaoImpl newInstance() {
-        if (instance == null) {
-            synchronized (PromotionDaoImpl.class) {
-                if (instance == null) {
-                    instance = new PromotionDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     public List<Promotion> findAllPromotions() {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         List<Promotion> promotions = session
@@ -34,5 +21,4 @@ public class PromotionDaoImpl extends GenericDaoImpl<Promotion> {
         session.close();
         return promotions;
     }
-
 }

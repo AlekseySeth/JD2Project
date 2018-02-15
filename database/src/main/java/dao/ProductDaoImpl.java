@@ -7,6 +7,7 @@ import entity.product.Product;
 import entity.product.QProduct;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 import util.SessionFactoryManager;
 
 import java.util.List;
@@ -15,21 +16,10 @@ import java.util.List;
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class ProductDaoImpl extends GenericDaoImpl<Product> {
+@Repository
+public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao {
 
-    private static ProductDaoImpl instance;
-
-    public static ProductDaoImpl newInstance() {
-        if (instance == null) {
-            synchronized (ProductDaoImpl.class) {
-                if (instance == null) {
-                    instance = new ProductDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
+    @Override
     public List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         JPAQuery<Product> query = new JPAQuery<>(session);

@@ -13,8 +13,8 @@ import util.SessionFactoryManager;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        BrandDaoTest.class,
-        UserDaoTest.class
+//        BrandDaoTest.class,
+//        UserDaoTest.class
 })
 public class TestSuite extends TestCase {
 

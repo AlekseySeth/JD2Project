@@ -4,27 +4,17 @@ import dao.common.GenericDaoImpl;
 import entity.user.User;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 import util.SessionFactoryManager;
 
 /**
  * @author a.shestovsky
  */
 @NoArgsConstructor
-public class UserDaoImpl extends GenericDaoImpl<User> {
+@Repository
+public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
-    private static UserDaoImpl instance;
-
-    public static UserDaoImpl newInstance() {
-        if (instance == null) {
-            synchronized (UserDaoImpl.class) {
-                if (instance == null) {
-                    instance = new UserDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
+    @Override
     public User findByEmail(String email) {
         Session session = SessionFactoryManager.getSessionFactory().openSession();
         return session.createQuery("select u from User u where u.email = :email", User.class)
