@@ -16,22 +16,29 @@
             <select name="category" id="category">
                 <option value="all">--</option>
                 <c:forEach var="category" items="${requestScope.categories}">
-                    <option value="${category.id}" ${sessionScope.selectedCategory eq category.id ? "selected" : ""}>${category.name}</option>
+                    <option value="${category.id}" ${sessionScope.selectedCategory eq category.id ? "selected" : ""}>
+                            ${category.name}
+                    </option>
                 </c:forEach>
             </select>
             <label for="brand">Брэнд</label>
             <c:forEach var="brand" items="${requestScope.brands}">
-                <input id="brand" name="brand" type="checkbox" value="${brand.id}" ${sessionScope.by.nutrition.product.brand.id eq brand.id ? "selected" : ""}>${brand.name}
+                   <input id="brand" name="brand" type="checkbox" value="${brand.id}"
+                       <%--${selectedBrand eq brand.id ? "checked" : ""}--%>
+                   >${brand.name}
             </c:forEach>
             <br>
             <label for="page">Количество на странице</label>
             <select name="productsOnPage" id="page">
                 <c:forEach var="qtyOnPage" items="${requestScope.pagesList}">
-                    <option value="${qtyOnPage}" ${sessionScope.selectedProductsOnPage eq qtyOnPage ? "selected" : ""}>${qtyOnPage}</option>
+                    <option value="${qtyOnPage}" ${sessionScope.selectedProductsOnPage eq qtyOnPage ? "selected" : ""}>
+                            ${qtyOnPage}
+                    </option>
                 </c:forEach>
             </select>
             <label for="page">Страница</label>
-            <input style="width: 50px" type="number" name="page" id="page" value="${sessionScope.selectedPage eq null ? 1 : sessionScope.selectedPage}">
+            <input style="width: 50px" type="number" name="page" id="page"
+                   value="${sessionScope.selectedPage eq null ? 1 : sessionScope.selectedPage}">
             <button type="submit">Поиск</button>
         </form>
     </div>
@@ -42,13 +49,13 @@
             <th>Цена</th>
             <th>Категория</th>
             <th>Брэнд</th>
-            <c:forEach var="by.nutrition.product" items="${sessionScope.products}">
+            <c:forEach var="product" items="${sessionScope.products}">
                 <tr>
-                    <td>${by.nutrition.product.id}</td>
-                    <td>${by.nutrition.product.title}</td>
-                    <td>${by.nutrition.product.price}</td>
-                    <td>${by.nutrition.product.category.name}</td>
-                    <td>${by.nutrition.product.brand.name}</td>
+                    <td>${product.id}</td>
+                    <td>${product.title}</td>
+                    <td>${product.price}</td>
+                    <td>${product.category.name}</td>
+                    <td>${product.brand.name}</td>
                 </tr>
             </c:forEach>
         </table>

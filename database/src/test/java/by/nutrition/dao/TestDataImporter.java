@@ -1,17 +1,17 @@
 package by.nutrition.dao;
 
-import by.nutrition.entity.marketing.FixedPricePromotion;
-import by.nutrition.entity.marketing.PercentageDiscountPromotion;
-import by.nutrition.entity.order.Delivery;
-import by.nutrition.entity.order.Order;
-import by.nutrition.entity.order.OrderContent;
-import by.nutrition.entity.order.Status;
-import by.nutrition.entity.product.Brand;
-import by.nutrition.entity.product.Category;
-import by.nutrition.entity.product.Product;
-import by.nutrition.entity.user.ContactDetails;
-import by.nutrition.entity.user.Role;
-import by.nutrition.entity.user.User;
+import com.nutrition.entity.marketing.FixedPricePromotion;
+import com.nutrition.entity.marketing.PercentageDiscountPromotion;
+import com.nutrition.entity.order.Delivery;
+import com.nutrition.entity.order.Order;
+import com.nutrition.entity.order.OrderContent;
+import com.nutrition.entity.order.Status;
+import com.nutrition.entity.product.Brand;
+import com.nutrition.entity.product.Category;
+import com.nutrition.entity.product.Product;
+import com.nutrition.entity.user.ContactDetails;
+import com.nutrition.entity.user.Role;
+import com.nutrition.entity.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 

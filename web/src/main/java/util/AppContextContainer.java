@@ -1,6 +1,6 @@
 package util;
 
-import by.nutrition.config.ServiceConfig;
+import com.nutrition.config.ServiceConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

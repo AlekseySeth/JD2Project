@@ -1,12 +1,11 @@
 package servlet;
 
-import by.nutrition.entity.product.Brand;
-import by.nutrition.entity.product.Category;
-import by.nutrition.entity.product.Product;
-import by.nutrition.product.BrandService;
-import by.nutrition.product.CategoryService;
-import by.nutrition.product.ProductService;
-import by.nutrition.product.ProductServiceImpl;
+import com.nutrition.entity.product.Brand;
+import com.nutrition.entity.product.Category;
+import com.nutrition.entity.product.Product;
+import com.nutrition.product.BrandService;
+import com.nutrition.product.CategoryService;
+import com.nutrition.product.ProductService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
@@ -26,20 +25,20 @@ import static util.ServletUtil.getPath;
 @WebServlet(urlPatterns = "/products")
 public class ProductsServlet extends HttpServlet {
 
-    private static final int DEFAULT_NUMBER_OF_PRODUCTS = 3;
+    private static final int DEFAULT_NUMBER_OF_PRODUCTS = 10;
     private static final int FIVE = 5;
-    private static final int TEN = 10;
+    private static final int THREE = 3;
     private AnnotationConfigApplicationContext context;
 
     @Override
     public void init() throws ServletException {
-        AnnotationConfigApplicationContext context = getContext();
+        context = getContext();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        List<Integer> pagesList = Arrays.asList(DEFAULT_NUMBER_OF_PRODUCTS, FIVE, TEN);
+        List<Integer> pagesList = Arrays.asList(DEFAULT_NUMBER_OF_PRODUCTS, FIVE, THREE);
         req.setAttribute("pagesList", pagesList);
         CategoryService categoryService = context.getBean(CategoryService.class);
         BrandService brandService = context.getBean(BrandService.class);
@@ -75,6 +74,7 @@ public class ProductsServlet extends HttpServlet {
             for (String currentBrandString : brandsString) {
                 brandsId.add(Long.valueOf(currentBrandString));
             }
+            session.setAttribute("selectedBrands", brandsId);
         }
 
         String productsOnPageString = req.getParameter("productsOnPage");
