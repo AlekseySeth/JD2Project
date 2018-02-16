@@ -1,19 +1,19 @@
 package service;
 
-import dao.BrandDaoImpl;
-import dao.CategoryDaoImpl;
-import dao.DeliveryDaoImpl;
-import dao.OrderDaoImpl;
-import dao.ProductDaoImpl;
-import dao.PromotionDaoImpl;
-import dao.UserDaoImpl;
-import entity.marketing.Promotion;
-import entity.order.Delivery;
-import entity.order.Order;
-import entity.product.Brand;
-import entity.product.Category;
-import entity.product.Product;
-import entity.user.User;
+import by.nutrition.dao.product.BrandDaoImpl;
+import by.nutrition.dao.product.CategoryDaoImpl;
+import by.nutrition.dao.order.DeliveryDaoImpl;
+import by.nutrition.dao.order.OrderDaoImpl;
+import by.nutrition.dao.product.ProductDaoImpl;
+import by.nutrition.dao.marketing.PromotionDaoImpl;
+import by.nutrition.dao.user.UserDaoImpl;
+import by.nutrition.entity.marketing.Promotion;
+import by.nutrition.entity.order.Delivery;
+import by.nutrition.entity.order.Order;
+import by.nutrition.entity.product.Brand;
+import by.nutrition.entity.product.Category;
+import by.nutrition.entity.product.Product;
+import by.nutrition.entity.user.User;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

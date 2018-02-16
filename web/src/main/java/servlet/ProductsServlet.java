@@ -1,8 +1,8 @@
 package servlet;
 
-import entity.product.Brand;
-import entity.product.Category;
-import entity.product.Product;
+import by.nutrition.entity.product.Brand;
+import by.nutrition.entity.product.Category;
+import by.nutrition.entity.product.Product;
 import service.DataListService;
 import service.ProductService;
 

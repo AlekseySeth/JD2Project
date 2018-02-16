@@ -1,7 +1,7 @@
 package service;
 
-import dao.ProductDaoImpl;
-import entity.product.Product;
+import by.nutrition.dao.product.ProductDaoImpl;
+import by.nutrition.entity.product.Product;
 
 import java.util.List;
 
