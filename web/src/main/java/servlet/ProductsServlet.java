@@ -3,7 +3,11 @@ package servlet;
 import by.nutrition.entity.product.Brand;
 import by.nutrition.entity.product.Category;
 import by.nutrition.entity.product.Product;
+import by.nutrition.product.BrandService;
+import by.nutrition.product.CategoryService;
+import by.nutrition.product.ProductService;
 import by.nutrition.product.ProductServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.AppContextContainer.getContext;
 import static util.ServletUtil.getPath;
 
 @WebServlet(urlPatterns = "/products")
@@ -24,15 +29,23 @@ public class ProductsServlet extends HttpServlet {
     private static final int DEFAULT_NUMBER_OF_PRODUCTS = 3;
     private static final int FIVE = 5;
     private static final int TEN = 10;
+    private AnnotationConfigApplicationContext context;
+
+    @Override
+    public void init() throws ServletException {
+        AnnotationConfigApplicationContext context = getContext();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         List<Integer> pagesList = Arrays.asList(DEFAULT_NUMBER_OF_PRODUCTS, FIVE, TEN);
         req.setAttribute("pagesList", pagesList);
+        CategoryService categoryService = context.getBean(CategoryService.class);
+        BrandService brandService = context.getBean(BrandService.class);
 
-        List<Category> categories = dataListService.getAllCategories();
-        List<Brand> brands = dataListService.getAllBrands();
+        List<Category> categories = categoryService.findAll();
+        List<Brand> brands = brandService.findAll();
         req.setAttribute("categories", categories);
         req.setAttribute("brands", brands);
 
@@ -50,10 +63,12 @@ public class ProductsServlet extends HttpServlet {
         } else if ("all".equals(categoryIdString)) {
             session.setAttribute("selectedCategory", 0);
         }
+
         String title = req.getParameter("title");
         if (title != null && "".equals(title)) {
             title = null;
         }
+
         String[] brandsString = req.getParameterValues("brand");
         List<Long> brandsId = new ArrayList<>();
         if (brandsString != null) {
@@ -61,6 +76,7 @@ public class ProductsServlet extends HttpServlet {
                 brandsId.add(Long.valueOf(currentBrandString));
             }
         }
+
         String productsOnPageString = req.getParameter("productsOnPage");
         Integer productsOnPage = DEFAULT_NUMBER_OF_PRODUCTS;
         if (productsOnPageString != null) {
@@ -71,11 +87,12 @@ public class ProductsServlet extends HttpServlet {
         Integer page = Integer.valueOf(req.getParameter("page"));
         session.setAttribute("selectedPage", page);
 
+        ProductService productService = context.getBean(ProductService.class);
 
         int offset = productsOnPage * (page - 1);
 
-        List<Product> products = ProductServiceImpl.newInstance()
-                .searchProducts(categoryId, title, brandsId, productsOnPage, offset);
+        List<Product> products = productService
+                .findByCategoryTitleBrands(categoryId, title, brandsId, productsOnPage, offset);
 
         session.setAttribute("products", products);
         resp.sendRedirect("/products?page=" + page);
