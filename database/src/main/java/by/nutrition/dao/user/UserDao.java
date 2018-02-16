@@ -8,6 +8,5 @@ import by.nutrition.entity.user.User;
  */
 public interface UserDao extends GenericDao<User> {
 
-
     User findByEmail(String email);
 }

@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "by.nutrition.marketing",
         "by.nutrition.order",
         "by.nutrition.product",
-        "by.nutrition.user"})
+        "by.nutrition.user",
+        "by.nutrition.dao"})
 @EnableTransactionManagement
 public class ServiceConfig {
 

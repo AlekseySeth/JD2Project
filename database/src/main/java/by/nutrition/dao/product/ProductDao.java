@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface ProductDao extends GenericDao<Product> {
 
-    List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset);
+    Product findByTitle(String title);
+
+    List<Product> findByCategoryTitleBrands(Long categoryId, String title, List<Long> brandsId, int limit, int offset);
 }

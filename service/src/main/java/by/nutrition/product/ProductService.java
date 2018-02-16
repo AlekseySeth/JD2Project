@@ -6,5 +6,13 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset);
+    Long save(Product product);
+
+    Product findById(Long id);
+
+    void update(Product product);
+
+    Product findByTitle(String title);
+
+    List<Product> findByCategoryTitleBrands(Long categoryId, String title, List<Long> brandsId, int limit, int offset);
 }

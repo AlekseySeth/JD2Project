@@ -24,7 +24,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
-        return productDao.searchProducts(categoryId, title, brandsId, limit, offset);
+    public Long save(Product product) {
+        return productDao.save(product);
+    }
+
+    @Override
+    public Product findById(Long id) {
+        return productDao.findById(id);
+    }
+
+    @Override
+    public void update(Product product) {
+        productDao.update(product);
+    }
+
+    @Override
+    public Product findByTitle(String title) {
+        return productDao.findByTitle(title);
+    }
+
+    @Override
+    public List<Product> findByCategoryTitleBrands(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
+        return productDao.findByCategoryTitleBrands(categoryId, title, brandsId, limit, offset);
     }
 }

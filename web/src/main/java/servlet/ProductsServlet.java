@@ -30,7 +30,7 @@ public class ProductsServlet extends HttpServlet {
         HttpSession session = req.getSession();
         List<Integer> pagesList = Arrays.asList(DEFAULT_NUMBER_OF_PRODUCTS, FIVE, TEN);
         req.setAttribute("pagesList", pagesList);
-        DataListService dataListService = DataListService.newInstance();
+
         List<Category> categories = dataListService.getAllCategories();
         List<Brand> brands = dataListService.getAllBrands();
         req.setAttribute("categories", categories);

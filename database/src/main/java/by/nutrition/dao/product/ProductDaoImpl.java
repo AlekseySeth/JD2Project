@@ -19,7 +19,12 @@ import java.util.List;
 public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao {
 
     @Override
-    public List<Product> searchProducts(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
+    public Product findByTitle(String title) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findByCategoryTitleBrands(Long categoryId, String title, List<Long> brandsId, int limit, int offset) {
         Session session = getSessionFactory().getCurrentSession();
         JPAQuery<Product> query = new JPAQuery<>(session);
         QProduct product = QProduct.product;
