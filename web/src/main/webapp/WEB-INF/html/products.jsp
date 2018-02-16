@@ -21,7 +21,7 @@
             </select>
             <label for="brand">Брэнд</label>
             <c:forEach var="brand" items="${requestScope.brands}">
-                <input id="brand" name="brand" type="checkbox" value="${brand.id}" ${sessionScope.product.brand.id eq brand.id ? "selected" : ""}>${brand.name}
+                <input id="brand" name="brand" type="checkbox" value="${brand.id}" ${sessionScope.by.nutrition.product.brand.id eq brand.id ? "selected" : ""}>${brand.name}
             </c:forEach>
             <br>
             <label for="page">Количество на странице</label>
@@ -42,13 +42,13 @@
             <th>Цена</th>
             <th>Категория</th>
             <th>Брэнд</th>
-            <c:forEach var="product" items="${sessionScope.products}">
+            <c:forEach var="by.nutrition.product" items="${sessionScope.products}">
                 <tr>
-                    <td>${product.id}</td>
-                    <td>${product.title}</td>
-                    <td>${product.price}</td>
-                    <td>${product.category.name}</td>
-                    <td>${product.brand.name}</td>
+                    <td>${by.nutrition.product.id}</td>
+                    <td>${by.nutrition.product.title}</td>
+                    <td>${by.nutrition.product.price}</td>
+                    <td>${by.nutrition.product.category.name}</td>
+                    <td>${by.nutrition.product.brand.name}</td>
                 </tr>
             </c:forEach>
         </table>

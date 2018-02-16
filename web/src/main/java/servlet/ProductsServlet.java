@@ -3,8 +3,7 @@ package servlet;
 import by.nutrition.entity.product.Brand;
 import by.nutrition.entity.product.Category;
 import by.nutrition.entity.product.Product;
-import service.DataListService;
-import service.ProductService;
+import by.nutrition.product.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -75,7 +74,7 @@ public class ProductsServlet extends HttpServlet {
 
         int offset = productsOnPage * (page - 1);
 
-        List<Product> products = ProductService.newInstance()
+        List<Product> products = ProductServiceImpl.newInstance()
                 .searchProducts(categoryId, title, brandsId, productsOnPage, offset);
 
         session.setAttribute("products", products);
