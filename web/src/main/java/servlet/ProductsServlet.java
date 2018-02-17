@@ -53,6 +53,7 @@ public class ProductsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ProductService productService = context.getBean(ProductService.class);
         HttpSession session = req.getSession();
         String categoryIdString = req.getParameter("category");
         Long categoryId = null;
@@ -69,12 +70,12 @@ public class ProductsServlet extends HttpServlet {
         }
 
         String[] brandsString = req.getParameterValues("brand");
-        List<Long> brandsId = new ArrayList<>();
+        List<Long> brandIds = new ArrayList<>();
         if (brandsString != null) {
             for (String currentBrandString : brandsString) {
-                brandsId.add(Long.valueOf(currentBrandString));
+                brandIds.add(Long.valueOf(currentBrandString));
             }
-            session.setAttribute("selectedBrands", brandsId);
+            session.setAttribute("selectedBrands", brandIds);
         }
 
         String productsOnPageString = req.getParameter("productsOnPage");
@@ -87,12 +88,11 @@ public class ProductsServlet extends HttpServlet {
         Integer page = Integer.valueOf(req.getParameter("page"));
         session.setAttribute("selectedPage", page);
 
-        ProductService productService = context.getBean(ProductService.class);
 
         int offset = productsOnPage * (page - 1);
 
         List<Product> products = productService
-                .findByCategoryTitleBrands(categoryId, title, brandsId, productsOnPage, offset);
+                .findByTitleCategoryBrandsViaId(title, categoryId, brandIds);
 
         session.setAttribute("products", products);
         resp.sendRedirect("/products?page=" + page);

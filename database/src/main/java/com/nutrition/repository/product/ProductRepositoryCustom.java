@@ -1,21 +1,12 @@
-package com.nutrition.product;
+package com.nutrition.repository.product;
 
 import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 
 import java.util.List;
-import java.util.spi.LocaleNameProvider;
 
-public interface ProductService {
-
-    void save(Product product);
-
-    Product findById(Long id);
-
-//    void update(Product product);
-
-    Product findByTitle(String title);
+public interface ProductRepositoryCustom {
 
     List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
 

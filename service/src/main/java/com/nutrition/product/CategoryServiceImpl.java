@@ -1,7 +1,7 @@
 package com.nutrition.product;
 
-import com.nutrition.repository.product.CategoryDao;
 import com.nutrition.entity.product.Category;
+import com.nutrition.repository.product.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,20 +16,20 @@ import java.util.List;
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryDao categoryDao;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryServiceImpl(CategoryDao categoryDao) {
-        this.categoryDao = categoryDao;
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
     public Category findById(Long id) {
-        return categoryDao.findById(id);
+        return categoryRepository.findOne(id);
     }
 
     @Override
     public List<Category> findAll() {
-        return categoryDao.findAll();
+        return categoryRepository.findAll();
     }
 }

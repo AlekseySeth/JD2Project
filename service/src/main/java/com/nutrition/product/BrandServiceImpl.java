@@ -1,7 +1,7 @@
 package com.nutrition.product;
 
-import com.nutrition.repository.product.BrandDao;
 import com.nutrition.entity.product.Brand;
+import com.nutrition.repository.product.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,20 +16,20 @@ import java.util.List;
 @Transactional
 public class BrandServiceImpl implements BrandService {
 
-    private final BrandDao brandDao;
+    private final BrandRepository brandRepository;
 
     @Autowired
-    public BrandServiceImpl(BrandDao brandDao) {
-        this.brandDao = brandDao;
+    public BrandServiceImpl(BrandRepository brandRepository) {
+        this.brandRepository = brandRepository;
     }
 
     @Override
     public Brand findById(Long id) {
-        return brandDao.findById(id);
+        return brandRepository.findOne(id);
     }
 
     @Override
     public List<Brand> findAll() {
-        return brandDao.findAll();
+        return brandRepository.findAll();
     }
 }
