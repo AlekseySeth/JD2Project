@@ -1,6 +1,6 @@
 package com.nutrition.product;
 
-import com.nutrition.dao.product.ProductDao;
+import com.nutrition.repository.product.ProductDao;
 import com.nutrition.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

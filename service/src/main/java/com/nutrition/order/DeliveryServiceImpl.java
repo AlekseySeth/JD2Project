@@ -1,6 +1,6 @@
 package com.nutrition.order;
 
-import com.nutrition.dao.order.DeliveryDao;
+import com.nutrition.repository.order.DeliveryDao;
 import com.nutrition.entity.order.Delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.nutrition.user;
 
-import com.nutrition.dao.user.UserDao;
+import com.nutrition.repository.user.UserDao;
 import com.nutrition.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

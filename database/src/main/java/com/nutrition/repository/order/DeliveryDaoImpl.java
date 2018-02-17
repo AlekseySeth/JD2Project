@@ -1,6 +1,6 @@
-package com.nutrition.dao.order;
+package com.nutrition.repository.order;
 
-import com.nutrition.dao.common.GenericDaoImpl;
+import com.nutrition.repository.common.GenericDaoImpl;
 import com.nutrition.entity.order.Delivery;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;

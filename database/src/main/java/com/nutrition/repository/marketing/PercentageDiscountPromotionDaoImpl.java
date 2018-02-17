@@ -1,6 +1,6 @@
-package com.nutrition.dao.marketing;
+package com.nutrition.repository.marketing;
 
-import com.nutrition.dao.common.GenericDaoImpl;
+import com.nutrition.repository.common.GenericDaoImpl;
 import com.nutrition.entity.marketing.PercentageDiscountPromotion;
 
 /**

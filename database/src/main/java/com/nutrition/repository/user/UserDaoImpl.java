@@ -1,6 +1,6 @@
-package com.nutrition.dao.user;
+package com.nutrition.repository.user;
 
-import com.nutrition.dao.common.GenericDaoImpl;
+import com.nutrition.repository.common.GenericDaoImpl;
 import com.nutrition.entity.user.User;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;

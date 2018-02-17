@@ -1,4 +1,4 @@
-package com.nutrition.dao.common;
+package com.nutrition.repository.common;
 
 import com.nutrition.entity.util.IdentifiableEntity;
 

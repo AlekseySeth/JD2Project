@@ -1,6 +1,6 @@
-package com.nutrition.dao.order;
+package com.nutrition.repository.order;
 
-import com.nutrition.dao.common.GenericDao;
+import com.nutrition.repository.common.GenericDao;
 import com.nutrition.entity.order.Order;
 
 /**

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "com.nutrition.order",
         "com.nutrition.product",
         "com.nutrition.user"})
-@Import(DatabaseConfig.class)
+@Import(PersistenceConfig.class)
 @EnableTransactionManagement
 public class ServiceConfig {
 
