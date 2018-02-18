@@ -8,10 +8,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public final class AppContextContainer {
 
-    private static final AnnotationConfigApplicationContext context =
+    private static final AnnotationConfigApplicationContext CONTEXT =
             new AnnotationConfigApplicationContext(ServiceConfig.class);
 
     public static AnnotationConfigApplicationContext getContext() {
-        return context;
+        return CONTEXT;
     }
 }

@@ -5,7 +5,6 @@ import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 
 import java.util.List;
-import java.util.spi.LocaleNameProvider;
 
 public interface ProductService {
 
