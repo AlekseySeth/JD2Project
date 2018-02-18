@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long>, ProductRepositoryCustom {
 
-    Product findByTitle(String title);
+    Product findByTitleContaining(String title);
 
     List<Product> findAllByCategory(Category category);
 }

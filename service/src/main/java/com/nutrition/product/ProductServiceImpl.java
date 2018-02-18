@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findByTitle(String title) {
-        return productRepository.findByTitle(title);
+        return productRepository.findByTitleContaining(title);
     }
 
     @Override

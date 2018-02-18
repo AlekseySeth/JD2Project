@@ -25,9 +25,6 @@ import static util.ServletUtil.getPath;
 @WebServlet(urlPatterns = "/products")
 public class ProductsServlet extends HttpServlet {
 
-    private static final int DEFAULT_NUMBER_OF_PRODUCTS = 10;
-    private static final int FIVE = 5;
-    private static final int THREE = 3;
     private AnnotationConfigApplicationContext context;
 
     @Override
@@ -38,8 +35,6 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        List<Integer> pagesList = Arrays.asList(DEFAULT_NUMBER_OF_PRODUCTS, FIVE, THREE);
-        req.setAttribute("pagesList", pagesList);
         CategoryService categoryService = context.getBean(CategoryService.class);
         BrandService brandService = context.getBean(BrandService.class);
 
@@ -78,23 +73,10 @@ public class ProductsServlet extends HttpServlet {
             session.setAttribute("selectedBrands", brandIds);
         }
 
-        String productsOnPageString = req.getParameter("productsOnPage");
-        Integer productsOnPage = DEFAULT_NUMBER_OF_PRODUCTS;
-        if (productsOnPageString != null) {
-            productsOnPage = Integer.valueOf(productsOnPageString);
-            session.setAttribute("selectedProductsOnPage", productsOnPage);
-        }
-
-        Integer page = Integer.valueOf(req.getParameter("page"));
-        session.setAttribute("selectedPage", page);
-
-
-        int offset = productsOnPage * (page - 1);
-
         List<Product> products = productService
                 .findByTitleCategoryBrandsViaId(title, categoryId, brandIds);
 
         session.setAttribute("products", products);
-        resp.sendRedirect("/products?page=" + page);
+        resp.sendRedirect("/products");
     }
 }
