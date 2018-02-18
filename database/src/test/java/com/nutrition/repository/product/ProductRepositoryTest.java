@@ -53,16 +53,16 @@ public class ProductRepositoryTest {
     @Test
     public void findByTitleCategoryBrandsViaId() {
         List<Product> resultByTitle = productRepository
-                .findByTitleCategoryBrandsViaId("xplode", null, new ArrayList<>());
+                .findByTitleCategoryBrandsViaId("xplode", null, new ArrayList<>(), 10, 1);
         assertThat(resultByTitle, hasSize(2));
         assertThat(resultByTitle.get(0).getTitle(), equalTo("BCAA Xplode 280 g"));
 
         List<Product> resultByCategory = productRepository
-                .findByTitleCategoryBrandsViaId(null, 7L, new ArrayList<>());
+                .findByTitleCategoryBrandsViaId(null, 7L, new ArrayList<>(), 10, 1);
         assertThat(resultByCategory, hasSize(4));
 
         List<Product> resultByBrands = productRepository
-                .findByTitleCategoryBrandsViaId(null, null, Arrays.asList(4L, 5L));
+                .findByTitleCategoryBrandsViaId(null, null, Arrays.asList(4L, 5L), 10,  1);
         assertThat(resultByBrands, hasSize(5));
     }
 }

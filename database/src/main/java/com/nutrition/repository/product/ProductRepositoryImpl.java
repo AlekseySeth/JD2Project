@@ -44,7 +44,8 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
     }
 
     @Override
-    public List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds) {
+    public List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
+                                                        int productsOnPage, int offset) {
         JPAQuery<Product> query = new JPAQuery<>(entityManager);
         QProduct product = QProduct.product;
         query.select(product).from(product);
@@ -57,6 +58,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         if (brandIds.size() > 0) {
             query.where(product.brand.id.in(brandIds));
         }
-        return query.fetchResults().getResults();
+        return query.limit(productsOnPage).offset(offset).fetchResults().getResults();
     }
 }

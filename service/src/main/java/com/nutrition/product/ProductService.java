@@ -19,5 +19,6 @@ public interface ProductService {
 
     List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
 
-    List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds);
+    List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
+                                                 int pageNumber, int productsOnPage);
 }

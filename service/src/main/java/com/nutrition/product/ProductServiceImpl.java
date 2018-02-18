@@ -51,7 +51,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds) {
-        return null;
+    public List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
+                                                        int pageNumber, int productsOnPage) {
+        int offset = productsOnPage * (pageNumber - 1);
+        return productRepository.findByTitleCategoryBrandsViaId(title, categoryId, brandIds, productsOnPage, offset);
     }
 }

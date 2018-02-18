@@ -26,6 +26,9 @@ import static util.ServletUtil.getPath;
 public class ProductsServlet extends HttpServlet {
 
     private AnnotationConfigApplicationContext context;
+    private static final int TEN_PRODUCTS_ON_PAGE = 10;
+    private static final int FIVE_PRODUCTS_ON_PAGE = 5;
+    private static final int THREE_PRODUCTS_ON_PAGE = 3;
 
     @Override
     public void init() throws ServletException {
@@ -35,6 +38,8 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        List<Integer> pagesList = Arrays.asList(TEN_PRODUCTS_ON_PAGE, FIVE_PRODUCTS_ON_PAGE, THREE_PRODUCTS_ON_PAGE);
+        req.setAttribute("pagesList", pagesList);
         CategoryService categoryService = context.getBean(CategoryService.class);
         BrandService brandService = context.getBean(BrandService.class);
 
@@ -73,10 +78,20 @@ public class ProductsServlet extends HttpServlet {
             session.setAttribute("selectedBrands", brandIds);
         }
 
+        String productsOnPageString = req.getParameter("productsOnPage");
+        Integer productsOnPage = TEN_PRODUCTS_ON_PAGE;
+        if (productsOnPageString != null) {
+            productsOnPage = Integer.valueOf(productsOnPageString);
+            session.setAttribute("selectedProductsOnPage", productsOnPage);
+        }
+
+        Integer pageNumber = Integer.valueOf(req.getParameter("page"));
+        session.setAttribute("selectedPage", pageNumber);
+
         List<Product> products = productService
-                .findByTitleCategoryBrandsViaId(title, categoryId, brandIds);
+                .findByTitleCategoryBrandsViaId(title, categoryId, brandIds, pageNumber, productsOnPage);
 
         session.setAttribute("products", products);
-        resp.sendRedirect("/products");
+        resp.sendRedirect("/products?page=" + pageNumber);
     }
 }
