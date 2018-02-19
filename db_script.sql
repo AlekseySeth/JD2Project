@@ -114,11 +114,11 @@ CREATE TABLE fixed_price_promos (
   FOREIGN KEY (promo_id) REFERENCES promotions (id)
 );
 
-CREATE TABLE pages (
-  id  INT AUTO_INCREMENT,
-  url VARCHAR(50),
-  PRIMARY KEY (id)
-);
+# CREATE TABLE pages (
+#   id  INT AUTO_INCREMENT,
+#   url VARCHAR(50),
+#   PRIMARY KEY (id)
+# );
 
 INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
 VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by',
