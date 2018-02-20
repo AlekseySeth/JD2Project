@@ -13,5 +13,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
 
     Product findByTitleContaining(String title);
 
-    List<Product> findAllByCategory(Category category);
+    List<Product> findAllByCategory(Long categoryId);
+
+    List<Product> findAll();
 }
