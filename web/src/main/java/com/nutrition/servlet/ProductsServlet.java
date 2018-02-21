@@ -1,4 +1,4 @@
-package servlet;
+package com.nutrition.servlet;
 
 import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static util.AppContextContainer.getContext;
-import static util.ServletUtil.getPath;
+import static com.nutrition.Initializer.AppContextContainer.getContext;
+import static com.nutrition.Initializer.ServletUtil.getPath;
 
 @WebServlet(urlPatterns = "/products")
 public class ProductsServlet extends HttpServlet {
