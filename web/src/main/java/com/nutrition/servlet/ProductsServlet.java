@@ -19,10 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.nutrition.Initializer.AppContextContainer.getContext;
-import static com.nutrition.Initializer.ServletUtil.getPath;
-
-@WebServlet(urlPatterns = "/products")
 public class ProductsServlet extends HttpServlet {
 
     private AnnotationConfigApplicationContext context;
@@ -30,10 +26,7 @@ public class ProductsServlet extends HttpServlet {
     private static final int FIVE_PRODUCTS_ON_PAGE = 5;
     private static final int THREE_PRODUCTS_ON_PAGE = 3;
 
-    @Override
-    public void init() throws ServletException {
-        context = getContext();
-    }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,7 +41,7 @@ public class ProductsServlet extends HttpServlet {
         req.setAttribute("categories", categories);
         req.setAttribute("brands", brands);
 
-        req.getServletContext().getRequestDispatcher(getPath("products")).forward(req, resp);
+//        req.getServletContext().getRequestDispatcher(getPath("products")).forward(req, resp);
     }
 
     @Override
