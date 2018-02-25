@@ -35,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findOne(id);
     }
 
+    @Override
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
 //    @Override
 //    public void update(Product product) {
 //        productRepository.update(product);
@@ -46,14 +51,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllByCategory(Long categoryId) {
-        return productRepository.findAllByCategory(categoryId);
+    public List<Product> findAllByCategory(Category category) {
+        return productRepository.findAllByCategory(category);
     }
 
-//    @Override
-//    public List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands) {
-//        return productRepository.findByTitleCategoryBrands(title, category, brands);
-//    }
+    @Override
+    public List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands) {
+        return productRepository.findByTitleCategoryBrands(title, category, brands);
+    }
 
     @Override
     public List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,

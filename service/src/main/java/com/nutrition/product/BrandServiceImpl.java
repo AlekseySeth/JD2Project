@@ -2,6 +2,7 @@ package com.nutrition.product;
 
 import com.nutrition.entity.product.Brand;
 import com.nutrition.repository.product.BrandRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +15,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@NoArgsConstructor
 public class BrandServiceImpl implements BrandService {
 
-    private final BrandRepository brandRepository;
+    private BrandRepository brandRepository;
 
     @Autowired
     public BrandServiceImpl(BrandRepository brandRepository) {

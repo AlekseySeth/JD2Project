@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductRepositoryCustom {
 
-//    List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
+    List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
 
     List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
                                                  int productsOnPage, int offset);

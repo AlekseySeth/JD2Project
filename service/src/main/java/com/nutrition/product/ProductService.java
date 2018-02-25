@@ -12,13 +12,15 @@ public interface ProductService {
 
     Product findById(Long id);
 
+    List<Product> findAll();
+
 //    void update(Product product);
 
     Product findByTitle(String title);
 
-    List<Product> findAllByCategory(Long categoryId);
+    List<Product> findAllByCategory(Category category);
 
-//    List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
+    List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
 
     List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
                                                  int pageNumber, int productsOnPage);

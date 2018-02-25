@@ -1,18 +1,20 @@
 package com.nutrition.util;
 
-import com.nutrition.entity.product.Brand;
-import com.nutrition.entity.product.Category;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 /**
  * @author a.shestovsky
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class ProductSearchFilter {
 
     private String searchTitle;
-
-    private Category searchCategory;
-
-    private List<Brand> searchBrands;
+    private Long searchCategoryId;
+    private List<Long> searchBrandsId;
 }
