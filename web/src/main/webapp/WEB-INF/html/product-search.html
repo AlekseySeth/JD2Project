@@ -10,7 +10,7 @@
             <input type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
             <label for="searchCategory">Категория</label>
             <select name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
-                <option th:value="${null}">All categories</option>
+                <option th:value="${null}">Все категории</option>
                 <option th:each="selectedCategory : ${allCategories}"
                         th:value="${selectedCategory.getId()}"
                         th:text="${selectedCategory.getName()}">Протеин</option>

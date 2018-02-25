@@ -1,5 +1,6 @@
 package com.nutrition.Initializer;
 
+import com.nutrition.config.SecurityConfig;
 import com.nutrition.config.ServiceConfig;
 import com.nutrition.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -12,7 +13,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {ServiceConfig.class};
+        return new Class[] {ServiceConfig.class, SecurityConfig.class};
     }
 
     @Override

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan(basePackages = {"com.nutrition.controller"})
 @EnableWebMvc
-@Import(ThymeleafConfig.class)
+@Import(value = {ThymeleafConfig.class, InternationalizationConfig.class})
 public class WebConfig {
 
 }
