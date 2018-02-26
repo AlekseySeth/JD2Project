@@ -18,9 +18,9 @@ public class TestingController {
         this.productService = productService;
     }
 
-    @GetMapping("testing")
-    public String testing(int pageNumber, int qtyOnPage, Model model) {
-        Page<Product> products = productService.findAll(pageNumber, qtyOnPage);
+    @GetMapping("/testing")
+    public String testing(int pageNumber, int showOnPage, Model model) {
+        Page<Product> products = productService.findAll(pageNumber, showOnPage);
         model.addAttribute("testProducts", products);
         return "testing";
     }
