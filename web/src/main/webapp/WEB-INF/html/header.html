@@ -13,12 +13,12 @@
 
 <nav>
     <ul>
-        <li><a class="navigation" th:href="@{/category-list}"></a></li>
-        <li><a class="navigation" th:href="@{/articles}"></a></li>
-        <li><a class="navigation" th:href="@{/delivery-info}"></a></li>
-        <li><a class="navigation" th:href="@{/contact-us}"></a></li>
-        <li class="my-account"><a class="navigation" th:href="@{/cart}"></a></li>
-        <li class="my-account"><a class="navigation" th:href="@{/my-account}"></a></li>
+        <li><a class="navigation" th:href="@{/category-list}" th:text="${header.catalog}"></a></li>
+        <li><a class="navigation" th:href="@{/articles}" th:text="${header.articles}"></a></li>
+        <li><a class="navigation" th:href="@{/delivery-info}" th:text="${header.delivery}"></a></li>
+        <li><a class="navigation" th:href="@{/contact-us}" th:text="${header.contact}"></a></li>
+        <li class="my-account"><a class="navigation" th:href="@{/cart}" th:text="${header.cart}"></a></li>
+        <li class="my-account"><a class="navigation" th:href="@{/my-account}" th:text="${header.account}"></a></li>
     </ul>
 </nav>
 </html>
