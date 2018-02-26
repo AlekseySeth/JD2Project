@@ -1,0 +1,28 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{../css/main.css}"/>
+    <link rel="stylesheet" href="../css/reset.css"th:href="@{../css/reset.css}">
+    <link rel="stylesheet" href="../css/header.css"th:href="@{../css/header.css}">
+    <link rel="stylesheet" href="../css/footer.css"th:href="@{../css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header :: copy">Header</div>
+    <div class="main">
+        <div id="login" class="login-form">
+            <h2 th:text="${login}">Вход в аккаунт</h2>
+            <form action="@{/login}" method="post">
+                <p><input type="text" id="email" name="email" placeholder="email" required></p>
+                <!--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>-->
+                <p><input type="password" id="password" name="password" th:placeholder="${login.password}" required></p>
+                <button class="login-button" type="submit" th:text="login.button">Войти</button>
+                <p class="registration-link"><a href="@{/registration}" th:text="${login.registration.link}">Зарегистрироваться</a></p>
+            </form>
+        </div>
+    </div>
+    <div th:insert="footer :: copy">Footer</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+html, body {
+    background-color: #f2f5f6;
+    /*height: 100%;*/
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+
+p{
+    text-align: justify;
+}
+
+.main {
+    background: #FFFFFF;
+    flex: 1 0 auto;
+    padding: 20px 250px;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.cart-container {
+    background-color: #d5d9e0;
+    padding: 20px;
+}
+
+.top {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.cart {
+    margin-left: 50px;
+    width: 90%;
+}
+
+.cart th {
+    font-size: 20px;
+    height: 40px;
+    font-weight: bold;
+}
+
+th#head-name {
+    text-align: left;
+}
+
+.cart td {
+    font-size: 18px;
+    height: 40px;
+    text-align: center;
+}
+
+td#name {
+    text-align: left;
+}
+
+.subtotal {
+    text-align: right;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-right: 35px;
+}
+
+.delivery-header {
+    font-size: 18px;
+    margin: 20px 0 10px 20px;
+}
+
+.delivery {
+    margin-left: 20px;
+    font-size: 16px;
+    width: 50%;
+}
+
+.delivery td {
+    padding-top: 10px;
+}
+
+p#order-placed {
+    text-align: center;
+    align-self: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 50px 0;
+    margin-top: 20px;
+    background-color: #d5d9e0;
+}
+

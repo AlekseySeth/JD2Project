@@ -1,0 +1,24 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<fmt:setLocale value="${sessionScope.language}"/>-->
+<!--<fmt:setBundle basename="translations"/>-->
+<header>
+
+    <div class="title">
+        <a id="title" th:href="@{/}">
+            <p class="store-title">Sport Pit</p>
+        </a>
+    </div>
+
+</header>
+
+<nav>
+    <ul>
+        <li><a class="navigation" th:href="@{/category-list}"></a></li>
+        <li><a class="navigation" th:href="@{/articles}"></a></li>
+        <li><a class="navigation" th:href="@{/delivery-info}"></a></li>
+        <li><a class="navigation" th:href="@{/contact-us}"></a></li>
+        <li class="my-account"><a class="navigation" th:href="@{/cart}"></a></li>
+        <li class="my-account"><a class="navigation" th:href="@{/my-account}"></a></li>
+    </ul>
+</nav>
+</html>

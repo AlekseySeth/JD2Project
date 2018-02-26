@@ -5,6 +5,8 @@ import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 import com.nutrition.repository.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> findAll(int pageNumber, int qtyOnPage) {
+        return productRepository.findAll(new PageRequest(pageNumber, qtyOnPage));
     }
 
 //    @Override

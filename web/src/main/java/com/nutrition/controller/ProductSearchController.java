@@ -26,9 +26,9 @@ import java.util.List;
 @SessionAttributes("products")
 public class ProductSearchController {
 
-    public static final int TEN = 10;
-    public static final int FIVE = 5;
-    public static final int THREE = 3;
+    private static final int TEN = 10;
+    private static final int FIVE = 5;
+    private static final int THREE = 3;
     private final ProductService productService;
     private final CategoryService categoryService;
     private final BrandService brandService;
