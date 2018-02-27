@@ -14,6 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .authorizeRequests()
                     .antMatchers("/test")
@@ -24,14 +25,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .hasAuthority("MARKETER")
                     .anyRequest()
                         .permitAll();
-        http
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/my-account")
-                .usernameParameter("email")
-                .passwordParameter("password")
-            .and()
-                .logout()
-                .logoutUrl("/logout");
+//        http
+//                .formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/my-account")
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//            .and()
+//                .logout()
+//                .logoutUrl("/logout");
     }
 }

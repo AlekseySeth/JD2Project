@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<fmt:setLocale value="${sessionScope.language}"/>-->
+<!--<fmt:setBundle basename="translations"/>-->
+<header>
+
+    <div class="title">
+        <a id="title" th:href="@{/}">
+            <p class="store-title">Sport Pit</p>
+        </a>
+    </div>
+
+</header>
+
+<nav>
+    <ul>
+        <li><a class="navigation" th:href="@{/category-list}" th:text="#{header.catalog}">Каталог</a></li>
+        <li><a class="navigation" th:href="@{/articles}" th:text="#{header.articles}">Статьи</a></li>
+        <li><a class="navigation" th:href="@{/delivery-info}" th:text="#{header.delivery}">Доставка</a></li>
+        <li><a class="navigation" th:href="@{/contact-us}" th:text="#{header.contact}">Наши контакты</a></li>
+        <li class="my-account"><a class="navigation" th:href="@{/cart}" th:text="#{header.cart}">Корзина</a></li>
+        <li class="my-account"><a class="navigation" th:href="@{/my-account}" th:text="#{header.account}">Мой аккаунт</a></li>
+    </ul>
+</nav>
+</html>
+
+<!--th:text="#{header.catalog}"-->
+<!--th:text="#{header.articles}"-->
+<!--th:text="#{header.delivery}"-->
+<!--th:text="#{header.contact}"-->
+<!--th:text="#{header.cart}"-->
+<!--th:text="#{header.account}"-->
