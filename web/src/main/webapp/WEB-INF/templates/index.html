@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sports nutrition store</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="/resources/css/header.css" >
+    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <h1 class="main-header">Добро пожаловать в интернет-магазин спортивного питания Sport Pit!</h1>
+        <p style="text-align: center">
+            <img th:src="@{/resources/images/welcome.png}" alt="Привет" style="padding: 30px" height="500">
+        </p>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

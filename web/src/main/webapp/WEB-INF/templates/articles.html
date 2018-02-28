@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="/resources/css/header.css" >
+    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css"></head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <h1 class="main-header">Статьи</h1>
+        <p style="padding: 0 0 10px 20px; font-size: 18px">Данный раздел находится в разработке</p>
+        <img src="/resources/images/wip.png" alt="Страница в разработке" style="padding: 30px">
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

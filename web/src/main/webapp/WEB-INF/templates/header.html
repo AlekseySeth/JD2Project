@@ -1,16 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<fmt:setLocale value="${sessionScope.language}"/>-->
-<!--<fmt:setBundle basename="translations"/>-->
 <header>
-
     <div class="title">
         <a id="title" th:href="@{/}">
             <p class="store-title">Sport Pit</p>
         </a>
     </div>
-
 </header>
-
 <nav>
     <ul>
         <li><a class="navigation" th:href="@{/category-list}" th:text="#{header.catalog}">Каталог</a></li>
@@ -22,10 +17,3 @@
     </ul>
 </nav>
 </html>
-
-<!--th:text="#{header.catalog}"-->
-<!--th:text="#{header.articles}"-->
-<!--th:text="#{header.delivery}"-->
-<!--th:text="#{header.contact}"-->
-<!--th:text="#{header.cart}"-->
-<!--th:text="#{header.account}"-->

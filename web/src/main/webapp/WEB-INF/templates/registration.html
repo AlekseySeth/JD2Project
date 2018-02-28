@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="/resources/css/header.css" >
+    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div id="registration" class="registration-form">
+            <h2 th:text="#{registration}">Регистрация</h2>
+            <form th:action="@{/registration}" method="post">
+                <div>
+                    <label for="firstName" th:text="#{registration.first.name}">Имя</label>
+                    <input type="text" id="firstName" name="firstName" placeholder=" " required>
+                </div>
+                <div>
+                    <label for="lastName" th:text="#{registration.last.name}">Фамилия</label>
+                    <input type="text" id="lastName" name="lastName" placeholder=" ">
+                </div>
+                <div>
+                    <label for="email">E-mail </label>
+                    <input type="email" id="email" name="email" required>
+                    <!--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>-->
+                </div>
+                <div>
+                    <label for="password" th:text="#{registration.password}">Пароль</label>
+                    <input type="password" id="password" name="password" placeholder=" " required>
+                </div>
+                <div>
+                    <label for="repPassword" th:text="#{registration.repeat.password}">Повторите пароль</label>
+                    <input type="password" id="repPassword" name="repPassword" placeholder=" " required>
+                </div>
+                <div>
+                    <label for="phone" th:text="#{registration.phone}">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder=" " required>
+                </div>
+                <div>
+                    <label for="address" th:text="#{registration.address}">Адрес</label>
+                    <input type="text" id="address" name="address" placeholder=" " required>
+                </div>
+                <button class="registration-button" type="submit" th:text="#{registration.button}">Зарегистрироваться</button>
+                <p class="login-link">
+                    <a  th:href="@{/login}" th:text="#{registration.login.link}">Войти в существующий аккаунт</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <div th:insert="footer">Footer</div>
+</div>
+</body>
+</html>
