@@ -60,4 +60,22 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         }
         return query.limit(productsOnPage).offset(offset).fetchResults().getResults();
     }
+
+    @Override
+    public int countPagesByFilter(String title, Long categoryId, List<Long> brandIds) {
+        JPAQuery<Product> query = new JPAQuery<>(entityManager);
+        QProduct product = QProduct.product;
+        query.select(product).from(product);
+        if (title != null && !"".equals(title)) {
+            query.where(product.title.like(Expressions.asString("%").concat(title).concat("%")));
+        }
+        if (categoryId != null) {
+            query.where(product.category.id.eq(categoryId));
+        }
+        if (brandIds != null && brandIds.size() > 0) {
+            query.where(product.brand.id.in(brandIds));
+        }
+        query
+        return 0;
+    }
 }

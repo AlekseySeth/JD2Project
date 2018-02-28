@@ -4,6 +4,7 @@ import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 import com.nutrition.repository.product.ProductRepository;
+import com.nutrition.util.ProductSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -72,5 +73,17 @@ public class ProductServiceImpl implements ProductService {
                                                         int pageNumber, int productsOnPage) {
         int offset = productsOnPage * (pageNumber - 1);
         return productRepository.findByTitleCategoryBrandsViaId(title, categoryId, brandIds, productsOnPage, offset);
+    }
+
+    @Override
+    public Page<Product> findByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int qtyOnPage) {
+
+        return null;
+    }
+
+    @Override
+    public int countPagesByFilter(ProductSearchFilter productSearchFilter) {
+
+        return 10;
     }
 }

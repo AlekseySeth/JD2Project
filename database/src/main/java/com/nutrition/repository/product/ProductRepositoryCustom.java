@@ -12,4 +12,6 @@ public interface ProductRepositoryCustom {
 
     List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
                                                  int productsOnPage, int offset);
+
+    int countPagesByFilter(String title, Long categoryId, List<Long> brandIds);
 }

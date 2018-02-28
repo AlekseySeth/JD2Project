@@ -29,6 +29,7 @@ public class ProductSearchController {
     private static final int TEN = 10;
     private static final int FIVE = 5;
     private static final int THREE = 3;
+    private static final int DEFAULT_PAGE_NUMBER = 1;
     private final ProductService productService;
     private final CategoryService categoryService;
     private final BrandService brandService;
@@ -62,9 +63,14 @@ public class ProductSearchController {
     }
 
     @ModelAttribute("products")
-    public List<Product> initProducts() {
+    private List<Product> initProducts() {
         return productService
-                .findByTitleCategoryBrandsViaId(null, null, null, 1, 10);
+                .findByTitleCategoryBrandsViaId(null, null, null, DEFAULT_PAGE_NUMBER, TEN);
+    }
+
+    @ModelAttribute("pages")
+    public int countPages() {
+        return initProducts().size();
     }
 
     @GetMapping("/product-search")
@@ -81,6 +87,7 @@ public class ProductSearchController {
         List<Product> products = productService
                 .findByTitleCategoryBrandsViaId(searchTitle, searchCategoryId, searchBrandsId, pageNumber, showProductsOnPage);
 
+        model.addAttribute("pages", products.size());
         model.addAttribute("products", products);
 
         return "product-search";
