@@ -9,6 +9,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  */
 @NoArgsConstructor
 @Repository
+@CacheConfig(cacheNames = "products")
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     @Autowired
@@ -75,7 +77,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         if (brandIds != null && brandIds.size() > 0) {
             query.where(product.brand.id.in(brandIds));
         }
-        query
+
         return 0;
     }
 }
