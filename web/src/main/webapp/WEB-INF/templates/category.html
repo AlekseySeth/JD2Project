@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/category.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:include="header">Header</div>
+    <div class="main">
+        <div th:include="category-tree">Категории</div>
+
+        <div class="top-category">
+            <h2 th:text="${category.getName()}">Категория</h2>
+        </div>
+        <div class="categories">
+            <div>
+                <div class="product-item" th:each="product : ${products}">
+                    <a th:href="@{/product(id=${product.getId()})}">
+                        <img class="product-image" src="/resources/images/default.png"
+                             th:src="${product.getImageURL()}" height="100" width="100">
+                        <p class="product-name" th:text="${product.getTitle()}">Название</p>
+                        <div class="short-description">
+                            <p th:if="${product.getDescription().length()>150}" th:text="${product.getDescription()}">
+                                ${product.description}
+                            </p>
+                            <p th:if="${product.getDescription().length()<150}" th:text="${product.getDescription()}">
+                                <!--${product.description}-->
+                                <!--<c:forEach begin="1" end="130">-->
+                                    <!--&nbsp;-->
+                                <!--</c:forEach>-->
+                            </p>
+                        </div>
+                        <p class="product-price" th:text="${product.getPrice()}+' руб.'">
+                            цена руб.
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

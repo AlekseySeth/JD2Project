@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/category.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:include="header">Header</div>
+    <div class="main">
+        <div th:include="category-tree">Категории</div>
+        <div class="top-category">
+            <h2>Все категории</h2></div>
+        <div class="categories">
+            <ul>
+                <li th:each="currentCategory : ${allCategories}">
+                    <a class="category-link" th:href="@{/category(id=${currentCategory.getId()})}">
+                    <h3 th:text="${currentCategory.getName()}">Название категории</h3>
+                        <span th:text="${currentCategory.getDescription()}">Описание категории</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

@@ -23,7 +23,7 @@ public interface ProductService {
 
     Product findByTitle(String title);
 
-    List<Product> findAllByCategory(Category category);
+    List<Product> findAllByCategory(Long categoryId);
 
     List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
 

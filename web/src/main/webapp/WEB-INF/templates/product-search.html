@@ -1,51 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Products search</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/category.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
 </head>
 <body>
-<div>
-    <form th:action="@{/product-search}" method="post" th:object="${productSearchFilter}">
-        <input type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
-        <label for="searchCategory">Категория</label>
-        <select name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
-            <option th:value="${null}">Все категории</option>
-            <option th:each="selectedCategory : ${allCategories}"
-                    th:value="${selectedCategory.getId()}"
-                    th:text="${selectedCategory.getName()}">Протеин
-            </option>
-        </select>
-        <label for="searchBrand">Брэнд</label>
-        <input type="checkbox" id="searchBrand" th:each="selectedBrand : ${allBrands}"
-               th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
-        <p>
-            <label for="showProductsOnPage">Количество на странице </label>
-            <select name="showProductsOnPage" id="showProductsOnPage">
-                <option th:each="showProductsOnPage : ${productsOnPage}" th:value="${showProductsOnPage}"
-                        th:text="${showProductsOnPage}"></option>
-            </select>
-        </p>
-        <label for="pageNumber">Страница</label>
-        <input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">
-        <button type="submit">Поиск</button>
-    </form>
-</div>
-<div>
-    <table>
-        <th>Id</th>
-        <th>Наименование</th>
-        <th>Цена</th>
-        <th>Категория</th>
-        <th>Брэнд</th>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.getId()}"></td>
-            <td th:text="${product.getTitle()}"></td>
-            <td th:text="${product.getPrice()}"></td>
-            <td th:text="${product.getCategory().getName()}"></td>
-            <td th:text="${product.getBrand().getName()}"></td>
-        </tr>
-    </table>
-</div>
+    <div class="wrapper">
+        <div th:include="header">Header</div>
+        <div class="main">
+
+            <form th:action="@{/product-search}" method="post" th:object="${productSearchFilter}">
+                <input type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
+                <label for="searchCategory">Категория</label>
+                <select name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
+                    <option th:value="${null}">Все категории</option>
+                    <option th:each="selectedCategory : ${allCategories}"
+                            th:value="${selectedCategory.getId()}"
+                            th:text="${selectedCategory.getName()}">Протеин
+                    </option>
+                </select>
+                <label for="searchBrand">Брэнд</label>
+                <input type="checkbox" id="searchBrand" th:each="selectedBrand : ${allBrands}"
+                       th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
+                <p>
+                    <label for="showProductsOnPage">Количество на странице </label>
+                    <select name="showProductsOnPage" id="showProductsOnPage">
+                        <option th:each="showProductsOnPage : ${productsOnPage}" th:value="${showProductsOnPage}"
+                                th:text="${showProductsOnPage}"></option>
+                    </select>
+                </p>
+                <label for="pageNumber">Страница</label>
+                <input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">
+                <button type="submit">Поиск</button>
+            </form>
+            <div>
+            <table>
+                <th>Id</th>
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>Категория</th>
+                <th>Брэнд</th>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.getId()}"></td>
+                    <td th:text="${product.getTitle()}"></td>
+                    <td th:text="${product.getPrice()}"></td>
+                    <td th:text="${product.getCategory().getName()}"></td>
+                    <td th:text="${product.getBrand().getName()}"></td>
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div th:include="footer">Footer</div>
+    </div>
 </body>
 </html>

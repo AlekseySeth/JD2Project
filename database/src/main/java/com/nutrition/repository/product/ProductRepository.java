@@ -19,7 +19,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     Product findByTitleContaining(String title);
 
     @Cacheable
-    List<Product> findAllByCategory(Category category);
+    List<Product> findAllByCategory_Id(Long categoryId);
 
     @Cacheable
     List<Product> findAll();

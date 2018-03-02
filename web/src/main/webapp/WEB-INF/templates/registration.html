@@ -5,12 +5,12 @@
     <title>Registration</title>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
-    <link rel="stylesheet" type="text/css" href="/resources/css/header.css" >
-    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
 </head>
 <body>
 <div class="wrapper">
-    <div th:insert="header">Header</div>
+    <div th:include="header">Header</div>
     <div class="main">
         <div id="registration" class="registration-form">
             <h2 th:text="#{registration}">Регистрация</h2>
@@ -51,7 +51,7 @@
             </form>
         </div>
     </div>
-    <div th:insert="footer">Footer</div>
+    <div th:include="footer">Footer</div>
 </div>
 </body>
 </html>

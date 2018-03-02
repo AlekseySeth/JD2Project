@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Controller
-@SessionAttributes("products")
+@SessionAttributes(names = {"products", "allCategories"})
 public class ProductSearchController {
 
     private static final int TEN = 10;

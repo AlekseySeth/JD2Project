@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<aside>
+    <div class="category-tree">
+        <h2 th:text="#{catalog.tree.header}">Каталог</h2>
+        <ul>
+            <li class="tree-element" th:each="currentCategory : ${allCategories}">
+                <a class="navigation" th:href="@{/category(id=${currentCategory.getId()})}" th:text="${currentCategory.getName()}">Категория</a>
+            </li>
+        </ul>
+    </div>
+</aside>
+</html>
