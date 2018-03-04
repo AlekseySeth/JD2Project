@@ -1,7 +1,8 @@
 package com.nutrition.order;
 
 import com.nutrition.entity.order.Order;
-import com.nutrition.entity.user.User;
+import com.nutrition.entity.user.SystemUser;
+import com.nutrition.entity.user.SystemUser;
 import com.nutrition.repository.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAllByUser(User user) {
-        return orderRepository.findAllByUser(user);
+    public List<Order> findAllByUser(SystemUser systemUser) {
+        return orderRepository.findAllByUser(systemUser);
     }
 
     @Override

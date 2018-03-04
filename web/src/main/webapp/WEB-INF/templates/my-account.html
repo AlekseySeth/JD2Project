@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <h2 id="welcome" th:text="'Добро пожаловать, ' + ${user.getFirstName()} + ' ' + ${user.getLastName()}">
+            Добро пожаловать, Имя Фамилия
+        </h2>
+        <div class="profile-container">
+            <h2 id="profile-header">Персональные данные</h2>
+            <table class="profile">
+                <tr><td class="row-title" th:text="#{registration.first.name}">Имя</td><td class="row-value" th:text="${user.getFirstName()}"></td></tr>
+                <tr><td class="row-title" th:text="#{registration.last.name}">Фамилия</td><td class="row-value" th:text="${user.getLastName()}"></td></tr>
+                <tr><td class="row-title">E-mail</td><td class="row-value" th:text="${user.getEmail()}"></td></tr>
+                <tr><td class="row-title" th:text="#{registration.phone}"></td><td class="row-value" th:text="${user.getContactDetails().getMobile()}"></td></tr>
+                <tr><td class="row-title" th:text="#{registration.address}"></td><td class="row-value" th:text="${user.getContactDetails().getAddress()}"></td></tr>
+            </table>
+            <form th:action="@{/update-profile}" method="get">
+                <button class="profile-button" type="submit">Редактировать данные</button>
+            </form>
+            <form th:action="@{/update-password}" method="get">
+                <button class="profile-button" type="submit">Изменить пароль</button>
+            </form>
+            <form th:action="@{/log-out}" method="post">
+                <input type="hidden" name="logOut" value="true">
+                <button class="profile-button" type="submit">Выйти из аккаунта</button>
+            </form>
+        </div>
+        <div class="my-orders-container">
+            <h2 id="orders-header">Мои заказы</h2>
+            <table class="my-orders">
+                <th>Номер</th>
+                <th>Статус</th>
+                <th>Дата размещения</th>
+                <th>Сумма</th>
+                <th></th>
+                <th></th>
+                <c:forEach var="order" items="${requestScope.orders}">
+                    <tr th:each="order : ${allOrdersByUser}">
+                        <td>${order.id}</td>
+                        <td id="order-status">${order.status}</td>
+                        <td id="date">${order.openDate}</td>
+                        <td id="sum">${order.totalPrice}</td>
+                        <td class="button">
+                            <form action="${pageContext.request.contextPath}/order?id=${order.id}" method="get">
+                                <input type="hidden" name="orderId" value="${order.id}">
+                                <button type="submit">Открыть</button>
+                            </form>
+                        </td>
+                        <td class="button">
+                            <form action="${pageContext.request.contextPath}/download-order" method="get">
+                                <input type="hidden" name="orderId" value="${order.id}">
+                                <button type="submit">Скачать</button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

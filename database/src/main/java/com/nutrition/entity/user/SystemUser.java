@@ -25,7 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User extends IdentifiableEntity {
+public class SystemUser extends IdentifiableEntity {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -52,8 +52,8 @@ public class User extends IdentifiableEntity {
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
-    public User(String firstName, String lastName, String email, String password, ContactDetails contactDetails,
-                LocalDate registrationDate, Role role) {
+    public SystemUser(String firstName, String lastName, String email, String password, ContactDetails contactDetails,
+                      LocalDate registrationDate, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

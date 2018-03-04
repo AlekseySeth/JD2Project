@@ -1,7 +1,8 @@
 package com.nutrition.repository.user;
 
 import com.nutrition.config.PersistenceTestConfig;
-import com.nutrition.entity.user.User;
+import com.nutrition.entity.user.SystemUser;
+import com.nutrition.entity.user.SystemUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,14 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = PersistenceTestConfig.class)
 @Transactional
-public class UserRepositoryTest {
+public class SystemUserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
     public void findByEmail() throws Exception {
-        User result = userRepository.findByEmail("Admin");
+        SystemUser result = userRepository.findByEmail("Admin");
         assertThat(result.getFirstName(), equalTo("Admin"));
     }
 

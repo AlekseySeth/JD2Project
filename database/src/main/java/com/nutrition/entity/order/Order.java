@@ -1,6 +1,6 @@
 package com.nutrition.entity.order;
 
-import com.nutrition.entity.user.User;
+import com.nutrition.entity.user.SystemUser;
 import com.nutrition.entity.util.IdentifiableEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +35,7 @@ public class Order extends IdentifiableEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private SystemUser systemUser;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status", nullable = false)

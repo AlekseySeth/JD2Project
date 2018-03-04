@@ -1,6 +1,7 @@
 package com.nutrition.repository.user;
 
-import com.nutrition.entity.user.User;
+import com.nutrition.entity.user.SystemUser;
+import com.nutrition.entity.user.SystemUser;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -8,9 +9,9 @@ import java.util.List;
 /**
  * @author a.shestovsky
  */
-public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+public interface UserRepository extends PagingAndSortingRepository<SystemUser, Long> {
 
-    User findByEmail(String email);
+    SystemUser findByEmail(String email);
 
-    List<User> findAll();
+    List<SystemUser> findAll();
 }
