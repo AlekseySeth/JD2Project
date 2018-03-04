@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/product.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:include="header">Header</div>
+    <div class="main">
+        <div th:include="category-tree">Категории</div>
+        <div class="top">
+            <h2 th:text="${product.getTitle()}">Название продукта</h2>
+        </div>
+        <div class="product">
+            <div id="image">
+                <img src="/resources/images/default.png" th:src="${product.getImageURL()}" width="200" height="200">
+            </div>
+            <div class="add-to-cart">
+                <p class="price" th:text="${product.getPrice()}+' руб.'">Цена руб.</p>
+                <form th:action="@{/product}" method="post" th:object="${orderContent}">
+                    <input type="hidden" th:field="*{product}">
+                    <label for="qty">Количество</label>
+                    <input id="qty" type="number" th:field="*{productQty}" th:value="1">
+                    <button type="submit">Добавить в корзину</button>
+                </form>
+                <p class="stock" style="color: green" th:if="${product.getQtyInStock() gt 0}" th:text="'В наличии'">
+                    В наличии
+                </p>
+                <p class="stock" style="color: red" th:if="${product.getQtyInStock() eq 0}" th:text="'Нет на складе'">
+                    Нет на складе
+                </p>
+            </div>
+            <div class="full-description">
+                <p th:text="${product.getDescription()}">Полное описание</p>
+            </div>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

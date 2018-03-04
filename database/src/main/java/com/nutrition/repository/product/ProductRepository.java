@@ -1,6 +1,5 @@
 package com.nutrition.repository.product;
 
-import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;

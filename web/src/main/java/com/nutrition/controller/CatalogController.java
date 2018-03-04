@@ -1,5 +1,6 @@
 package com.nutrition.controller;
 
+import com.nutrition.entity.order.OrderContent;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 import com.nutrition.product.CategoryService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -35,6 +37,11 @@ public class CatalogController {
         return categoryService.findAll();
     }
 
+    @ModelAttribute("orderContent")
+    public OrderContent initOrderContent() {
+        return new OrderContent();
+    }
+
     @GetMapping("/category-list")
     public String showCategoryListPage() {
         return "category-list";
@@ -47,5 +54,18 @@ public class CatalogController {
         model.addAttribute("category", category);
         model.addAttribute("products", productsByCategory);
         return "category";
+    }
+
+    @GetMapping("/product")
+    public String showProductDetailsPage(@RequestParam("id") Long productId, Model model) {
+        Product product = productService.findById(productId);
+        model.addAttribute("product", product);
+        return "product";
+    }
+
+    @PostMapping("/product")
+    public String addProductToCart(OrderContent orderContent) {
+
+        return "product";
     }
 }

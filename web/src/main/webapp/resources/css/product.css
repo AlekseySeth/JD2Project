@@ -17,6 +17,7 @@ aside {
 .tree-element {
     font-size: 18px;
     height: 30px;
+    margin-bottom: 20px;
     border: 1px solid #2e6da4;
     position: relative;
 }
@@ -58,6 +59,7 @@ p{
 .main {
     background: #FFFFFF;
     flex: 1 0 auto;
+    min-height: 75vh;
     padding: 20px;
 }
 
