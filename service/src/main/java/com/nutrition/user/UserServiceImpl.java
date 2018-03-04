@@ -58,7 +58,15 @@ public class UserServiceImpl implements UserService {
 
     private Collection<? extends GrantedAuthority> generateAuthorities(Role role) {
         return Arrays.asList(new SimpleGrantedAuthority(role.toString()));
-
     }
 
+    @Override
+    public boolean loginSystemUser(UserDetails foundUser, String password) {
+        return foundUser.getPassword().equals(password);
+    }
+
+    @Override
+    public String encryptPassword(String email, String originalPassword) {
+        return originalPassword;
+    }
 }

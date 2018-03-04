@@ -19,4 +19,8 @@ public interface UserService extends UserDetailsService {
     SystemUser findByEmail(String email);
 
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
+    boolean loginSystemUser(UserDetails foundUser, String password);
+
+    String encryptPassword(String email, String originalPassword);
 }

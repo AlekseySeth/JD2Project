@@ -45,8 +45,12 @@ public class AccountController {
     @PostMapping("/login")
     public String loginSystemUser(String email, String password, RedirectAttributes systemUser) {
         UserDetails foundUser = userService.loadUserByUsername(email);
-
-        return "redirect:/my-account";
+        String encryptedPassword = userService.encryptPassword(email, password);
+        if (userService.loginSystemUser(foundUser, encryptedPassword)) {
+            return "redirect:/my-account";
+        } else {
+            return "login";
+        }
     }
 
     @GetMapping("/registration")
@@ -63,6 +67,7 @@ public class AccountController {
     @GetMapping("/my-account")
     public String showMyAccountPage(SystemUser systemUser, Model model) {
         List<Order> allOrdersByUser = orderService.findAllByUser(systemUser);
+        model.addAttribute("allOrdersByUser", allOrdersByUser);
         return "my-account";
     }
 }

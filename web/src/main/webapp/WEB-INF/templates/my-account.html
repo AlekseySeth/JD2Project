@@ -44,26 +44,26 @@
                 <th>Сумма</th>
                 <th></th>
                 <th></th>
-                <c:forEach var="order" items="${requestScope.orders}">
+
                     <tr th:each="order : ${allOrdersByUser}">
-                        <td>${order.id}</td>
-                        <td id="order-status">${order.status}</td>
-                        <td id="date">${order.openDate}</td>
-                        <td id="sum">${order.totalPrice}</td>
+                        <td th:text="${order.getId()}">ID</td>
+                        <td id="order-status" th:text="${order.getStatus()}">Status</td>
+                        <td id="date" th:text="${order.getOpenDate()}">Open Date</td>
+                        <td id="sum" th:text="${order.getTotalPrice()}">Total Price</td>
                         <td class="button">
-                            <form action="${pageContext.request.contextPath}/order?id=${order.id}" method="get">
-                                <input type="hidden" name="orderId" value="${order.id}">
+                            <form th:action="@{/order(id=${order.getId()})}" method="get">
+                                <input type="hidden" name="orderId" th:value="${order.getId()}">
                                 <button type="submit">Открыть</button>
                             </form>
                         </td>
                         <td class="button">
-                            <form action="${pageContext.request.contextPath}/download-order" method="get">
-                                <input type="hidden" name="orderId" value="${order.id}">
+                            <form th:action="@{/download-order}" method="get">
+                                <input type="hidden" name="orderId" th:value="${order.getId()}">
                                 <button type="submit">Скачать</button>
                             </form>
                         </td>
                     </tr>
-                </c:forEach>
+
             </table>
         </div>
     </div>
