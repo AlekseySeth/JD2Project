@@ -14,23 +14,23 @@
     <div class="main">
         <div id="registration" class="registration-form">
             <h2 th:text="#{registration}">Регистрация</h2>
-            <form th:action="@{/registration}" method="post">
+            <form th:action="@{/registration}" method="post" th:object="${user}">
                 <div>
                     <label for="firstName" th:text="#{registration.first.name}">Имя</label>
-                    <input type="text" id="firstName" name="firstName" placeholder=" " required>
+                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" placeholder=" " required>
                 </div>
                 <div>
                     <label for="lastName" th:text="#{registration.last.name}">Фамилия</label>
-                    <input type="text" id="lastName" name="lastName" placeholder=" ">
+                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder=" ">
                 </div>
                 <div>
                     <label for="email">E-mail </label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" th:field="*{email}" required>
                     <!--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>-->
                 </div>
                 <div>
                     <label for="password" th:text="#{registration.password}">Пароль</label>
-                    <input type="password" id="password" name="password" placeholder=" " required>
+                    <input type="password" id="password" name="password" th:field="*{password}" placeholder=" " required>
                 </div>
                 <div>
                     <label for="repPassword" th:text="#{registration.repeat.password}">Повторите пароль</label>
@@ -38,11 +38,11 @@
                 </div>
                 <div>
                     <label for="phone" th:text="#{registration.phone}">Телефон</label>
-                    <input type="tel" id="phone" name="phone" placeholder=" " required>
+                    <input type="tel" id="phone" name="phone" th:field="*{contactDetails.mobile}" placeholder=" " required>
                 </div>
                 <div>
                     <label for="address" th:text="#{registration.address}">Адрес</label>
-                    <input type="text" id="address" name="address" placeholder=" " required>
+                    <input type="text" id="address" name="address" th:field="*{contactDetails.address}" placeholder=" " required>
                 </div>
                 <button class="registration-button" type="submit" th:text="#{registration.button}">Зарегистрироваться</button>
                 <p class="login-link">

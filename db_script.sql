@@ -6,7 +6,7 @@ CREATE TABLE users (
   first_name        VARCHAR(50)         NOT NULL,
   last_name         VARCHAR(50),
   email             VARCHAR(100) UNIQUE NOT NULL,
-  password          VARCHAR(50)         NOT NULL,
+  password          VARCHAR(100)         NOT NULL,
   mobile            VARCHAR(20)         NOT NULL,
   address           VARCHAR(100)        NOT NULL,
   registration_date DATE,

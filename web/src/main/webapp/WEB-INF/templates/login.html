@@ -13,7 +13,7 @@
     <div class="main">
         <div id="login" class="login-form">
             <h2 th:text="#{login.form.title}">Вход в аккаунт</h2>
-            <form action="@{/login}" method="post">
+            <form th:action="@{/login}" method="post">
                 <p><input type="text" id="email" name="email" placeholder="email" required></p>
                 <!--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>-->
                 <p><input type="password" id="password" name="password" th:placeholder="#{login.password}" required></p>

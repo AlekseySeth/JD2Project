@@ -1,7 +1,8 @@
 package com.nutrition.controller;
 
 import com.nutrition.entity.order.Order;
-import com.nutrition.entity.user.SystemUser;
+import com.nutrition.entity.user.Role;
+import com.nutrition.entity.user.User;
 import com.nutrition.order.OrderService;
 import com.nutrition.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -33,8 +37,8 @@ public class AccountController {
     }
 
     @ModelAttribute("user")
-    public SystemUser initUser() {
-        return new SystemUser();
+    public User initUser() {
+        return new User();
     }
 
     @GetMapping("/login")
@@ -42,16 +46,11 @@ public class AccountController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginSystemUser(String email, String password, RedirectAttributes systemUser) {
-        UserDetails foundUser = userService.loadUserByUsername(email);
-        String encryptedPassword = userService.encryptPassword(email, password);
-        if (userService.loginSystemUser(foundUser, encryptedPassword)) {
-            return "redirect:/my-account";
-        } else {
-            return "login";
-        }
-    }
+//    @PostMapping("/login")
+//    public String loginSystemUser(String email, String password, RedirectAttributes user) {
+//
+//        return "redirect:/my-account";
+//    }
 
     @GetMapping("/registration")
     public String showRegistrationPage() {
@@ -59,14 +58,17 @@ public class AccountController {
     }
 
     @PostMapping("/registration")
-    public String registerCustomer() {
-
+    public String registerCustomer(User user, Model model) {
+        user.setRole(Role.CUSTOMER);
+        user.setRegistrationDate(LocalDate.now());
+        User registered = userService.registerNewCustomer(user);
+        model.addAttribute("user", registered);
         return "redirect:/my-account";
     }
 
     @GetMapping("/my-account")
-    public String showMyAccountPage(SystemUser systemUser, Model model) {
-        List<Order> allOrdersByUser = orderService.findAllByUser(systemUser);
+    public String showMyAccountPage(User user, Model model) {
+        List<Order> allOrdersByUser = orderService.findAllByUser(user);
         model.addAttribute("allOrdersByUser", allOrdersByUser);
         return "my-account";
     }

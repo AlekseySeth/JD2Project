@@ -1,7 +1,6 @@
 package com.nutrition.user;
 
-import com.nutrition.entity.user.SystemUser;
-import com.nutrition.entity.user.SystemUser;
+import com.nutrition.entity.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,17 +9,15 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    void save(SystemUser systemUser);
+    void save(User user);
 
-    SystemUser findById(Long id);
+    User findById(Long id);
 
-    List<SystemUser> findAll();
+    List<User> findAll();
 
-    SystemUser findByEmail(String email);
+    User findByEmail(String email);
 
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
-    boolean loginSystemUser(UserDetails foundUser, String password);
-
-    String encryptPassword(String email, String originalPassword);
+    User registerNewCustomer(User user);
 }
