@@ -1,7 +1,5 @@
 package com.nutrition.product;
 
-import com.nutrition.entity.product.Brand;
-import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 import com.nutrition.repository.product.ProductRepository;
 import com.nutrition.util.ProductSearchFilter;
@@ -48,11 +46,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(new PageRequest(pageNumber, qtyOnPage));
     }
 
-//    @Override
-//    public void update(Product product) {
-//        productRepository.update(product);
-//    }
-
     @Override
     public Product findByTitle(String title) {
         return productRepository.findByTitleContaining(title);
@@ -64,13 +57,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands) {
-        return productRepository.findByTitleCategoryBrands(title, category, brands);
-    }
-
-    @Override
-    public List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
-                                                        int pageNumber, int productsOnPage) {
+    public List<Product> findByTitleCategoryBrands(String title, Long categoryId, List<Long> brandIds,
+                                                   int pageNumber, int productsOnPage) {
         int offset = productsOnPage * (pageNumber - 1);
         return productRepository.findByTitleCategoryBrandsViaId(title, categoryId, brandIds, productsOnPage, offset);
     }

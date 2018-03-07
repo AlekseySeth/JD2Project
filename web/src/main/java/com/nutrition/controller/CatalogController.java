@@ -1,8 +1,10 @@
 package com.nutrition.controller;
 
 import com.nutrition.entity.order.OrderContent;
+import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
+import com.nutrition.product.BrandService;
 import com.nutrition.product.CategoryService;
 import com.nutrition.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

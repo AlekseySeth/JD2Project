@@ -44,7 +44,7 @@
                 <th>Цена</th>
                 <th>Категория</th>
                 <th>Брэнд</th>
-                <tr th:each="product : ${products}">
+                <tr th:each="product : ${filteredProducts}">
                     <td th:text="${product.getId()}"></td>
                     <td th:text="${product.getTitle()}"></td>
                     <td th:text="${product.getPrice()}"></td>

@@ -23,12 +23,12 @@ import java.util.List;
  */
 
 @Controller
-@SessionAttributes(names = {"products", "allCategories"})
+@SessionAttributes(names = {"filteredProducts", "allCategories"})
 public class ProductSearchController {
 
+    private static final int TWENTY = 20;
+    private static final int FIFTEEN = 15;
     private static final int TEN = 10;
-    private static final int FIVE = 5;
-    private static final int THREE = 3;
     private static final int DEFAULT_PAGE_NUMBER = 1;
     private final ProductService productService;
     private final CategoryService categoryService;
@@ -54,7 +54,7 @@ public class ProductSearchController {
 
     @ModelAttribute("productsOnPage")
     public List<Integer> productsOnPage() {
-        return Arrays.asList(TEN, FIVE, THREE);
+        return Arrays.asList(TEN, FIFTEEN, TWENTY);
     }
 
     @ModelAttribute("productSearchFilter")
@@ -62,10 +62,10 @@ public class ProductSearchController {
         return new ProductSearchFilter();
     }
 
-    @ModelAttribute("products")
+    @ModelAttribute("filteredProducts")
     private List<Product> initProducts() {
         return productService
-                .findByTitleCategoryBrandsViaId(null, null, null, DEFAULT_PAGE_NUMBER, TEN);
+                .findByTitleCategoryBrands(null, null, null, DEFAULT_PAGE_NUMBER, TEN);
     }
 
     @ModelAttribute("pages")
@@ -85,7 +85,7 @@ public class ProductSearchController {
         List<Long> searchBrandsId = productSearchFilter.getSearchBrandsId();
 
         List<Product> products = productService
-                .findByTitleCategoryBrandsViaId(searchTitle, searchCategoryId, searchBrandsId, pageNumber, showProductsOnPage);
+                .findByTitleCategoryBrands(searchTitle, searchCategoryId, searchBrandsId, pageNumber, showProductsOnPage);
 
         model.addAttribute("pages", products.size());
         model.addAttribute("products", products);
