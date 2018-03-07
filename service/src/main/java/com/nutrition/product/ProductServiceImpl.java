@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllByCategory(Long categoryId) {
-        return productRepository.findAllByCategory_Id(categoryId);
+        return productRepository.findAllByCategoryId(categoryId);
     }
 
     @Override
