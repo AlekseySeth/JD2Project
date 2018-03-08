@@ -1,7 +1,6 @@
 package com.nutrition.controller;
 
 import com.nutrition.entity.order.Order;
-import com.nutrition.entity.user.Role;
 import com.nutrition.entity.user.User;
 import com.nutrition.order.OrderService;
 import com.nutrition.user.UserService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,8 +48,6 @@ public class AccountController {
 
     @PostMapping("/registration")
     public String registerCustomer(User user, Model model) {
-        user.setRole(Role.CUSTOMER);
-        user.setRegistrationDate(LocalDate.now());
         User registered = userService.registerNewCustomer(user);
         model.addAttribute("user", registered);
         return "redirect:/my-account";

@@ -14,11 +14,11 @@
         <div id="login" class="login-form">
             <h2 th:text="#{login.form.title}">Вход в аккаунт</h2>
             <form th:action="@{/login}" method="post">
+                <p th:if="${param.error != null}" id="error-login" th:text="#{login.error.invalid.credentials}">Invalid credentials</p>
                 <p><input type="text" id="email" name="email" placeholder="email" required></p>
-                <!--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>-->
                 <p><input type="password" id="password" name="password" th:placeholder="#{login.password}" required></p>
                 <button class="login-button" type="submit" th:text="#{login.button}">Войти</button>
-                <p class="registration-link"><a href="@{/registration}" th:text="#{login.registration.link}">Зарегистрироваться</a></p>
+                <p class="registration-link"><a th:href="@{/registration}" th:text="#{login.registration.link}">Зарегистрироваться</a></p>
             </form>
         </div>
     </div>

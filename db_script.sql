@@ -38,7 +38,7 @@ CREATE TABLE products (
   category_id  BIGINT              NOT NULL,
   brand_id     BIGINT              NOT NULL,
   promotion_id BIGINT,
-  image_url    VARCHAR(100) DEFAULT '/images/default.png',
+  image_url    VARCHAR(100) DEFAULT '/resources/images/default.png',
   PRIMARY KEY (id),
   FOREIGN KEY (category_id) REFERENCES categories (id),
   FOREIGN KEY (brand_id) REFERENCES brands (id)
@@ -168,11 +168,11 @@ INSERT INTO categories (id, name, description) VALUES (7, 'Жиросжигат�
 которые способствуют эффективному снижению массы тела за счет редукции жировых отложений спортсмена. Кроме того с их
 помощью легче концентрироваться на выполнении упражнений и облегчаются тренировки.');
 
-INSERT INTO brands (id, name, logo_url) VALUES (1, 'Biotech', '/images/Biotech.png');
-INSERT INTO brands (id, name, logo_url) VALUES (2, 'QNT', '/images/QNT.png');
-INSERT INTO brands (id, name, logo_url) VALUES (3, 'Olimp', '/images/Olimp.png');
-INSERT INTO brands (id, name, logo_url) VALUES (4, 'ActivLab', '/images/ActivLab.png');
-INSERT INTO brands (id, name, logo_url) VALUES (5, 'IronMaxx', '/images/IronMaxx.png');
+INSERT INTO brands (id, name, logo_url) VALUES (1, 'Biotech', '/resources/images/Biotech.png');
+INSERT INTO brands (id, name, logo_url) VALUES (2, 'QNT', '/resources/images/QNT.png');
+INSERT INTO brands (id, name, logo_url) VALUES (3, 'Olimp', '/resources/images/Olimp.png');
+INSERT INTO brands (id, name, logo_url) VALUES (4, 'ActivLab', '/resources/images/ActivLab.png');
+INSERT INTO brands (id, name, logo_url) VALUES (5, 'IronMaxx', '/resources/images/IronMaxx.png');
 
 #Protein
 #Biotech
