@@ -45,15 +45,6 @@ public class Order extends IdentifiableEntity {
     @JoinColumn(name = "delivery_id", nullable = false)
     private Delivery delivery;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(
-//            name = "orders_products",
-//            joinColumns = @JoinColumn(name = "order_id")
-//    )
-//    @MapKeyJoinColumn(name = "product_id", referencedColumnName = "id")
-//    @Column(name = "product_qty")
-//    private Map<Product, Integer> products = new HashMap<>();
-
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderContent> orderContent = new ArrayList<>();
 
@@ -62,4 +53,17 @@ public class Order extends IdentifiableEntity {
 
     @Column(name = "close_date")
     private LocalDateTime closeDate;
+
+    public Order(User user, Delivery delivery) {
+        this.user = user;
+        this.delivery = delivery;
+    }
+
+    public void addOrderContent(OrderContent product) {
+        orderContent.add(product);
+    }
+
+    public void removeOrderContent(OrderContent product) {
+        orderContent.remove(product);
+    }
 }

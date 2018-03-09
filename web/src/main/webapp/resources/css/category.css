@@ -10,8 +10,6 @@ a {
 aside {
     float: left;
     width: 190px;
-    margin: 20px;
-    padding: 10px;
 }
 
 .tree-element {
@@ -20,6 +18,18 @@ aside {
     border: 1px solid #446d91;
     margin-bottom: 20px;
     position: relative;
+}
+
+.search-bar {
+    width: 250px;
+    background-color: #d5d9e0;
+}
+
+h2#filter-title {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .tree-element a {

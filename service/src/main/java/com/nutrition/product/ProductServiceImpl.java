@@ -4,6 +4,8 @@ import com.nutrition.entity.product.Product;
 import com.nutrition.repository.product.ProductRepository;
 import com.nutrition.util.ProductSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@CacheConfig(cacheNames = "products")
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -32,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Cacheable
     public Product findById(Long id) {
         return productRepository.findOne(id);
     }

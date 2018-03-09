@@ -1,6 +1,7 @@
 package com.nutrition.controller;
 
 import com.nutrition.entity.order.Order;
+import com.nutrition.entity.user.Role;
 import com.nutrition.entity.user.User;
 import com.nutrition.order.OrderService;
 import com.nutrition.user.UserService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -47,9 +50,14 @@ public class AccountController {
     }
 
     @PostMapping("/registration")
-    public String registerCustomer(User user, Model model) {
+    public String registerCustomer(User user, Model model, HttpServletRequest request) {
         User registered = userService.registerNewCustomer(user);
         model.addAttribute("user", registered);
+        try {
+            request.login(user.getEmail(), user.getPassword());
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
         return "redirect:/my-account";
     }
 
@@ -57,8 +65,24 @@ public class AccountController {
     public String showMyAccountPage(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-        List<Order> allOrdersByUser = orderService.findAllByUser(user);
-        model.addAttribute("allOrdersByUser", allOrdersByUser);
-        return "my-account";
+        if (user.getRole().equals(Role.ADMIN)) {
+            return "admin";
+        } else if (user.getRole().equals(Role.MARKETER)) {
+            return "marketer";
+        } else {
+            List<Order> allOrdersByUser = orderService.findAllByUser(user);
+            model.addAttribute("allOrdersByUser", allOrdersByUser);
+            return "my-account";
+        }
+    }
+
+    @GetMapping("/admin")
+    public String showAdminAccountPage() {
+        return "admin";
+    }
+
+    @GetMapping("/marketer")
+    public String showMarketerAccountPage() {
+        return "marketer";
     }
 }

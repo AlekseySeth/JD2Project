@@ -64,10 +64,4 @@ public class CatalogController {
         model.addAttribute("product", product);
         return "product";
     }
-
-    @PostMapping("/product")
-    public String addProductToCart(OrderContent orderContent) {
-
-        return "product";
-    }
 }

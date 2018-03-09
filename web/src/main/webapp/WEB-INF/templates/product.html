@@ -22,10 +22,10 @@
             </div>
             <div class="add-to-cart">
                 <p class="price" th:text="${product.getPrice()}+' руб.'">Цена руб.</p>
-                <form th:action="@{/product}" method="post" th:object="${orderContent}">
-                    <input type="hidden" th:field="*{product}">
+                <form th:action="@{/product}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.getId()}">
                     <label for="qty">Количество</label>
-                    <input id="qty" type="number" th:field="*{productQty}" th:value="1">
+                    <input id="qty" type="number" name="productQty" value="1" th:value="1">
                     <button type="submit">Добавить в корзину</button>
                 </form>
                 <p class="stock" style="color: green" th:if="${product.getQtyInStock() gt 0}" th:text="'В наличии'">

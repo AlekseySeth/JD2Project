@@ -1,5 +1,6 @@
 package com.nutrition.user;
 
+import com.nutrition.entity.order.Order;
 import com.nutrition.entity.user.Role;
 import com.nutrition.entity.user.User;
 import com.nutrition.repository.user.UserRepository;
@@ -62,5 +63,11 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.CUSTOMER);
         user.setRegistrationDate(LocalDate.now());
         return userRepository.save(user);
+    }
+
+    @Override
+    public Order generateInitialOrder(User user) {
+
+        return null;
     }
 }

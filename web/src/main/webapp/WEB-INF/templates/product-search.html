@@ -12,46 +12,49 @@
     <div class="wrapper">
         <div th:include="header">Header</div>
         <div class="main">
-
-            <form th:action="@{/product-search}" method="post" th:object="${productSearchFilter}">
-                <input type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
-                <label for="searchCategory">Категория</label>
-                <select name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
-                    <option th:value="${null}">Все категории</option>
-                    <option th:each="selectedCategory : ${allCategories}"
-                            th:value="${selectedCategory.getId()}"
-                            th:text="${selectedCategory.getName()}">Протеин
-                    </option>
-                </select>
-                <label for="searchBrand">Брэнд</label>
-                <input type="checkbox" id="searchBrand" th:each="selectedBrand : ${allBrands}"
-                       th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
-                <p>
-                    <label for="showProductsOnPage">Количество на странице </label>
-                    <select name="showProductsOnPage" id="showProductsOnPage">
-                        <option th:each="showProductsOnPage : ${productsOnPage}" th:value="${showProductsOnPage}"
-                                th:text="${showProductsOnPage}"></option>
+            <aside class="search-bar">
+                <h2 id="filter-title" th:text="'Поиск продуктов'">Product search</h2>
+                <form th:action="@{/product-search}" method="post" th:object="${productSearchFilter}">
+                    <input type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
+                    <label for="searchCategory">Категория</label>
+                    <select name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
+                        <option th:value="${null}">Все категории</option>
+                        <option th:each="selectedCategory : ${allCategories}"
+                                th:value="${selectedCategory.getId()}"
+                                th:text="${selectedCategory.getName()}">Протеин
+                        </option>
                     </select>
-                </p>
-                <label for="pageNumber">Страница</label>
-                <input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">
-                <button type="submit">Поиск</button>
-            </form>
+                    <label for="searchBrand">Брэнд</label>
+                    <input type="checkbox" id="searchBrand" th:each="selectedBrand : ${allBrands}"
+                           th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
+                    <p>
+                        <label for="showProductsOnPage">Количество на странице </label>
+                        <select name="showProductsOnPage" id="showProductsOnPage">
+                            <option th:each="showProductsOnPage : ${productsOnPage}" th:value="${showProductsOnPage}"
+                                    th:text="${showProductsOnPage}"></option>
+                        </select>
+                    </p>
+                    <label for="pageNumber">Страница</label>
+                    <input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">
+                    <button type="submit">Поиск</button>
+                </form>
+            </aside>
+
             <div>
-            <table>
-                <th>Id</th>
-                <th>Наименование</th>
-                <th>Цена</th>
-                <th>Категория</th>
-                <th>Брэнд</th>
-                <tr th:each="product : ${filteredProducts}">
-                    <td th:text="${product.getId()}"></td>
-                    <td th:text="${product.getTitle()}"></td>
-                    <td th:text="${product.getPrice()}"></td>
-                    <td th:text="${product.getCategory().getName()}"></td>
-                    <td th:text="${product.getBrand().getName()}"></td>
-                </tr>
-            </table>
+                <table>
+                    <th>Id</th>
+                    <th>Наименование</th>
+                    <th>Цена</th>
+                    <th>Категория</th>
+                    <th>Брэнд</th>
+                    <tr th:each="product : ${filteredProducts}">
+                        <td th:text="${product.getId()}"></td>
+                        <td th:text="${product.getTitle()}"></td>
+                        <td th:text="${product.getPrice()}"></td>
+                        <td th:text="${product.getCategory().getName()}"></td>
+                        <td th:text="${product.getBrand().getName()}"></td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div th:include="footer">Footer</div>

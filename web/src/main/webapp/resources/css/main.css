@@ -10,7 +10,7 @@ p{
     background: #FFFFFF;
     flex: 1 0 auto;
     min-height: 75vh;
-    height: 100%;
+    /*height: 100%;*/
     padding: 20px;
 }
 
@@ -96,7 +96,7 @@ div#login input {
     margin-top: 20px;
     margin-left: 390px;
     width: 350px;
-    height: 580px;
+    height: 610px;
     padding: 10px 20px;
     background-color: #d5d9e0;
 }
@@ -127,7 +127,7 @@ div#registration div {
 }
 
 .registration-button {
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 5px;
     height: 40px;
     font-size: 22px;
@@ -136,7 +136,7 @@ div#registration div {
 
 .login-link {
     font-size: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 5px;
     text-align: center;
 }

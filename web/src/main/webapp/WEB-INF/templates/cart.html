@@ -5,15 +5,15 @@
     <title>Cart</title>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/cart.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+    <script src="/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/js/main.js"></script>
 </head>
 <body>
 <div class="wrapper">
     <div th:include="header">Header</div>
     <div class="main">
-        <div th:include="category-tree">Категории</div>
-
         <div class="cart-container">
             <div class="top">
                 <h2 th:text="'Ваш заказ'">Ваш заказ</h2>
@@ -25,9 +25,12 @@
                     <th th:text="'Количество'">Количество</th>
                 </tr>
 
-                    <tr th:each="product : ${orderedProducts}">
-                        <td id="name">${product.key.name}</td><td>${product.key.price} руб.</td><td>${product.value}</td><td>
-                            <form action="${pageContext.request.contextPath}/remove-from-cart" method="post">
+                    <tr th:each="orderContent : ${order.getOrderContent()}">
+                        <td id="name" th:text="${orderContent.product.getTitle()}">Product title</td>
+                        <td th:text="${orderContent.product.getPrice() + ' руб.'}">Price руб.</td>
+                        <td th:text="${orderContent.productQty}">Product value</td>
+                        <td>
+                            <form th:action="@{/remove-from-cart}" method="post">
                                 <input type="hidden" name="productToRemoveId" value="${product.key.id}">
                                 <input type="hidden" name="productToRemoveQty" value="${product.value}">
                                 <button type="submit">X</button>
@@ -36,25 +39,25 @@
                     </tr>
 
             </table>
-            <div class="subtotal">
-                Сумма ${requestScope.subtotalPrice} руб.
+            <div class="subtotal" th:text="'Сумма ' + ${subtotalPrice} + ' руб.'">
+                Сумма Subtotal Price руб.
             </div>
             <h3 class="delivery-header">Выберите способ доставки</h3>
-            <form action="${pageContext.request.contextPath}/cart" method="post">
+            <!--<form action="${pageContext.request.contextPath}/cart" method="post">-->
                 <table class="delivery">
-                    <c:forEach var="delivery" items="${requestScope.deliveries}">
-                        <tr><td><input id="${delivery.id}" type="radio" name="delivery" value="${delivery.id}" ${sessionScope.order.delivery.id eq delivery.id ? "checked" : ""} onchange="submit()"><label for="${delivery.id}">${delivery.name}</label></td>
-                            <td>${delivery.cost}</td>
-                            <td>руб.</td></tr>
-                    </c:forEach>
-            </form>
+                    <tr th:each="delivery : ${allDeliveries}">
+                        <td>
+                            <input th:id="${delivery.getId()}" type="radio" name="delivery" th:value="${delivery.getId()}" onchange="setDelivery(2)">
+                            <label th:for="${delivery.getId()}" th:text="${delivery.getName()}"></label>
+                        </td>
+                        <td th:text="${delivery.cost}"></td>
+                        <td th:text="' руб.'">руб.</td>
+                    </tr>
+            <!--</form>-->
             </table>
-            <div class="subtotal">
-                Итого ${sessionScope.order.totalPrice} руб.
-            </div>
-            <form action="${pageContext.request.contextPath}/order-placed" method="post">
-                <input type="hidden" name="isPlaced" value="true">
-                <button class="place-order" type="submit">Разместить заказ</button>
+            <div class="subtotal" th:text="'Итого ' + ${subtotalPrice} + ' руб.'"></div>
+            <form th:action="@{/order-placed}" method="post">
+                <button class="place-order" type="submit" th:text="'Разместить заказ'">Разместить заказ</button>
             </form>
         </div>
 
@@ -63,3 +66,5 @@
 </div>
 </body>
 </html>
+
+<!--th:onchange="'javascript:setDelivery(\'' + ${delivery.getId()} + '\');'"-->

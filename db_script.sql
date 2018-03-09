@@ -121,10 +121,10 @@ CREATE TABLE fixed_price_promos (
 # );
 
 INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
-VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by',
+VALUES (1, 'Admin', 'Admin', '$2a$10$h8HSoUzsAlRmPDinUcAGBOWPnJs7uj9XVed9WiWWialGX.ncMqi/a', 'admin@sportpit.by', 'admin@sportpit.by',
         '2017-12-01', 'ADMIN');
 INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
-VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by',
+VALUES (2, 'Marketer', 'Marketer', '$2a$10$ijmU5KsjxbBjbXDdFNiacOkbEx3kdrG5jZUKMRTMZyn6Zgxvlh/SG', 'marketer@sportpit.by',
         'marketer@sportpit.by', '2017-12-01', 'MARKETER');
 
 INSERT INTO deliveries (name, cost) VALUES ('Самовывоз', 0.0);

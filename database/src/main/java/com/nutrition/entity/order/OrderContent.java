@@ -21,7 +21,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "order_content")
 public class OrderContent extends IdentifiableEntity {
@@ -36,4 +35,9 @@ public class OrderContent extends IdentifiableEntity {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    public OrderContent(Product product, Integer productQty) {
+        this.product = product;
+        this.productQty = productQty;
+    }
 }
