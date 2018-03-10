@@ -84,13 +84,13 @@ public class OrderController {
             initOrder(model);
         }
         Order order = (Order) modelMap.get("order");
+        orderContent.setOrder(order);
         redirectAttributes.addAttribute("id", productId);
         if (!orderService.addProductToCart(order, orderContent)) {
             redirectAttributes.addAttribute("notEnoughInStock", true);
             return "redirect:product";
-        } else {
-            redirectAttributes.addAttribute("notEnoughInStock", false);
         }
+        redirectAttributes.addAttribute("notEnoughInStock", null);
         model.addAttribute("order", order);
         return "redirect:product";
     }

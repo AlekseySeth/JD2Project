@@ -23,4 +23,8 @@ public interface UserService extends UserDetailsService {
     User registerNewCustomer(User user);
 
     Order generateInitialOrder(User user);
+
+    void updateProfile(User user, String firstName, String lastName, String phone, String address);
+
+    void updatePassword(User user, String newPassword);
 }

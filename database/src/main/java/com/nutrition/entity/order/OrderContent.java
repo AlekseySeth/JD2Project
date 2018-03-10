@@ -25,14 +25,14 @@ import javax.persistence.Table;
 @Table(name = "order_content")
 public class OrderContent extends IdentifiableEntity {
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     @Column(name = "product_qty")
     private Integer productQty;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 

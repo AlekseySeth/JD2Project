@@ -25,5 +25,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
 
     Page<Product> findAll(Pageable pageable);
 
-    void update(Product product);
+//    void update(Product product);
+
+
 }

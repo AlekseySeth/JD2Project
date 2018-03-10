@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         if (qtyInStock >= qtyToAdd) {
             order.addOrderContent(contentToAdd);
             product.setQtyInStock(qtyInStock - qtyToAdd);
-            productService.update(product);
+//            productService.update(product);
             return true;
         }
         return false;

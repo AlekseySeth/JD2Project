@@ -55,8 +55,8 @@
                         <td th:text="${delivery.cost}"></td>
                         <td th:text="' руб.'">руб.</td>
                     </tr>
+                </table>
             </form>
-            </table>
             <div class="subtotal" th:text="'Итого ' + ${order.getTotalPrice()} + ' руб.'"></div>
             <form th:action="@{/order-placed}" method="post">
                 <button class="place-order" type="submit" th:text="'Разместить заказ'">Разместить заказ</button>

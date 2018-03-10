@@ -1,6 +1,7 @@
 package com.nutrition.controller;
 
 import com.nutrition.entity.order.Order;
+import com.nutrition.entity.order.OrderContent;
 import com.nutrition.entity.user.Role;
 import com.nutrition.entity.user.User;
 import com.nutrition.order.OrderService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.ServletException;
@@ -74,6 +76,40 @@ public class AccountController {
             model.addAttribute("allOrdersByUser", allOrdersByUser);
             return "my-account";
         }
+    }
+
+    @GetMapping("/order")
+    public String showOrderPage(@RequestParam("orderId") Long orderId, Model model) {
+        Order orderInfo = orderService.findById(orderId);
+        List<OrderContent> orderContentList = orderInfo.getOrderContent();
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("orderContentList", orderContentList);
+        return "order";
+    }
+
+    @GetMapping("/update-profile")
+    public String showUpdateProfilePage() {
+        return "update-profile";
+    }
+
+    @PostMapping("/update-profile")
+    public String updateProfile(User user, String firstName, String lastName, String phone, String address) {
+        userService.updateProfile(user, firstName, lastName, phone, address);
+        return "redirect:/my-account";
+    }
+
+    @GetMapping("/update-password")
+    public String showUpdatePasswordPage() {
+        return "update-password";
+    }
+
+    @PostMapping("/update-password")
+    public String updatePassword(User user, String newPassword, String confirmNewPassword) {
+        if (!newPassword.equals(confirmNewPassword)) {
+            return "redirect:/update-password?error=true";
+        }
+        userService.updatePassword(user, newPassword);
+        return "redirect:/my-account";
     }
 
     @GetMapping("/admin")

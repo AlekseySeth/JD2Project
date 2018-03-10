@@ -1,6 +1,7 @@
 package com.nutrition.user;
 
 import com.nutrition.entity.order.Order;
+import com.nutrition.entity.user.ContactDetails;
 import com.nutrition.entity.user.Role;
 import com.nutrition.entity.user.User;
 import com.nutrition.repository.user.UserRepository;
@@ -69,5 +70,30 @@ public class UserServiceImpl implements UserService {
     public Order generateInitialOrder(User user) {
 
         return null;
+    }
+
+    @Override
+    public void updateProfile(User user, String firstName, String lastName, String phone, String address) {
+        if (firstName.length() > 0) {
+            user.setFirstName(firstName);
+        }
+        user.setLastName(lastName);
+        if (phone.length() > 0) {
+            ContactDetails contactDetails = user.getContactDetails();
+            contactDetails.setMobile(phone);
+            user.setContactDetails(contactDetails);
+        }
+        if (address.length() > 0) {
+            ContactDetails contactDetails = user.getContactDetails();
+            contactDetails.setAddress(address);
+            user.setContactDetails(contactDetails);
+        }
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updatePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }

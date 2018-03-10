@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update profile</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div class="profile-change-container">
+            <h2 id="profile-update">Изменение персональных данных</h2>
+            <form th:action="@{/update-profile}" method="post">
+                <div class="profile-update-element">
+                    <label for="firstName" th:text="#{registration.first.name}">Имя</label>
+                    <input type="text" id="firstName" name="firstName" th:value="${user.getFirstName()}" placeholder=" ">
+                </div>
+                <div class="profile-update-element">
+                    <label for="lastName" th:text="#{registration.last.name}">Фамилия</label>
+                    <input type="text" id="lastName" name="lastName" th:value="${user.getLastName()}" placeholder=" ">
+                </div>
+                <div class="profile-update-element">
+                    <label for="phone" th:text="#{registration.phone}">Телефон</label>
+                    <input type="tel" id="phone" name="phone" th:value="${user.getContactDetails().getMobile()}" placeholder=" ">
+                </div>
+                <div class="profile-update-element">
+                    <label for="address" th:text="#{registration.address}">Адрес</label>
+                    <input type="text" id="address" name="address" th:value="${user.getContactDetails().getAddress()}" placeholder=" ">
+                </div>
+                <button class="profile-button" type="submit">Изменить данные</button>
+            </form>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>
