@@ -28,4 +28,6 @@ public interface ProductService {
     Page<Product> findByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int qtyOnPage);
 
     int countPagesByFilter(ProductSearchFilter productSearchFilter);
+
+    void update(Product product);
 }

@@ -15,8 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,7 +25,7 @@ import java.util.Map;
  * @author a.shestovsky
  */
 @Controller
-@SessionAttributes(names = {"user", "order"})
+@SessionAttributes(names = {"user", "order", "isPlaced"})
 public class OrderController {
 
     private final OrderService orderService;
@@ -48,9 +46,9 @@ public class OrderController {
     }
 
     @ModelAttribute("order")
-    public Order initOrder() {
-        //TODO: add isPlaced = false flag
-        return orderService.createInitialOrder(getUserFromSession());
+    private void initOrder(Model model) {
+        model.addAttribute("isPlaced", false);
+        model.addAttribute("order", orderService.createInitialOrder(getUserFromSession()));
     }
 
     @ModelAttribute("allDeliveries")
@@ -64,16 +62,16 @@ public class OrderController {
         Order order = (Order) modelMap.get("order");
         model.addAttribute("subtotalPrice", orderService.calculateSubtotalPrice(order));
         order.setTotalPrice(orderService.calculateTotalPrice(order));
+        model.addAttribute("order", order);
         return "cart";
     }
 
     @PostMapping("/cart")
-    @ResponseBody
-    public void setDelivery(Model model, @RequestBody Long deliveryId) {
+    public String setDelivery(Model model, Long deliveryId) {
         Map<String, Object> modelMap = model.asMap();
         Order order = (Order) modelMap.get("order");
         orderService.setOrderDelivery(order, deliveryId);
-        order.setTotalPrice(orderService.calculateTotalPrice(order));
+        return "redirect:/cart";
     }
 
     @PostMapping("/product")
@@ -81,11 +79,28 @@ public class OrderController {
         Product product = productService.findById(productId);
         OrderContent orderContent = new OrderContent(product, productQty);
         Map<String, Object> modelMap = model.asMap();
+        boolean isPlaced = (boolean) modelMap.get("isPlaced");
+        if (isPlaced) {
+            initOrder(model);
+        }
         Order order = (Order) modelMap.get("order");
-        orderService.addProductToCart(order, orderContent);
-        model.addAttribute("order", order);
         redirectAttributes.addAttribute("id", productId);
+        if (!orderService.addProductToCart(order, orderContent)) {
+            redirectAttributes.addAttribute("notEnoughInStock", true);
+            return "redirect:product";
+        } else {
+            redirectAttributes.addAttribute("notEnoughInStock", false);
+        }
+        model.addAttribute("order", order);
         return "redirect:product";
+    }
+
+    @PostMapping("/remove-order-content")
+    public String removeProductFromCart(Long productToRemoveId, int productToRemoveQty, Model model) {
+        Map<String, Object> modelMap = model.asMap();
+        Order order = (Order) modelMap.get("order");
+        orderService.removeProductFromCart(order, productToRemoveId, productToRemoveQty);
+        return "redirect:/cart";
     }
 
     @PostMapping("/order-placed")
@@ -93,7 +108,7 @@ public class OrderController {
         Map<String, Object> modelMap = model.asMap();
         Order order = (Order) modelMap.get("order");
         orderService.placeOrder(order);
-        //TODO: add isPlaced = true flag
+        model.addAttribute("isPlaced", true);
         return "redirect:/order-placed";
     }
 

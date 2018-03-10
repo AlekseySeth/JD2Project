@@ -78,4 +78,9 @@ public class ProductServiceImpl implements ProductService {
 
         return 10;
     }
+
+    @Override
+    public void update(Product product) {
+        productRepository.update(product);
+    }
 }

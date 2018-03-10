@@ -30,7 +30,7 @@ import java.util.List;
 @Table(name = "orders")
 public class Order extends IdentifiableEntity {
 
-    @Column
+    @Column(name = "open_date")
     private LocalDateTime openDate;
 
     @ManyToOne
@@ -59,11 +59,12 @@ public class Order extends IdentifiableEntity {
         this.delivery = delivery;
     }
 
-    public void addOrderContent(OrderContent product) {
-        orderContent.add(product);
+    public void addOrderContent(OrderContent contentToAdd) {
+        orderContent.add(contentToAdd);
     }
 
-    public void removeOrderContent(OrderContent product) {
-        orderContent.remove(product);
+    public void removeOrderContent(OrderContent contentToDelete) {
+        int indexOfProduct = orderContent.indexOf(contentToDelete);
+        orderContent.remove(indexOfProduct);
     }
 }

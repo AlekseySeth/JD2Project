@@ -30,9 +30,9 @@
                         <td th:text="${orderContent.product.getPrice() + ' руб.'}">Price руб.</td>
                         <td th:text="${orderContent.productQty}">Product value</td>
                         <td>
-                            <form th:action="@{/remove-from-cart}" method="post">
-                                <input type="hidden" name="productToRemoveId" value="${product.key.id}">
-                                <input type="hidden" name="productToRemoveQty" value="${product.value}">
+                            <form th:action="@{/remove-order-content}" method="post">
+                                <input type="hidden" name="productToRemoveId" th:value="${orderContent.product.getId()}">
+                                <input type="hidden" name="productToRemoveQty" th:value="${orderContent.productQty}">
                                 <button type="submit">X</button>
                             </form>
                         </td>
@@ -43,24 +43,25 @@
                 Сумма Subtotal Price руб.
             </div>
             <h3 class="delivery-header">Выберите способ доставки</h3>
-            <!--<form action="${pageContext.request.contextPath}/cart" method="post">-->
+            <form th:action="@{/cart}" method="post">
                 <table class="delivery">
                     <tr th:each="delivery : ${allDeliveries}">
                         <td>
-                            <input th:id="${delivery.getId()}" type="radio" name="delivery" th:value="${delivery.getId()}" onchange="setDelivery(2)">
+                            <input th:id="${delivery.getId()}" type="radio" name="deliveryId"
+                                   th:value="${delivery.getId()}" onchange="submit()"
+                                   th:checked="${delivery.getId()} == ${order.delivery.getId()}">
                             <label th:for="${delivery.getId()}" th:text="${delivery.getName()}"></label>
                         </td>
                         <td th:text="${delivery.cost}"></td>
                         <td th:text="' руб.'">руб.</td>
                     </tr>
-            <!--</form>-->
+            </form>
             </table>
-            <div class="subtotal" th:text="'Итого ' + ${subtotalPrice} + ' руб.'"></div>
+            <div class="subtotal" th:text="'Итого ' + ${order.getTotalPrice()} + ' руб.'"></div>
             <form th:action="@{/order-placed}" method="post">
                 <button class="place-order" type="submit" th:text="'Разместить заказ'">Разместить заказ</button>
             </form>
         </div>
-
     </div>
     <div th:include="footer">Footer</div>
 </div>

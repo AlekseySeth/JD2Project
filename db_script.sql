@@ -81,7 +81,7 @@ CREATE TABLE order_content (
   id          BIGINT AUTO_INCREMENT,
   order_id    BIGINT NOT NULL,
   product_id  BIGINT NOT NULL,
-  prosuct_qty INT    NOT NULL,
+  product_qty INT    NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (order_id) REFERENCES orders (id),
   FOREIGN KEY (product_id) REFERENCES products (id)

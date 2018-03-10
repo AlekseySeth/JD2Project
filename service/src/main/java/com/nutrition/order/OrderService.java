@@ -16,7 +16,9 @@ public interface OrderService {
 
     List<Order> findAllByOpenDateBetweenOrderByOpenDateDesc(LocalDateTime from, LocalDateTime to);
 
-    void addProductToCart(Order order, OrderContent orderContent);
+    boolean addProductToCart(Order order, OrderContent orderContent);
+
+    void removeProductFromCart(Order order, Long productId, Integer productQty);
 
     void setOrderDelivery(Order order, Long deliveryId);
 

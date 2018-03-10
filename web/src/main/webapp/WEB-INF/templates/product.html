@@ -26,6 +26,7 @@
                     <input type="hidden" name="productId" th:value="${product.getId()}">
                     <label for="qty">Количество</label>
                     <input id="qty" type="number" name="productQty" value="1" th:value="1">
+                    <p th:if="${param.notEnoughInStock eq true}" th:text="'Недостаточно на складе. Доступно: ' + ${product.getQtyInStock()}"></p>
                     <button type="submit">Добавить в корзину</button>
                 </form>
                 <p class="stock" style="color: green" th:if="${product.getQtyInStock() gt 0}" th:text="'В наличии'">

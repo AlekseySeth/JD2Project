@@ -4,7 +4,9 @@ import com.nutrition.entity.order.Delivery;
 import com.nutrition.entity.order.Order;
 import com.nutrition.entity.order.OrderContent;
 import com.nutrition.entity.order.Status;
+import com.nutrition.entity.product.Product;
 import com.nutrition.entity.user.User;
+import com.nutrition.product.ProductService;
 import com.nutrition.repository.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,13 @@ public class OrderServiceImpl implements OrderService {
     private static final long DEFAULT_DELIVERY_ID = 1L;
     private final OrderRepository orderRepository;
     private final DeliveryService deliveryService;
+    private final ProductService productService;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, DeliveryService deliveryService) {
+    public OrderServiceImpl(OrderRepository orderRepository, DeliveryService deliveryService, ProductService productService) {
         this.orderRepository = orderRepository;
         this.deliveryService = deliveryService;
+        this.productService = productService;
     }
 
     @Override
@@ -44,8 +48,29 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addProductToCart(Order order, OrderContent orderContent) {
-        order.addOrderContent(orderContent);
+    public boolean addProductToCart(Order order, OrderContent contentToAdd) {
+        Product product = contentToAdd.getProduct();
+        Integer qtyToAdd = contentToAdd.getProductQty();
+        int qtyInStock = product.getQtyInStock();
+        if (qtyInStock >= qtyToAdd) {
+            order.addOrderContent(contentToAdd);
+            product.setQtyInStock(qtyInStock - qtyToAdd);
+            productService.update(product);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void removeProductFromCart(Order order, Long productId, Integer productQty) {
+        List<OrderContent> orderContentList = order.getOrderContent();
+        OrderContent orderContentToDelete = null;
+        for (OrderContent currentOrderContent : orderContentList) {
+            if (currentOrderContent.getProduct().getId().equals(productId)) {
+                orderContentToDelete = currentOrderContent;
+            }
+        }
+        order.removeOrderContent(orderContentToDelete);
     }
 
     @Override

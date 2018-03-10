@@ -88,7 +88,7 @@ public class ProductSearchController {
                 .findByTitleCategoryBrands(searchTitle, searchCategoryId, searchBrandsId, pageNumber, showProductsOnPage);
 
         model.addAttribute("pages", products.size());
-        model.addAttribute("products", products);
+        model.addAttribute("filteredProducts", products);
 
         return "product-search";
     }
