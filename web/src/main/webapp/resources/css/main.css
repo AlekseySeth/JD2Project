@@ -9,8 +9,8 @@ p{
 .main {
     background: #FFFFFF;
     flex: 1 0 auto;
-    min-height: 75vh;
-    /*height: 100%;*/
+    /*min-height: 75vh;*/
+    height: 100%;
     padding: 20px;
 }
 
@@ -352,9 +352,9 @@ h2#password-update {
 }
 
 .password-change-container input {
-    width: 96%;
+    width: 100%;
     padding-left: 5px;
-    height: 25px;
+    height: 30px;
     font-size: 16px;
 }
 

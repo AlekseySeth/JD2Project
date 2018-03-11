@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +21,7 @@
             </div>
             <div class="add-to-cart">
                 <p class="price" th:text="${product.getPrice()}+' руб.'">Цена руб.</p>
-                <form th:action="@{/product}" method="post">
+                <form th:action="@{/add-product}" method="post">
                     <input type="hidden" name="productId" th:value="${product.getId()}">
                     <label for="qty">Количество</label>
                     <input id="qty" type="number" name="productQty" value="1" th:value="1">

@@ -74,7 +74,7 @@ public class OrderController {
         return "redirect:/cart";
     }
 
-    @PostMapping("/product")
+    @PostMapping("/add-product")
     public String addProductToCart(Long productId, int productQty, Model model, RedirectAttributes redirectAttributes) {
         Product product = productService.findById(productId);
         OrderContent orderContent = new OrderContent(product, productQty);
