@@ -113,4 +113,9 @@ public class OrderServiceImpl implements OrderService {
         Delivery delivery = deliveryService.findById(DEFAULT_DELIVERY_ID);
         return new Order(userFromSession, delivery);
     }
+
+    @Override
+    public Iterable<Order> findAll() {
+        return orderRepository.findAll();
+    }
 }

@@ -48,10 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/my-account", "/cart")
                         .authenticated()
-                    .antMatchers("/admin")
+                    .antMatchers("/admin", "/users-list")
                         .hasAuthority("ADMIN")
                     .antMatchers("/marketer")
                         .hasAuthority("MARKETER")
+                    .antMatchers("/orders-list", "/products-list")
+                        .hasAnyAuthority("ADMIN", "MARKETER")
                     .anyRequest()
                         .permitAll();
         http

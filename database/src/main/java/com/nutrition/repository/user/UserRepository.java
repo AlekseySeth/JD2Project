@@ -12,5 +12,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     User findByEmail(String email);
 
-    List<User> findAll();
+    List<User> findAllByIdAfter(Long id);
 }

@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="left-navigation-bar">
+    <a th:href="@{/users-list}">
+        <button th:action="@{/users-list}" class="lnb-button" type="submit">Список пользователей</button>
+    </a>
+    <form th:action="@{/user}">
+        <input type="text" name="userId" placeholder="введите ID пользователя">
+        <button class="find" type="submit">Найти</button>
+    </form>
+    <form th:action="@{/user}">
+        <input type="text" name="userEmail" placeholder="введите e-mail пользователя">
+        <button class="find" type="submit">Найти</button>
+    </form>
+    <a th:href="@{/products-list}">
+        <button class="lnb-button" type="submit">Список продуктов</button>
+    </a>
+    <form th:action="@{/update-product}">
+        <input type="text" name="productId" placeholder="введите ID продукта">
+        <button class="find" type="submit">Найти</button>
+    </form>
+    <a th:href="@{/orders-list}">
+        <button class="lnb-button" type="submit">Список заказов</button>
+    </a>
+    <form th:action="@{/update-order}">
+        <input type="text" name="orderId" placeholder="введите ID заказа">
+        <button class="find" type="submit">Найти</button>
+    </form>
+    <form th:action="@{/logout}" class="log-out" method="post">
+        <input type="hidden" name="logOut" value="true">
+        <button class="lnb-button" type="submit">Выйти из аккаунта</button>
+    </form>
+</div>

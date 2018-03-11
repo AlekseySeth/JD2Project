@@ -25,13 +25,13 @@ import java.util.List;
  */
 @Controller
 @SessionAttributes(names = {"user"})
-public class AccountController {
+public class CustomerAccountController {
 
     private final OrderService orderService;
     private final UserService userService;
 
     @Autowired
-    public AccountController(OrderService orderService, UserService userService) {
+    public CustomerAccountController(OrderService orderService, UserService userService) {
         this.orderService = orderService;
         this.userService = userService;
     }
@@ -110,15 +110,5 @@ public class AccountController {
         }
         userService.updatePassword(user, newPassword);
         return "redirect:/my-account";
-    }
-
-    @GetMapping("/admin")
-    public String showAdminAccountPage() {
-        return "admin";
-    }
-
-    @GetMapping("/marketer")
-    public String showMarketerAccountPage() {
-        return "marketer";
     }
 }

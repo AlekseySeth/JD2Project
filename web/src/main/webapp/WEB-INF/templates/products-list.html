@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div sec:authorize="hasAuthority('ADMIN')" th:insert="admin-side-bar">Admin side bar</div>
+        <div sec:authorize="hasAuthority('MARKETER')" th:insert="marketer-side-bar">Marketer side bar</div>
+        <div class="products-list-container">
+            <table id="products-list">
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Стоимость</th>
+                <th>На складе</th>
+                <th>Категория</th>
+                <th>Брэнд</th>
+                <tr th:each="product : ${allProducts}">
+                    <td th:text="${product.getId()}">Id</td>
+                    <td id="pl-product-name" th:text="${product.getTitle()}">Title</td>
+                    <td th:text="${product.getPrice()}">Price</td>
+                    <td th:text="${product.getQtyInStock()}">In stock</td>
+                    <td th:text="${product.getCategory().getName()}">Category name</td>
+                    <td th:text="${product.getBrand().getName()}">Brand name</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

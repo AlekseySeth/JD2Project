@@ -29,4 +29,6 @@ public interface OrderService {
     Order placeOrder(Order order);
 
     Order createInitialOrder(User userFromSession);
+
+    Iterable<Order> findAll();
 }

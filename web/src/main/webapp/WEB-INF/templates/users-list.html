@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div th:insert="admin-side-bar">Admin side bar</div>
+        <div class="users-list">
+            <table id="users">
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>E-mail</th>
+                <th>Зарегистрирован</th>
+                <th>Телефон</th>
+                <th>Адрес</th>
+                <tr th:each="userItem : ${allUsers}">
+                    <td th:text="${userItem.getId()}">Id</td>
+                    <td th:text="${userItem.getFirstName()}">First Name</td>
+                    <td th:text="${userItem.getLastName()}">Last Name</td>
+                    <td th:text="${userItem.getEmail()}">Email</td>
+                    <td th:text="${#temporals.format(userItem.getRegistrationDate(), 'dd.MM.yyyy')}">Registration Date</td>
+                    <td th:text="${userItem.getContactDetails().getMobile()}">Phone</td>
+                    <td th:text="${userItem.getContactDetails().getAddress()}">Address</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>
