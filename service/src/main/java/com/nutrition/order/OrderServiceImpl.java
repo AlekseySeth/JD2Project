@@ -118,4 +118,10 @@ public class OrderServiceImpl implements OrderService {
     public Iterable<Order> findAll() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public void update(Order order, String status) {
+        order.setStatus(Status.valueOf(status));
+        orderRepository.save(order);
+    }
 }

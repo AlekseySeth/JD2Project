@@ -3,11 +3,11 @@
     <a th:href="@{/users-list}">
         <button th:action="@{/users-list}" class="lnb-button" type="submit">Список пользователей</button>
     </a>
-    <form th:action="@{/user}">
+    <form th:action="@{/user/id}">
         <input type="text" name="userId" placeholder="введите ID пользователя">
         <button class="find" type="submit">Найти</button>
     </form>
-    <form th:action="@{/user}">
+    <form th:action="@{/user/email}">
         <input type="text" name="userEmail" placeholder="введите e-mail пользователя">
         <button class="find" type="submit">Найти</button>
     </form>

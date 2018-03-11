@@ -1,9 +1,11 @@
 package com.nutrition.product;
 
+import com.nutrition.entity.order.Order;
 import com.nutrition.entity.product.Product;
 import com.nutrition.util.ProductSearchFilter;
 import org.springframework.data.domain.Page;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProductService {
@@ -29,5 +31,6 @@ public interface ProductService {
 
     int countPagesByFilter(ProductSearchFilter productSearchFilter);
 
-    void update(Product product);
+    void update(Product product,String title, String description, BigDecimal price,
+                int qtyInStock, String imageURL, Long categoryId, Long brandId);
 }

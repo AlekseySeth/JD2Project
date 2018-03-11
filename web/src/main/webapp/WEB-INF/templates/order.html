@@ -36,6 +36,7 @@
                 <tr>
                     <td class="oi_title" th:text="'Дата закрытия'">Дата закрытия</td>
                     <td class="oi_value" th:if="${orderInfo.getCloseDate() != null}" th:text="${#temporals.format(orderInfo.getCloseDate(), 'dd.MM.yyyy HH:mm')}"></td>
+                    <td class="oi_value" th:if="${orderInfo.getCloseDate() == null}" th:text="'        '"></td>
                 </tr>
             </table>
         </div>

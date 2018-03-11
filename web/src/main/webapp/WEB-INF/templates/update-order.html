@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Order</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div sec:authorize="hasAuthority('ADMIN')" th:insert="admin-side-bar">Admin side bar</div>
+        <div sec:authorize="hasAuthority('MARKETER')" th:insert="marketer-side-bar">Marketer side bar</div>
+        <div class="update-order-container">
+            <h2 id="order-update">Изменение заказа</h2>
+            <form th:action="@{/update-order}" method="post">
+                <table id="update-order">
+                    <tr><td>ID</td><td th:text="${orderToUpdate.getId()}"></td></tr>
+                    <tr><td>Статус</td>
+                        <td><select name="status">
+                            <option th:each="status : ${allStatuses}"
+                                    th:text="${status.getAsString()}"
+                                    th:value="${status.name()}"
+                                    th:selected="${orderToUpdate.getStatus().name()} eq ${status.name()}">
+                            </option>
+                        </select></td>
+                    </tr>
+                    <tr><td>Сумма</td><td th:text="${orderToUpdate.getTotalPrice()}"></td></tr>
+                    <tr><td>Доставка</td><td th:text="${orderToUpdate.getDelivery().getName()}"></td></tr>
+                    <tr><td>Дата размещения</td><td th:text="${#temporals.format(orderToUpdate.getOpenDate(), 'dd.MM.yyyy')}"></td></tr>
+                    <tr><td>Дата закрытия</td><td th:if="${orderToUpdate.getCloseDate()} != null" th:text="${#temporals.format(orderToUpdate.getCloseDate(), 'dd.MM.yyyy')}"></td></tr>
+                    <tr><td>Пользователь</td><td th:text="${orderToUpdate.user.getEmail()}"></td></tr>
+                </table>
+                <input type="hidden" name="orderId" th:value="${orderToUpdate.getId()}">
+                <button id="change-status" type="submit">Изменить статус</button>
+            </form>
+            <h2 id="uo-products">Продукты в заказе</h2>
+            <table id="update-order-products">
+                <th style="text-align: left">Наименование</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <tr th:each="orderContent : ${orderContentList}">
+                    <td style="text-align: left" th:text="${orderContent.product.getTitle()}"></td>
+                    <td th:text="${orderContent.product.getPrice()} + ' руб.'"></td>
+                    <td th:text="${orderContent.productQty}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

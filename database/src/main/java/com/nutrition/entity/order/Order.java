@@ -25,7 +25,7 @@ public class Order extends IdentifiableEntity {
     @Column(name = "open_date")
     private LocalDateTime openDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

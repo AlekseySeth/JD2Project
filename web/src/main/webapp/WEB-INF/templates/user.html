@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div sec:authorize="hasAuthority('ADMIN')" th:insert="admin-side-bar">Admin side bar</div>
+        <div class="user-container">
+            <table class="user">
+                <tr>
+                    <td class="user-row-title">ID</td>
+                    <td class="user-row-value" th:text="${foundUser.getId()}"></td>
+                </tr>
+                <tr>
+                    <td class="user-row-title" th:text="#{registration.first.name}"></td>
+                    <td class="user-row-value" th:text="${foundUser.getFirstName()}"></td>
+                </tr>
+                <tr>
+                    <td class="user-row-title" th:text="#{registration.last.name}"></td>
+                    <td class="user-row-value" th:text="${foundUser.getLastName()}"></td>
+                </tr>
+                <tr>
+                    <td class="user-row-title">E-mail</td>
+                    <td class="user-row-value" th:text="${foundUser.getEmail()}"></td>
+                </tr>
+                <tr>
+                    <td class="user-row-title" th:text="#{registration.phone}"></td>
+                    <td class="user-row-value" th:text="${foundUser.getContactDetails().getMobile()}"></td>
+                </tr>
+                <tr>
+                    <td class="user-row-title" th:text="#{registration.address}"></td>
+                    <td class="user-row-value" th:text="${foundUser.getContactDetails().getAddress()}"></td>
+                </tr>
+                <tr>
+                    <td class="user-row-title">Дата регистрации</td>
+                    <td class="user-row-value" th:text="${#temporals.format(foundUser.getRegistrationDate(), 'dd.MM.yyyy')}">${requestScope.foundUser.registrationDate}</td>
+                </tr>
+            </table>
+            <h2 id="user-orders-list">Список заказов</h2>
+            <table class="user-my-orders">
+                <th>Номер</th>
+                <th>Статус</th>
+                <th>Сумма</th>
+                <th>Дата размещения</th>
+                <th>Дата закрытия</th>
+                <tr th:each="order : ${foundUserOrders}">
+                    <td class="id" th:text="${order.getId()}"></td>
+                    <td th:text="${order.getStatus().getAsString()}"></td>
+                    <td class="sum" th:text="${order.getTotalPrice()}"></td>
+                    <td id="open-date" th:text="${#temporals.format(order.getOpenDate(), 'dd.MM.yyyy')}"></td>
+                    <td id="close-date" th:if="${order.getCloseDate()} != null" th:text="${#temporals.format(order.getCloseDate(), 'dd.MM.yyyy')}"></td>
+                    <td id="close-date" th:if="${order.getCloseDate()} == null" th:text="'      '"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

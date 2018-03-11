@@ -29,8 +29,9 @@
                     <td id="delivery" th:text="${orderItem.getDelivery().getName()}">Delivery</td>
                     <td th:text="${orderItem.getTotalPrice()}">Total Price</td>
                     <td th:text="${#temporals.format(orderItem.getOpenDate(), 'dd.MM.yyyy')}">Open Date</td>
-                    <td th:text="${#temporals.format(orderItem.getCloseDate(), 'dd.MM.yyyy')}">Close Date</td>
-                    <td th:text="${orderItem.getUser().getEmail()}">User Email</td>
+                    <td th:if="${orderItem.getCloseDate()} != null" th:text="${#temporals.format(orderItem.getCloseDate(), 'dd.MM.yyyy')}">Close Date</td>
+                    <td th:if="${orderItem.getCloseDate()} == null" th:text="'        '">Close Date</td>
+                    <td th:text="${orderItem.user.getEmail()}">User Email</td>
                 </tr>
             </table>
         </div>

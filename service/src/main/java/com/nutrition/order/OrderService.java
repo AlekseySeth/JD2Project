@@ -31,4 +31,6 @@ public interface OrderService {
     Order createInitialOrder(User userFromSession);
 
     Iterable<Order> findAll();
+
+    void update(Order order, String status);
 }

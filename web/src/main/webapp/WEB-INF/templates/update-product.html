@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset=UTF-8>
+    <title>Update Product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div sec:authorize="hasAuthority('ADMIN')" th:insert="admin-side-bar">Admin side bar</div>
+        <div sec:authorize="hasAuthority('MARKETER')" th:insert="marketer-side-bar">Marketer side bar</div>
+        <div class="update-product-container">
+            <h2 id="prod-update">Изменение продукта</h2>
+            <form th:action="@{/update-product}" method="post">
+                <table id="update-product">
+                    <tr>
+                        <td>ID</td><td th:text="${productToUpdate.getId()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Наименование</td><td><input type="text" name="title" th:value="${productToUpdate.getTitle()}"></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle">Описание</td><td><textarea name="description" cols="60" rows="5"
+                                                                                      th:text="${productToUpdate.getDescription()}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость</td><td><input type="text" name="price" th:value="${productToUpdate.getPrice()}"></td>
+                    </tr>
+                    <tr>
+                        <td>На складе</td><td><input type="number" name="qtyInStock" th:value="${productToUpdate.getQtyInStock()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Изображение</td><td><input type="text" name="imageURL" th:value="${productToUpdate.getImageURL()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Категория</td><td>
+                            <select name="categoryId">
+                                <option th:each="currentCategory : ${allCategories}"
+                                        th:value="${currentCategory.getId()}"
+                                        th:text="${currentCategory.getName()}"
+                                        th:selected="${productToUpdate.getCategory().getId() eq currentCategory.getId()}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Брэнд</td><td>
+                        <select name="brandId">
+                            <option th:each="currentBrand : ${allBrands}"
+                                    th:value="${currentBrand.getId()}"
+                                    th:text="${currentBrand.getName()}"
+                                    th:selected="${productToUpdate.getBrand().getId() eq currentBrand.getId()}">
+                            </option>
+                        </select>
+                    </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="productId" th:value="${productToUpdate.getId()}">
+                <button id="pu-button" type="submit">Принять изменения</button>
+            </form>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>
