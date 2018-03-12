@@ -25,7 +25,7 @@ public class ServiceConfig {
 
     @Bean
     public Logger logger() {
-        return Logger.getLogger("service");
+        return Logger.getLogger(Logging.class);
     }
 
     @Bean

@@ -13,16 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Aspect
 public class Logging {
 
-    private final Logger LOGGER;
+    private final Logger logger;
 
     @Autowired
-    public Logging(Logger LOGGER) {
-        this.LOGGER = LOGGER;
+    public Logging(Logger logger) {
+        this.logger = logger;
     }
-
-    @Pointcut("@within(LoggerCall)")
-    public void loggerCall() {}
-
 
     @Pointcut("execution(* com.nutrition.marketing.*.*(..))")
     public void marketing() {}
@@ -41,7 +37,7 @@ public class Logging {
         String methodName = joinPoint.getSignature().getName();
         Object[] methodArgs = joinPoint.getArgs();
 
-        LOGGER.info("Call method " + methodName + " with args " + methodArgs.toString());
+        logger.info("Call method " + methodName + " with args " + methodArgs);
 
         Object result = null;
         try {
@@ -50,7 +46,7 @@ public class Logging {
             throwable.printStackTrace();
         }
 
-        LOGGER.info("Method " + methodName + " returns " + result);
+        logger.info("Method " + methodName + " returns " + result);
 
         return result;
     }
