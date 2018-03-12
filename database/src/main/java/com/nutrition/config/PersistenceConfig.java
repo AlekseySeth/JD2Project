@@ -40,6 +40,9 @@ public class PersistenceConfig {
     @Value("${hibernate.format_sql}")
     private String formatSql;
 
+    @Value("${hibernate.connection.isolation}")
+    private String isolationLevel;
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -54,7 +57,6 @@ public class PersistenceConfig {
     public LocalContainerEntityManagerFactoryBean  entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
-
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactoryBean.setDataSource(dataSource());
@@ -69,6 +71,7 @@ public class PersistenceConfig {
         properties.setProperty("hibernate.dialect", hibernateDialect);
         properties.setProperty("hibernate.show_sql", showSql);
         properties.setProperty("hibernate.format_sql", formatSql);
+        properties.setProperty("hibernate.connection.isolation", isolationLevel);
         return properties;
     }
 }

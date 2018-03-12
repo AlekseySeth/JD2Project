@@ -1,6 +1,6 @@
 package com.nutrition.product;
 
-import com.nutrition.entity.order.Order;
+import com.nutrition.aspect.LoggerCall;
 import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 @Transactional
 @CacheConfig(cacheNames = "products")
+@LoggerCall
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;

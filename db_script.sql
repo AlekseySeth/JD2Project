@@ -6,7 +6,7 @@ CREATE TABLE users (
   first_name        VARCHAR(50)         NOT NULL,
   last_name         VARCHAR(50),
   email             VARCHAR(100) UNIQUE NOT NULL,
-  password          VARCHAR(100)         NOT NULL,
+  password          VARCHAR(100)        NOT NULL,
   mobile            VARCHAR(20)         NOT NULL,
   address           VARCHAR(100)        NOT NULL,
   registration_date DATE,
@@ -39,6 +39,7 @@ CREATE TABLE products (
   brand_id     BIGINT              NOT NULL,
   promotion_id BIGINT,
   image_url    VARCHAR(100) DEFAULT '/resources/images/default.png',
+  version      BIGINT DEFAULT 1,
   PRIMARY KEY (id),
   FOREIGN KEY (category_id) REFERENCES categories (id),
   FOREIGN KEY (brand_id) REFERENCES brands (id)
@@ -121,11 +122,13 @@ CREATE TABLE fixed_price_promos (
 # );
 
 INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
-VALUES (1, 'Admin', 'Admin', '$2a$10$h8HSoUzsAlRmPDinUcAGBOWPnJs7uj9XVed9WiWWialGX.ncMqi/a', 'admin@sportpit.by', 'admin@sportpit.by',
+VALUES (1, 'Admin', 'Admin', '$2a$10$h8HSoUzsAlRmPDinUcAGBOWPnJs7uj9XVed9WiWWialGX.ncMqi/a', 'admin@sportpit.by',
+        'admin@sportpit.by',
         '2017-12-01', 'ADMIN');
 INSERT INTO users (id, first_name, email, password, mobile, address, registration_date, role)
-VALUES (2, 'Marketer', 'Marketer', '$2a$10$ijmU5KsjxbBjbXDdFNiacOkbEx3kdrG5jZUKMRTMZyn6Zgxvlh/SG', 'marketer@sportpit.by',
-        'marketer@sportpit.by', '2017-12-01', 'MARKETER');
+VALUES
+  (2, 'Marketer', 'Marketer', '$2a$10$ijmU5KsjxbBjbXDdFNiacOkbEx3kdrG5jZUKMRTMZyn6Zgxvlh/SG', 'marketer@sportpit.by',
+   'marketer@sportpit.by', '2017-12-01', 'MARKETER');
 
 INSERT INTO deliveries (name, cost) VALUES ('Самовывоз', 0.0);
 INSERT INTO deliveries (name, cost) VALUES ('Стандартная доставка', 3.50);

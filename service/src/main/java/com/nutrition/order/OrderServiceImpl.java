@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         if (qtyInStock >= qtyToAdd) {
             order.addOrderContent(contentToAdd);
             product.setQtyInStock(qtyInStock - qtyToAdd);
-//            productService.update(product);
+            productService.save(product);
             return true;
         }
         return false;
@@ -122,6 +122,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void update(Order order, String status) {
         order.setStatus(Status.valueOf(status));
+        if ("COMPLETED".equals(status) || "CLOSED".equals(status)) {
+            order.setCloseDate(LocalDateTime.now());
+        }
         orderRepository.save(order);
     }
 }
