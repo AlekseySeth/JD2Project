@@ -1,17 +1,12 @@
 package com.nutrition.repository.product;
 
-import com.nutrition.entity.product.Brand;
-import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
 
 import java.util.List;
 
 public interface ProductRepositoryCustom {
 
-    List<Product> findByTitleCategoryBrands(String title, Category category, List<Brand> brands);
+    List<Product> findProductsByFilter(String title, Long categoryId, List<Long> brandIds, int productsOnPage, int offset);
 
-    List<Product> findByTitleCategoryBrandsViaId(String title, Long categoryId, List<Long> brandIds,
-                                                 int productsOnPage, int offset);
-
-    int countPagesByFilter(String title, Long categoryId, List<Long> brandIds);
+    long countProductsByFilter(String title, Long categoryId, List<Long> brandIds);
 }

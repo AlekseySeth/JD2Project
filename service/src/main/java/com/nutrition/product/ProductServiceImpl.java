@@ -8,8 +8,6 @@ import com.nutrition.util.ProductSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +23,7 @@ import java.util.List;
 @CacheConfig(cacheNames = "products")
 public class ProductServiceImpl implements ProductService {
 
+    private static final int ONE = 1;
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
     private final BrandService brandService;
@@ -53,37 +52,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findAll(int pageNumber, int qtyOnPage) {
-        return productRepository.findAll(new PageRequest(pageNumber, qtyOnPage));
-    }
-
-    @Override
-    public Product findByTitle(String title) {
-        return productRepository.findByTitleContaining(title);
-    }
-
-    @Override
     public List<Product> findAllByCategory(Long categoryId) {
         return productRepository.findAllByCategoryId(categoryId);
     }
 
     @Override
-    public List<Product> findByTitleCategoryBrands(String title, Long categoryId, List<Long> brandIds,
-                                                   int pageNumber, int productsOnPage) {
-        int offset = productsOnPage * (pageNumber - 1);
-        return productRepository.findByTitleCategoryBrandsViaId(title, categoryId, brandIds, productsOnPage, offset);
+    public List<Product> findProductsByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int qtyOnPage) {
+        String searchTitle = productSearchFilter.getSearchTitle();
+        Long searchCategoryId = productSearchFilter.getSearchCategoryId();
+        List<Long> searchBrandsId = productSearchFilter.getSearchBrandsId();
+        int offset = (pageNumber - ONE) * qtyOnPage;
+        return productRepository.findProductsByFilter(searchTitle, searchCategoryId, searchBrandsId, qtyOnPage, offset);
     }
 
     @Override
-    public Page<Product> findByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int qtyOnPage) {
-
-        return null;
-    }
-
-    @Override
-    public int countPagesByFilter(ProductSearchFilter productSearchFilter) {
-
-        return 10;
+    public int countPagesByFilter(ProductSearchFilter productSearchFilter, int qtyOnPage) {
+        String searchTitle = productSearchFilter.getSearchTitle();
+        Long searchCategoryId = productSearchFilter.getSearchCategoryId();
+        List<Long> searchBrandsId = productSearchFilter.getSearchBrandsId();
+        long productsCount = productRepository.countProductsByFilter(searchTitle, searchCategoryId, searchBrandsId);
+        return (int) Math.ceil((double) productsCount / qtyOnPage);
     }
 
     @Override

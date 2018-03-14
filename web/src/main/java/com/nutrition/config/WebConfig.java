@@ -11,7 +11,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +25,7 @@ import java.util.List;
 @ComponentScan(basePackages = {"com.nutrition.controller"})
 @EnableWebMvc
 @Import(value = {ThymeleafConfig.class, InternationalizationConfig.class})
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;

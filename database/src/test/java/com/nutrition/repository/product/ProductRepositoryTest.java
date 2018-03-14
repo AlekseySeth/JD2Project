@@ -45,24 +45,25 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void findByTitleContaining() {
-        Product result = productRepository.findByTitleContaining("carbox");
-        assertThat(result.getTitle(), equalTo("Biotech CARBOX 1000"));
-    }
-
-    @Test
     public void findByTitleCategoryBrandsViaId() {
         List<Product> resultByTitle = productRepository
-                .findByTitleCategoryBrandsViaId("xplode", null, new ArrayList<>(), 10, 0);
+                .findProductsByFilter("xplode", null, new ArrayList<>(), 10, 0);
         assertThat(resultByTitle, hasSize(2));
         assertThat(resultByTitle.get(0).getTitle(), equalTo("BCAA Xplode 280 g"));
 
         List<Product> resultByCategory = productRepository
-                .findByTitleCategoryBrandsViaId(null, 7L, new ArrayList<>(), 10, 0);
+                .findProductsByFilter(null, 7L, new ArrayList<>(), 10, 0);
         assertThat(resultByCategory, hasSize(4));
 
         List<Product> resultByBrands = productRepository
-                .findByTitleCategoryBrandsViaId(null, null, Arrays.asList(4L, 5L), 10, 0);
+                .findProductsByFilter(null, null, Arrays.asList(4L, 5L), 10, 0);
         assertThat(resultByBrands, hasSize(5));
     }
+
+    @Test
+    public void countProductsByFilter() throws Exception {
+        long productsCount = productRepository.countProductsByFilter(null, null, null);
+        assertThat(productsCount, equalTo(35L));
+    }
+
 }
