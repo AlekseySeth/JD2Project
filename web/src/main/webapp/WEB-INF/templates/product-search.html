@@ -11,21 +11,23 @@
     <div class="wrapper">
         <div th:include="header">Header</div>
         <div class="main">
-            <aside class="search-bar">
+            <div class="search-bar">
                 <h2 id="filter-title" th:text="'Поиск продуктов'">Product search</h2>
                 <form th:action="@{/product-search}" method="post" th:object="${productSearchFilter}">
-                    <input type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
-                    <label for="searchCategory">Категория</label>
-                    <select name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
+                    <input class="title-search" type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
+                    <p><label id="categories-selector" for="searchCategory">Категория</label></p>
+                    <select class="categories-selector" name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
                         <option th:value="${null}">Все категории</option>
                         <option th:each="selectedCategory : ${allCategories}"
                                 th:value="${selectedCategory.getId()}"
                                 th:text="${selectedCategory.getName()}">Протеин
                         </option>
                     </select>
-                    <label for="searchBrand">Брэнд</label>
-                    <input type="checkbox" id="searchBrand" th:each="selectedBrand : ${allBrands}"
-                           th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
+                    <p><label id="brands-selector" for="searchBrand">Брэнд</label></p>
+                    <div class="brands-checkbox" th:each="selectedBrand : ${allBrands}">
+                        <input type="checkbox" id="searchBrand"
+                               th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
+                    </div>
                     <p>
                         <label for="showProductsOnPage">Количество на странице </label>
                         <select name="showProductsOnPage" id="showProductsOnPage">
@@ -35,25 +37,29 @@
                     </p>
                     <label for="pageNumber">Страница</label>
                     <input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">
-                    <button type="submit">Поиск</button>
+                    <button class="sb-button" type="submit">Поиск</button>
                 </form>
-            </aside>
+            </div>
 
-            <div>
-                <table>
-                    <th>Id</th>
-                    <th>Наименование</th>
-                    <th>Цена</th>
-                    <th>Категория</th>
-                    <th>Брэнд</th>
-                    <tr th:each="product : ${productsByFilter}">
-                        <td th:text="${product.getId()}"></td>
-                        <td th:text="${product.getTitle()}"></td>
-                        <td th:text="${product.getPrice()}"></td>
-                        <td th:text="${product.getCategory().getName()}"></td>
-                        <td th:text="${product.getBrand().getName()}"></td>
-                    </tr>
-                </table>
+            <div class="product-search-result-container">
+                <div class="product-item" th:each="product : ${productsByFilter}">
+                    <a th:href="@{/product(id=${product.getId()})}">
+                        <img class="product-image" src="/resources/images/default.png"
+                             th:src="${product.getImageURL()}" height="100" width="100">
+                        <p class="product-name" th:text="${product.getTitle()}">Название</p>
+                        <div class="search-result-short-description">
+                            <p th:if="${product.getDescription().length()>150}" th:text="${product.getDescription()}">
+                                ${product.description}
+                            </p>
+                            <p th:if="${product.getDescription().length()<150}" th:text="${product.getDescription()}">
+                                ${product.description}
+                            </p>
+                        </div>
+                        <p class="search-result-product-price" th:text="${product.getPrice()}+' руб.'">
+                            цена руб.
+                        </p>
+                    </a>
+                </div>
             </div>
         </div>
         <div th:include="footer">Footer</div>

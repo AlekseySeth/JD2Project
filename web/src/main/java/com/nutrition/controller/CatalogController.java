@@ -9,7 +9,6 @@ import com.nutrition.product.CategoryService;
 import com.nutrition.product.ProductService;
 import com.nutrition.util.ProductSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * @author a.shestovsky
@@ -32,8 +29,8 @@ import java.util.TreeMap;
 public class CatalogController {
 
     private static final int TWENTY = 20;
-    private static final int FIFTEEN = 15;
     private static final int TEN = 10;
+    private static final int FIVE = 5;
 
     private final CategoryService categoryService;
     private final ProductService productService;
@@ -58,7 +55,7 @@ public class CatalogController {
 
     @ModelAttribute("productsOnPage")
     public List<Integer> productsOnPage() {
-        return Arrays.asList(TEN, FIFTEEN, TWENTY);
+        return Arrays.asList(FIVE, TEN, TWENTY);
     }
 
     @ModelAttribute("orderContent")
@@ -103,6 +100,14 @@ public class CatalogController {
         List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("productsByFilter", productsByFilter);
+        return "product-search";
+    }
+
+    @PostMapping("/product-search/filter")
+    @ResponseBody
+    public String searchProductsByFilterJs(ProductSearchFilter productSearchFilter, int pageNumber, int showProductsOnPage, Model model) {
+        int totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
+        List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
         return "product-search";
     }
 }

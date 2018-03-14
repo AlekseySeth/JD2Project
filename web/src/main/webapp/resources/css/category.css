@@ -20,11 +20,6 @@ aside {
     position: relative;
 }
 
-.search-bar {
-    width: 250px;
-    background-color: #d5d9e0;
-}
-
 h2#filter-title {
     font-size: 20px;
     padding: 10px;
@@ -162,3 +157,94 @@ p{
     text-align: center;
 }
 
+/*Product search page*/
+
+.search-bar {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    background-color: #d5d9e0;
+}
+
+.title-search {
+    width: 100%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+label#categories-selector {
+    font-size: 18px;
+    padding: 5px;
+}
+
+label#brands-selector {
+    font-size: 18px;
+    padding: 5px;
+}
+
+.categories-selector {
+    width: 100%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.brands-checkbox {
+    font-size: 16px;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+
+.brands-checkbox input {
+    height: 20px;
+}
+
+.sb-button {
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product-search-result-container {
+    float: right;
+    width: 70%;
+    padding: 10px;
+}
+
+.search-result-short-description p{
+    float: left;
+    width: 77%;
+    font-size: 14px;
+    padding: 10px;
+    overflow: hidden;
+    height: 50px;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.search-result-short-description:after {
+    content: "";
+    position: absolute;
+    float: right;
+    right: 80px;
+    bottom: 22px;
+    width: 25%;
+    height: 17px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%);
+}
+
+.search-result-product-price {
+    position: absolute;
+    right: 5px;
+    top: 50px;
+    float: right;
+    text-align: center;
+}
