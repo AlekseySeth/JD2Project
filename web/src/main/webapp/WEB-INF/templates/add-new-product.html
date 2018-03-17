@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div th:insert="marketer-side-bar">Marketer side bar</div>
+        <div class="update-product-container">
+            <h2 id="prod-add">Добавление продукта</h2>
+            <form th:action="@{/add-product}" method="post" th:object="${productToAdd}">
+                <table id="update-product">
+                    <tr>
+                        <td>Наименование</td><td><input type="text" name="title" th:field="*{title}"></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle">Описание</td><td><textarea name="description" cols="60" rows="5"
+                                                                                      th:field="*{description}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость</td><td><input type="text" name="price" th:field="*{price}"></td>
+                    </tr>
+                    <tr>
+                        <td>На складе</td><td><input type="number" name="qtyInStock" th:field="*{qtyInStock}"></td>
+                    </tr>
+                    <tr>
+                        <td>Изображение</td><td><input type="text" name="imageURL" th:field="*{imageURL}" placeholder="введите путь к файлу"></td>
+                    </tr>
+                    <tr>
+                        <td>Категория</td><td>
+                        <select name="categoryId">
+                            <option th:each="currentCategory : ${allCategories}"
+                                    th:value="${currentCategory.getId()}"
+                                    th:text="${currentCategory.getName()}">
+                            </option>
+                        </select>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>Брэнд</td><td>
+                        <select name="brandId">
+                            <option th:each="currentBrand : ${allBrands}"
+                                    th:value="${currentBrand.getId()}"
+                                    th:text="${currentBrand.getName()}">
+                            </option>
+                        </select>
+                    </td>
+                    </tr>
+                </table>
+                <button id="pu-button" type="submit">Добавить продукт</button>
+            </form>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>
