@@ -35,8 +35,13 @@
                                     th:text="${showProductsOnPage}"></option>
                         </select>
                     </p>
-                    <label for="pageNumber">Страница</label>
-                    <input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">
+                    <p>Страницы:</p>
+                    <!--<input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">-->
+                    <input type="button" name="pageNumber" th:value="'1'" onclick="submit()">
+                    <input type="button" name="pageNumber"
+                           th:if="${totalPages} != null"
+                           th:each="page : ${#numbers.sequence(2, ${totalPages})}"
+                           th:value="${page}" onclick="submit()">
                     <button class="sb-button" type="submit">Поиск</button>
                 </form>
             </div>

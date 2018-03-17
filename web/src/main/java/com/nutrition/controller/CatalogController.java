@@ -96,18 +96,18 @@ public class CatalogController {
 
     @PostMapping("/product-search")
     public String searchProductsByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int showProductsOnPage, Model model) {
-        int totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
+        Integer totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
         List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("productsByFilter", productsByFilter);
         return "product-search";
     }
 
-    @PostMapping("/product-search/filter")
-    @ResponseBody
-    public String searchProductsByFilterJs(ProductSearchFilter productSearchFilter, int pageNumber, int showProductsOnPage, Model model) {
-        int totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
-        List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
-        return "product-search";
-    }
+//    @PostMapping("/product-search/filter")
+//    @ResponseBody
+//    public String searchProductsByFilterJs(ProductSearchFilter productSearchFilter, int pageNumber, int showProductsOnPage, Model model) {
+//        int totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
+//        List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
+//        return "product-search";
+//    }
 }

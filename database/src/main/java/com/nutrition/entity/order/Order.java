@@ -51,10 +51,12 @@ public class Order extends IdentifiableEntity {
         this.delivery = delivery;
     }
 
+    @Transient
     public void addOrderContent(OrderContent contentToAdd) {
         orderContent.add(contentToAdd);
     }
 
+    @Transient
     public void removeOrderContent(OrderContent contentToDelete) {
         int indexOfProduct = orderContent.indexOf(contentToDelete);
         orderContent.remove(indexOfProduct);
