@@ -16,9 +16,9 @@ public interface ProductService {
 
     List<Product> findAllByCategory(Long categoryId);
 
-    List<Product> findProductsByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int qtyOnPage);
+    List<Product> findProductsByFilter(ProductSearchFilter productSearchFilter, Integer pageNumber, Integer qtyOnPage);
 
-    int countPagesByFilter(ProductSearchFilter productSearchFilter, int qtyOnPage);
+    Integer countPagesByFilter(ProductSearchFilter productSearchFilter, Integer qtyOnPage);
 
     void update(Product product, String title, String description, BigDecimal price,
                 int qtyInStock, String imageURL, Long categoryId, Long brandId);

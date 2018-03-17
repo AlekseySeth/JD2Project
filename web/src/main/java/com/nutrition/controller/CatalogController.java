@@ -13,9 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.Arrays;
@@ -31,6 +30,8 @@ public class CatalogController {
     private static final int TWENTY = 20;
     private static final int TEN = 10;
     private static final int FIVE = 5;
+
+    private static final Integer DEFAULT_PAGE_NUMBER = 1;
 
     private final CategoryService categoryService;
     private final ProductService productService;
@@ -89,25 +90,20 @@ public class CatalogController {
         return "product";
     }
 
-    @GetMapping("/product-search")
-    public String showProductsSearchPage() {
-        return "product-search";
-    }
-
-    @PostMapping("/product-search")
-    public String searchProductsByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int showProductsOnPage, Model model) {
+    @GetMapping("/product-search/{pageNumber}/filter")
+    public String showProductsSearchPage(ProductSearchFilter productSearchFilter, @PathVariable Integer pageNumber, Integer showProductsOnPage, Model model) {
+        if (showProductsOnPage == null) {
+            showProductsOnPage = FIVE;
+        }
         Integer totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
+        if (totalPages < DEFAULT_PAGE_NUMBER) {
+            totalPages = DEFAULT_PAGE_NUMBER;
+        }
         List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
         model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentlyShownProductsOnPage", showProductsOnPage);
         model.addAttribute("productsByFilter", productsByFilter);
+        model.addAttribute("currentPage", pageNumber);
         return "product-search";
     }
-
-//    @PostMapping("/product-search/filter")
-//    @ResponseBody
-//    public String searchProductsByFilterJs(ProductSearchFilter productSearchFilter, int pageNumber, int showProductsOnPage, Model model) {
-//        int totalPages = productService.countPagesByFilter(productSearchFilter, showProductsOnPage);
-//        List<Product> productsByFilter = productService.findProductsByFilter(productSearchFilter, pageNumber, showProductsOnPage);
-//        return "product-search";
-//    }
 }

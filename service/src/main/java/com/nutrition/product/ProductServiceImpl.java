@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsByFilter(ProductSearchFilter productSearchFilter, int pageNumber, int qtyOnPage) {
+    public List<Product> findProductsByFilter(ProductSearchFilter productSearchFilter, Integer pageNumber, Integer qtyOnPage) {
         String searchTitle = productSearchFilter.getSearchTitle();
         Long searchCategoryId = productSearchFilter.getSearchCategoryId();
         List<Long> searchBrandsId = productSearchFilter.getSearchBrandsId();
@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int countPagesByFilter(ProductSearchFilter productSearchFilter, int qtyOnPage) {
+    public Integer countPagesByFilter(ProductSearchFilter productSearchFilter, Integer qtyOnPage) {
         String searchTitle = productSearchFilter.getSearchTitle();
         Long searchCategoryId = productSearchFilter.getSearchCategoryId();
         List<Long> searchBrandsId = productSearchFilter.getSearchBrandsId();

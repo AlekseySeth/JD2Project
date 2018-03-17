@@ -13,7 +13,7 @@
         <div class="main">
             <div class="search-bar">
                 <h2 id="filter-title" th:text="'Поиск продуктов'">Product search</h2>
-                <form th:action="@{/product-search}" method="post" th:object="${productSearchFilter}">
+                <form th:action="@{/product-search/1/filter}" method="get" name="searchForm" th:object="${productSearchFilter}">
                     <input class="title-search" type="text" id="searchTitle" th:field="*{searchTitle}" placeholder="введите название продукта">
                     <p><label id="categories-selector" for="searchCategory">Категория</label></p>
                     <select class="categories-selector" name="searchCategory" id="searchCategory" th:field="*{searchCategoryId}">
@@ -29,25 +29,31 @@
                                th:field="*{searchBrandsId}" th:value="${selectedBrand.getId()}" th:text="${selectedBrand.getName()}">
                     </div>
                     <p>
-                        <label for="showProductsOnPage">Количество на странице </label>
+                        <label class="pages-title" for="showProductsOnPage">Количество на странице </label>
                         <select name="showProductsOnPage" id="showProductsOnPage">
                             <option th:each="showProductsOnPage : ${productsOnPage}" th:value="${showProductsOnPage}"
-                                    th:text="${showProductsOnPage}"></option>
+                                    th:text="${showProductsOnPage}" th:selected="${currentlyShownProductsOnPage} eq ${showProductsOnPage}"></option>
                         </select>
                     </p>
-                    <p>Страницы:</p>
-                    <!--<input style="width: 35px" type="number" name="pageNumber" id="pageNumber" th:value="${1}">-->
-                    <input type="button" name="pageNumber" th:value="'1'" onclick="submit()">
-                    <input type="button" name="pageNumber"
-                           th:if="${totalPages} != null"
-                           th:each="page : ${#numbers.sequence(2, ${totalPages})}"
-                           th:value="${page}" onclick="submit()">
+                    <p class="pages-title">Страницы:</p>
+                    <ul class="pagination">
+                        <li th:each="pageNumber : ${#numbers.sequence(1,totalPages)}">
+                            <a th:href="@{/product-search/{page}/filter(page=${pageNumber},
+                                         searchTitle=${productSearchFilter.getSearchTitle()},
+                                         searchCategory=${productSearchFilter.getSearchCategoryId()},
+                                         searchBrandsId=${productSearchFilter.getSearchBrandsId()},
+                                         showProductsOnPage=${currentlyShownProductsOnPage})}"
+                               th:class="(${currentPage} eq ${pageNumber}) ? 'active' : ' '"
+                               th:text="${pageNumber}"></a>
+                        </li>
+                    </ul>
+
                     <button class="sb-button" type="submit">Поиск</button>
                 </form>
             </div>
 
             <div class="product-search-result-container">
-                <div class="product-item" th:each="product : ${productsByFilter}">
+                <div th:if="${productsByFilter} != null" class="product-item" th:each="product : ${productsByFilter}">
                     <a th:href="@{/product(id=${product.getId()})}">
                         <img class="product-image" src="/resources/images/default.png"
                              th:src="${product.getImageURL()}" height="100" width="100">
