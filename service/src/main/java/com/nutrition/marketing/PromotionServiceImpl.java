@@ -4,8 +4,6 @@ import com.nutrition.dto.PromoDto;
 import com.nutrition.entity.marketing.FixedPricePromotion;
 import com.nutrition.entity.marketing.PercentageDiscountPromotion;
 import com.nutrition.entity.marketing.Promotion;
-import com.nutrition.entity.product.Product;
-import com.nutrition.product.ProductService;
 import com.nutrition.repository.marketing.FixedPricePromotionRepository;
 import com.nutrition.repository.marketing.PercentageDiscountPromotionRepository;
 import com.nutrition.repository.marketing.PromotionRepository;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service

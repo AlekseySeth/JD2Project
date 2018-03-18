@@ -21,16 +21,20 @@ public class Logging {
     }
 
     @Pointcut("execution(* com.nutrition.marketing.*.*(..))")
-    public void marketing() {}
+    public void marketing() {
+    }
 
     @Pointcut("execution(* com.nutrition.order.*.*(..))")
-    public void order() {}
+    public void order() {
+    }
 
     @Pointcut("execution(* com.nutrition.product.*.*(..))")
-    public void product() {}
+    public void product() {
+    }
 
     @Pointcut("execution(* com.nutrition.user.*.*(..))")
-    public void user() {}
+    public void user() {
+    }
 
     @Around("marketing() || order() || product() || user()")
     public Object logService(ProceedingJoinPoint joinPoint) {

@@ -1,6 +1,5 @@
 package com.nutrition.user;
 
-import com.nutrition.entity.order.Order;
 import com.nutrition.entity.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,8 +20,6 @@ public interface UserService extends UserDetailsService {
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
     User registerNewCustomer(User user);
-
-    Order generateInitialOrder(User user);
 
     void updateProfile(User user, String firstName, String lastName, String phone, String address);
 

@@ -48,7 +48,7 @@ public class AdminAccountController {
 
     @ModelAttribute("registeredUser")
     public User initRegisteredUser() {
-        return  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     @ModelAttribute("allStatuses")

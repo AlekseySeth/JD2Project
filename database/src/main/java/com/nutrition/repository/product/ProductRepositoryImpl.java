@@ -27,7 +27,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
     @Override
     @Cacheable
     public List<Product> findProductsByFilter(String title, Long categoryId, List<Long> brandIds,
-                                                        int productsOnPage, int offset) {
+                                              int productsOnPage, int offset) {
         JPAQuery<Product> query = new JPAQuery<>(entityManager);
         QProduct product = QProduct.product;
         query.select(product).from(product);

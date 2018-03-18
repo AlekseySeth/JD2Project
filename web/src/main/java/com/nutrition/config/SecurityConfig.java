@@ -58,23 +58,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/my-account", "/cart", "/add-product")
-                        .authenticated()
-                    .antMatchers("/admin", "/users-list")
-                        .hasAuthority("ADMIN")
-                    .antMatchers("/marketer")
-                        .hasAuthority("MARKETER")
-                    .antMatchers("/orders-list", "/products-list")
-                        .hasAnyAuthority("ADMIN", "MARKETER")
-                    .anyRequest()
-                        .permitAll();
+                .antMatchers("/my-account", "/cart", "/add-product")
+                .authenticated()
+                .antMatchers("/admin", "/users-list")
+                .hasAuthority("ADMIN")
+                .antMatchers("/marketer")
+                .hasAuthority("MARKETER")
+                .antMatchers("/orders-list", "/products-list")
+                .hasAnyAuthority("ADMIN", "MARKETER")
+                .anyRequest()
+                .permitAll();
         http
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/my-account")
                 .usernameParameter("email")
                 .passwordParameter("password")
-            .and()
+                .and()
                 .logout()
                 .logoutUrl("/logout");
 

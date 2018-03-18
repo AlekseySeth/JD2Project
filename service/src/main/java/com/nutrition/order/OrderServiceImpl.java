@@ -43,11 +43,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAllByOpenDateBetweenOrderByOpenDateDesc(LocalDateTime from, LocalDateTime to) {
-        return orderRepository.findAllByOpenDateBetweenOrderByOpenDateDesc(from, to);
-    }
-
-    @Override
     public boolean addProductToCart(Order order, OrderContent contentToAdd) {
         Product product = contentToAdd.getProduct();
         Integer qtyToAdd = contentToAdd.getProductQty();
