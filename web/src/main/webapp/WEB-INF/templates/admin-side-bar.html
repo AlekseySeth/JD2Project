@@ -3,25 +3,25 @@
     <a th:href="@{/users-list}">
         <button th:action="@{/users-list}" class="lnb-button" type="submit">Список пользователей</button>
     </a>
-    <form th:action="@{/user/id}">
+    <form th:action="@{/user/id/show}" method="post">
         <input type="text" name="userId" placeholder="введите ID пользователя">
         <button class="find" type="submit">Найти</button>
     </form>
-    <form th:action="@{/user/email}">
+    <form th:action="@{/user/email/show}" method="post">
         <input type="text" name="userEmail" placeholder="введите e-mail пользователя">
         <button class="find" type="submit">Найти</button>
     </form>
     <a th:href="@{/products-list}">
         <button class="lnb-button" type="submit">Список продуктов</button>
     </a>
-    <form th:action="@{/update-product}">
+    <form th:action="@{/update-product/show}" method="post">
         <input type="text" name="productId" placeholder="введите ID продукта">
         <button class="find" type="submit">Найти</button>
     </form>
     <a th:href="@{/orders-list}">
         <button class="lnb-button" type="submit">Список заказов</button>
     </a>
-    <form th:action="@{/update-order}">
+    <form th:action="@{/update-order/show}" method="post">
         <input type="text" name="orderId" placeholder="введите ID заказа">
         <button class="find" type="submit">Найти</button>
     </form>

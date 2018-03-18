@@ -677,3 +677,11 @@ h2#prod-add {
     vertical-align: bottom;
     text-decoration: underline;
 }
+
+input.active-promo {
+    padding-left: 20px;
+}
+
+input.radio-promo {
+    text-align: left;
+}

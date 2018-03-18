@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -29,7 +30,7 @@ public abstract class Promotion extends IdentifiableEntity {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "promotion")
+    @OneToMany(mappedBy = "promotion", fetch = FetchType.EAGER)
     private List<Product> promotedProducts = new ArrayList<>();
 
     protected Promotion(String name, boolean isActive) {

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 
@@ -78,25 +79,62 @@ public class AdminAccountController {
         return "users-list";
     }
 
+    @PostMapping("/user/id/show")
+    public String showUserByIdPageShow(Long userId, RedirectAttributes redirectAttributes) {
+        if ("".equals(userId) || userId == null) {
+            return "redirect:/users-list";
+        }
+        redirectAttributes.addAttribute("userId", userId);
+        return "redirect:/user/id";
+    }
+
     @GetMapping("/user/id")
     public String showUserByIdPage(Long userId, Model model) {
         User foundUser = userService.findById(userId);
+        if (foundUser == null) {
+            return "redirect:/users-list";
+        }
         model.addAttribute("foundUser", foundUser);
         model.addAttribute("foundUserOrders", orderService.findAllByUser(foundUser));
         return "user";
+    }
+
+    @PostMapping("/user/email/show")
+    public String showUserByIdPageShow(String userEmail, RedirectAttributes redirectAttributes) {
+        if ("".equals(userEmail) || userEmail == null) {
+            return "redirect:/users-list";
+        }
+        redirectAttributes.addAttribute("userEmail", userEmail);
+        return "redirect:/user/email";
     }
 
     @GetMapping("/user/email")
     public String showUserByEmailPage(String userEmail, Model model) {
         User foundUser = userService.findByEmail(userEmail);
+        if (foundUser == null) {
+            return "redirect:/users-list";
+        }
         model.addAttribute("foundUser", foundUser);
         model.addAttribute("foundUserOrders", orderService.findAllByUser(foundUser));
         return "user";
     }
 
+    @PostMapping("/update-product/show")
+    public String redirectToUpdateProductPage(Long productId, RedirectAttributes redirectAttributes) {
+        if ("".equals(productId) || productId == null) {
+            return "redirect:/products-list";
+        }
+        redirectAttributes.addAttribute("productId", productId);
+        return "redirect:/update-product";
+    }
+
     @GetMapping("/update-product")
     public String showProductUpdatePage(Long productId, Model model) {
-        model.addAttribute("productToUpdate", productService.findById(productId));
+        Product product = productService.findById(productId);
+        if (product == null) {
+            return "redirect:/products-list";
+        }
+        model.addAttribute("productToUpdate", product);
         model.addAttribute("allCategories", categoryService.findAll());
         model.addAttribute("allBrands", brandService.findAll());
         return "update-product";
@@ -110,9 +148,21 @@ public class AdminAccountController {
         return "redirect:/update-product?productId=" + productId;
     }
 
+    @PostMapping("/update-order/show")
+    public String showUpdateOrderPageShow(Long orderId, RedirectAttributes redirectAttributes) {
+        if ("".equals(orderId) || orderId == null) {
+            return "redirect:/orders-list";
+        }
+        redirectAttributes.addAttribute("orderId", orderId);
+        return "redirect:/update-order";
+    }
+
     @GetMapping("/update-order")
     public String showUpdateOrderPage(Long orderId, Model model) {
         Order order = orderService.findById(orderId);
+        if (order == null) {
+            return "redirect:/orders-list";
+        }
         model.addAttribute("orderToUpdate", order);
         model.addAttribute("orderContentList", order.getOrderContent());
         return "update-order";
@@ -121,7 +171,6 @@ public class AdminAccountController {
     @PostMapping("/update-order")
     public String updateOrder(Long orderId, String status) {
         Order order = orderService.findById(orderId);
-        //TODO: message if order is not found
         orderService.update(order, status);
         return "redirect:/update-order?orderId=" + orderId;
     }

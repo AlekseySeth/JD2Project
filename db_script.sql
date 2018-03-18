@@ -101,7 +101,8 @@ CREATE TABLE promotions (
   name   VARCHAR(100) UNIQUE NOT NULL,
   active BOOLEAN,
   PRIMARY KEY (id)
-);
+)
+  AUTO_INCREMENT = 1000;
 
 CREATE TABLE percentage_discount_promos (
   promo_id       BIGINT,

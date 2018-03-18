@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add promotion</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div th:insert="marketer-side-bar">Marketer side bar</div>
+        <div class="update-product-container">
+            <h2 id="prod-add">Добавление скидки</h2>
+            <form th:action="@{/add-promotion}" method="post" th:object="${promoToAdd}">
+                <table id="update-product">
+                    <tr>
+                        <td>Название</td><td><input type="text" name="name" th:field="*{name}" required></td>
+                    </tr>
+                    <tr>
+                        <td>Продукт со скидкой</td><td><input type="text" name="promotedProductId" th:field="*{promotedProductId}" required></td>
+                    </tr>
+                    <tr>
+                        <td>Активна</td><td><input class="active-promo" type="checkbox" name="active" th:field="*{active}" required></td>
+                    </tr>
+                    <tr>
+                        <td>Величина скидки</td><td><input type="number" name="discount" th:field="*{discount}"></td>
+                    </tr>
+                    <tr>
+                        <td>Тип скидки</td>
+                        <td>
+                            <input class="radio-promo" type="radio" name="percentage" th:field="*{percentage}" th:value="${true}" th:text="'Процентная'">
+                            <input class="radio-promo" type="radio" name="percentage" th:field="*{percentage}" th:value="${false}" th:text="'Фиксированная'">
+                        </td>
+                    </tr>
+                </table>
+                <button id="pu-button" type="submit">Добавить скидку</button>
+            </form>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.nutrition.product;
 
+import com.nutrition.dto.ProductDto;
 import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
@@ -33,6 +34,25 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
         this.categoryService = categoryService;
         this.brandService = brandService;
+    }
+
+    @Override
+    public void save(ProductDto productDto) {
+        Product product = new Product();
+        product.setTitle(productDto.getTitle());
+        product.setDescription(productDto.getDescription());
+        product.setPrice(productDto.getPrice());
+        product.setQtyInStock(productDto.getQtyInStock());
+        Category category = categoryService.findById(productDto.getCategoryId());
+        product.setCategory(category);
+        Brand brand = brandService.findById(productDto.getBrandId());
+        product.setBrand(brand);
+        String imageURL = productDto.getImageURL();
+        if ("".equals(imageURL)) {
+            imageURL = null;
+        }
+        product.setImageURL(imageURL);
+        productRepository.save(product);
     }
 
     @Override
@@ -81,6 +101,9 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(description);
         product.setPrice(price);
         product.setQtyInStock(qtyInStock);
+        if ("".equals(imageURL)) {
+            imageURL = null;
+        }
         product.setImageURL(imageURL);
         Category category = categoryService.findById(categoryId);
         product.setCategory(category);

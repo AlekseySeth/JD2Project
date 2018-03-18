@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CommonPagesController {
 
+    @GetMapping("*")
+    public String showHomePage() {
+        return "index";
+    }
+
     @GetMapping("/articles")
     public String showArticlesPage() {
         return "articles";

@@ -6,7 +6,7 @@
     <a th:href="@{/add-new-product}">
         <button class="lnb-button" type="submit">Добавить продукт</button>
     </a>
-    <form th:action="@{/update-product}">
+    <form th:action="@{/update-product/show}" method="post">
         <input type="text" name="productId" placeholder="введите ID продукта">
         <button class="find" type="submit">Найти</button>
     </form>
@@ -16,14 +16,14 @@
     <a th:href="@{/add-promotion}">
         <button class="lnb-button" type="submit">Добавить скидку</button>
     </a>
-    <form th:action="@{/update-promotion}">
+    <form th:action="@{/update-promotion/show}" method="post">
         <input type="text" name="promoId" placeholder="введите ID скидки">
         <button class="find" type="submit">Найти</button>
     </form>
     <a th:href="@{/orders-list}">
         <button class="lnb-button" type="submit">Список заказов</button>
     </a>
-    <form th:action="@{/update-order}">
+    <form th:action="@{/update-order/show}" method="post">
         <input type="text" name="orderId" placeholder="введите ID заказа">
         <button class="find" type="submit">Найти</button>
     </form>

@@ -14,20 +14,20 @@
         <div th:insert="marketer-side-bar">Marketer side bar</div>
         <div class="update-product-container">
             <h2 id="prod-add">Добавление продукта</h2>
-            <form th:action="@{/add-product}" method="post" th:object="${productToAdd}">
+            <form th:action="@{/add-new-product}" method="post" th:object="${productToAdd}">
                 <table id="update-product">
                     <tr>
-                        <td>Наименование</td><td><input type="text" name="title" th:field="*{title}"></td>
+                        <td>Наименование</td><td><input type="text" name="title" th:field="*{title}" required></td>
                     </tr>
                     <tr>
                         <td style="vertical-align: middle">Описание</td><td><textarea name="description" cols="60" rows="5"
                                                                                       th:field="*{description}"></textarea></td>
                     </tr>
                     <tr>
-                        <td>Стоимость</td><td><input type="text" name="price" th:field="*{price}"></td>
+                        <td>Стоимость</td><td><input type="text" name="price" th:field="*{price}" required></td>
                     </tr>
                     <tr>
-                        <td>На складе</td><td><input type="number" name="qtyInStock" th:field="*{qtyInStock}"></td>
+                        <td>На складе</td><td><input type="number" name="qtyInStock" th:field="*{qtyInStock}" required></td>
                     </tr>
                     <tr>
                         <td>Изображение</td><td><input type="text" name="imageURL" th:field="*{imageURL}" placeholder="введите путь к файлу"></td>
@@ -37,6 +37,7 @@
                         <select name="categoryId">
                             <option th:each="currentCategory : ${allCategories}"
                                     th:value="${currentCategory.getId()}"
+                                    th:field="*{categoryId}"
                                     th:text="${currentCategory.getName()}">
                             </option>
                         </select>
@@ -47,6 +48,7 @@
                         <select name="brandId">
                             <option th:each="currentBrand : ${allBrands}"
                                     th:value="${currentBrand.getId()}"
+                                    th:field="*{brandId}"
                                     th:text="${currentBrand.getName()}">
                             </option>
                         </select>

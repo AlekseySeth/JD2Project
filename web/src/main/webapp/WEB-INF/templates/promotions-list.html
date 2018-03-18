@@ -15,18 +15,21 @@
         <div class="products-list-container">
             <table id="products-list">
                 <th>ID</th>
-                <th>Наименование</th>
-                <th>Стоимость</th>
-                <th>На складе</th>
-                <th>Категория</th>
-                <th>Брэнд</th>
+                <th>Название</th>
+                <th>Продукт со скидкой</th>
+                <th>Активна</th>
+                <th>Удалить</th>
                 <tr th:each="promotion : ${allPromotions}">
-                    <td th:text="${product.getId()}">Id</td>
-                    <td id="pl-product-name" th:text="${product.getTitle()}">Title</td>
-                    <td th:text="${product.getPrice()}">Price</td>
-                    <td th:text="${product.getQtyInStock()}">In stock</td>
-                    <td th:text="${product.getCategory().getName()}">Category name</td>
-                    <td th:text="${product.getBrand().getName()}">Brand name</td>
+                    <td th:text="${promotion.getId()}">Id</td>
+                    <td id="pl-product-name" th:text="${promotion.getName()}">Name</td>
+                    <td th:text="${promotion.getPromotedProducts().get(0)}">Products</td>
+                    <td th:text="${promotion.isActive()}">Active</td>
+                    <td>
+                        <form th:action="@{/delete-promotion}" method="post">
+                            <input type="hidden" th:value="${promotion.getId()}">
+                            <button type="submit">X</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
         </div>

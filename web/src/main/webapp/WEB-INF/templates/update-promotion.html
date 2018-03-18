@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update promotion</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/footer.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="header">Header</div>
+    <div class="main">
+        <div th:insert="marketer-side-bar">Marketer side bar</div>
+        <div class="update-product-container">
+            <h2 id="prod-add">Добавление скидки</h2>
+            <form th:action="@{/add-promotion}" method="post" th:object="${promoToUpdate}">
+                <table id="update-product">
+                    <tr>
+                        <td>ID</td><td th:text="${promoToUpdate.getId()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Название</td><td th:text="${promoToUpdate.getName()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Продукт со скидкой</td><td th:text="${promoToUpdate.getPromotedProducts().get(0)}"></td>
+                    </tr>
+                    <tr>
+                        <td>Активна</td><td><input class="active-promo" type="checkbox" name="active" th:value="${true}"></td>
+                    </tr>
+                    <tr>
+                        <td>Величина скидки</td>
+                        <td th:if="${percentage} != null" th:text="${percentage} + '%'"></td>
+                        <td th:if="${fixedPrice} != null" th:text="${fixedPrice} + ' руб.'"></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="promoId" th:value="${promoToUpdate.getId()}">
+                <button id="pu-button" type="submit">Изменить скидку</button>
+            </form>
+        </div>
+    </div>
+    <div th:include="footer">Footer</div>
+</div>
+</body>
+</html>
