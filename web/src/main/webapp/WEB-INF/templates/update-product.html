@@ -32,6 +32,13 @@
                         <td>Стоимость</td><td><input type="text" name="price" th:value="${productToUpdate.getPrice()}"></td>
                     </tr>
                     <tr>
+                        <td>Скидка</td><td>
+                        <input type="text" name="promoId" th:if="${productToUpdate.getPromotion()} != null"
+                                                           th:value="${productToUpdate.getPromotion().getId()}">
+                        <input type="text" name="promoId" th:if="${productToUpdate.getPromotion()} == null">
+                    </td>
+                    </tr>
+                    <tr>
                         <td>На складе</td><td><input type="number" name="qtyInStock" th:value="${productToUpdate.getQtyInStock()}"></td>
                     </tr>
                     <tr>

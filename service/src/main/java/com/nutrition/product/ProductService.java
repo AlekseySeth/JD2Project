@@ -23,6 +23,6 @@ public interface ProductService {
 
     Integer countPagesByFilter(ProductSearchFilter productSearchFilter, Integer qtyOnPage);
 
-    void update(Product product, String title, String description, BigDecimal price,
+    void update(Product product, String title, String description, BigDecimal price, Long promoId,
                 int qtyInStock, String imageURL, Long categoryId, Long brandId);
 }

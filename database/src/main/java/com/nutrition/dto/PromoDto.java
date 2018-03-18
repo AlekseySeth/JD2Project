@@ -16,7 +16,6 @@ public class PromoDto {
 
     private String name;
     private boolean active;
-    private Long promotedProductId;
     private BigDecimal discount;
     private boolean percentage;
 }

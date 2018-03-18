@@ -38,7 +38,7 @@ CREATE TABLE products (
   category_id  BIGINT              NOT NULL,
   brand_id     BIGINT              NOT NULL,
   promotion_id BIGINT,
-  image_url    VARCHAR(100) DEFAULT '/resources/images/default.png',
+  image_url    VARCHAR(100),
   version      BIGINT DEFAULT 1,
   PRIMARY KEY (id),
   FOREIGN KEY (category_id) REFERENCES categories (id),

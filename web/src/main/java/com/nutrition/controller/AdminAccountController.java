@@ -141,10 +141,10 @@ public class AdminAccountController {
     }
 
     @PostMapping("/update-product")
-    public String updateProduct(Long productId, String title, String description, BigDecimal price,
+    public String updateProduct(Long productId, String title, String description, BigDecimal price, Long promoId,
                                 int qtyInStock, String imageURL, Long categoryId, Long brandId) {
         Product product = productService.findById(productId);
-        productService.update(product, title, description, price, qtyInStock, imageURL, categoryId, brandId);
+        productService.update(product, title, description, price, promoId, qtyInStock, imageURL, categoryId, brandId);
         return "redirect:/update-product?productId=" + productId;
     }
 

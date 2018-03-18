@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author a.shestovsky
  */
 public interface PercentageDiscountPromotionRepository extends CrudRepository<PercentageDiscountPromotion, Long> {
+
 }

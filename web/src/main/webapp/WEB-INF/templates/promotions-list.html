@@ -16,17 +16,15 @@
             <table id="products-list">
                 <th>ID</th>
                 <th>Название</th>
-                <th>Продукт со скидкой</th>
                 <th>Активна</th>
                 <th>Удалить</th>
                 <tr th:each="promotion : ${allPromotions}">
                     <td th:text="${promotion.getId()}">Id</td>
                     <td id="pl-product-name" th:text="${promotion.getName()}">Name</td>
-                    <td th:text="${promotion.getPromotedProducts().get(0)}">Products</td>
-                    <td th:text="${promotion.isActive()}">Active</td>
+                    <td><input type="checkbox" th:checked="${promotion.isActive()} eq 1"></td>
                     <td>
                         <form th:action="@{/delete-promotion}" method="post">
-                            <input type="hidden" th:value="${promotion.getId()}">
+                            <input type="hidden" name="promoId" th:value="${promotion.getId()}">
                             <button type="submit">X</button>
                         </form>
                     </td>

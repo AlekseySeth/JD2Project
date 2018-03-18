@@ -23,16 +23,14 @@ public class PromotionServiceImpl implements PromotionService {
     private final PromotionRepository promotionRepository;
     private final PercentageDiscountPromotionRepository percentageDiscountPromotionRepository;
     private final FixedPricePromotionRepository fixedPricePromotionRepository;
-    private final ProductService productService;
 
     @Autowired
     public PromotionServiceImpl(PromotionRepository promotionRepository,
                                 PercentageDiscountPromotionRepository percentageDiscountPromotionRepository,
-                                FixedPricePromotionRepository fixedPricePromotionRepository, ProductService productService) {
+                                FixedPricePromotionRepository fixedPricePromotionRepository) {
         this.promotionRepository = promotionRepository;
         this.percentageDiscountPromotionRepository = percentageDiscountPromotionRepository;
         this.fixedPricePromotionRepository = fixedPricePromotionRepository;
-        this.productService = productService;
     }
 
     @Override
@@ -52,21 +50,18 @@ public class PromotionServiceImpl implements PromotionService {
 
     @Override
     public void save(PromoDto promoDto) {
-        Product product = productService.findById(promoDto.getPromotedProductId());
         if (promoDto.isPercentage()) {
             PercentageDiscountPromotion percentageDiscountPromotion = new PercentageDiscountPromotion();
             percentageDiscountPromotion.setName(promoDto.getName());
-            percentageDiscountPromotion.setPromotedProducts(Arrays.asList(product));
             percentageDiscountPromotion.setActive(promoDto.isActive());
             percentageDiscountPromotion.setDiscountValue(promoDto.getDiscount().intValue());
             percentageDiscountPromotionRepository.save(percentageDiscountPromotion);
         } else {
             FixedPricePromotion fixedPricePromotion = new FixedPricePromotion();
             fixedPricePromotion.setName(promoDto.getName());
-            fixedPricePromotion.setPromotedProducts(Arrays.asList(product));
             fixedPricePromotion.setActive(promoDto.isActive());
             fixedPricePromotion.setFixedPrice(promoDto.getDiscount());
-            fixedPricePromotionRepository.save((FixedPricePromotion) fixedPricePromotion);
+            fixedPricePromotionRepository.save(fixedPricePromotion);
         }
     }
 

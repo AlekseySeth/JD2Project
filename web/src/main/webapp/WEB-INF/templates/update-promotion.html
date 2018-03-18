@@ -23,7 +23,11 @@
                         <td>Название</td><td th:text="${promoToUpdate.getName()}"></td>
                     </tr>
                     <tr>
-                        <td>Продукт со скидкой</td><td th:text="${promoToUpdate.getPromotedProducts().get(0)}"></td>
+                        <td>Продуктs со скидкой</td>
+                        <td th:each="product : ${promoToUpdate.getPromotedProducts()}"
+                            th:text="${product.getId()}">
+
+                        </td>
                     </tr>
                     <tr>
                         <td>Активна</td><td><input class="active-promo" type="checkbox" name="active" th:value="${true}"></td>
