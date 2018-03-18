@@ -13,8 +13,8 @@
     <div class="main">
         <div th:insert="marketer-side-bar">Marketer side bar</div>
         <div class="update-product-container">
-            <h2 id="prod-add">Добавление скидки</h2>
-            <form th:action="@{/add-promotion}" method="post" th:object="${promoToUpdate}">
+            <h2 id="prod-add">Изменение скидки</h2>
+            <form th:action="@{/update-promotion}" method="post" th:object="${promoToUpdate}">
                 <table id="update-product">
                     <tr>
                         <td>ID</td><td th:text="${promoToUpdate.getId()}"></td>
@@ -23,14 +23,13 @@
                         <td>Название</td><td th:text="${promoToUpdate.getName()}"></td>
                     </tr>
                     <tr>
-                        <td>Продуктs со скидкой</td>
+                        <td>Продукт со скидкой</td>
                         <td th:each="product : ${promoToUpdate.getPromotedProducts()}"
                             th:text="${product.getId()}">
-
                         </td>
                     </tr>
                     <tr>
-                        <td>Активна</td><td><input class="active-promo" type="checkbox" name="active" th:value="${true}"></td>
+                        <td>Активна</td><td><input class="active-promo" type="checkbox" name="active" th:checked="${promoToUpdate.active}" th:value="${true}"></td>
                     </tr>
                     <tr>
                         <td>Величина скидки</td>

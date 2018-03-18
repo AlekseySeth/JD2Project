@@ -21,7 +21,7 @@
                 <tr th:each="promotion : ${allPromotions}">
                     <td th:text="${promotion.getId()}">Id</td>
                     <td id="pl-product-name" th:text="${promotion.getName()}">Name</td>
-                    <td><input type="checkbox" th:checked="${promotion.isActive()} eq 1"></td>
+                    <td><input type="checkbox" th:checked="${promotion.active}"></td>
                     <td>
                         <form th:action="@{/delete-promotion}" method="post">
                             <input type="hidden" name="promoId" th:value="${promotion.getId()}">
