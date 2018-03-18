@@ -11,14 +11,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author a.shestovsky
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ServiceConfig.class)
-public class BrandServiceImplTest {
+public class CategoryServiceImplTest {
 
     @Autowired
     private CategoryService categoryService;

@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -24,10 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public CharacterEncodingFilter encodingFilter() {
@@ -41,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userService);
-        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
 
@@ -60,9 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/my-account", "/cart", "/add-product")
                 .authenticated()
-                .antMatchers("/admin", "/users-list")
+                .antMatchers("/admin", "/users-list", "/user")
                 .hasAuthority("ADMIN")
-                .antMatchers("/marketer")
+                .antMatchers("/marketer", "/add-new-product", "/add-promotion", "/update-promotion", "/promotions-list")
                 .hasAuthority("MARKETER")
                 .antMatchers("/orders-list", "/products-list")
                 .hasAnyAuthority("ADMIN", "MARKETER")

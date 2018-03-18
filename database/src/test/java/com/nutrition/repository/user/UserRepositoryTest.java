@@ -25,5 +25,4 @@ public class UserRepositoryTest {
         User result = userRepository.findByEmail("Admin");
         assertThat(result.getFirstName(), equalTo("Admin"));
     }
-
 }
