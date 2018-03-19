@@ -6,8 +6,6 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,14 +16,12 @@ import java.util.List;
  */
 @NoArgsConstructor
 @Repository
-@CacheConfig(cacheNames = "products")
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     @Autowired
     private EntityManager entityManager;
 
     @Override
-    @Cacheable
     public List<Product> findProductsByFilter(String title, Long categoryId, List<Long> brandIds,
                                               int productsOnPage, int offset) {
         JPAQuery<Product> query = new JPAQuery<>(entityManager);

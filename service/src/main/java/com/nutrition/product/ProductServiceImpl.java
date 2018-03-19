@@ -1,6 +1,7 @@
 package com.nutrition.product;
 
 import com.nutrition.dto.ProductDto;
+import com.nutrition.entity.marketing.Promotion;
 import com.nutrition.entity.product.Brand;
 import com.nutrition.entity.product.Category;
 import com.nutrition.entity.product.Product;
@@ -8,11 +9,11 @@ import com.nutrition.marketing.PromotionService;
 import com.nutrition.repository.product.ProductRepository;
 import com.nutrition.util.ProductSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.OptimisticLockException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -22,10 +23,10 @@ import java.util.List;
 
 @Service
 @Transactional
-@CacheConfig(cacheNames = "products")
 public class ProductServiceImpl implements ProductService {
 
     private static final int ONE = 1;
+    private static final String DEFAULT_IMAGE_URL = "/resources/images/default.png";
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
     private final BrandService brandService;
@@ -52,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         product.setBrand(brand);
         String imageURL = productDto.getImageURL();
         if ("".equals(imageURL) || imageURL == null) {
-            imageURL = "/resources/images/default.png";
+            imageURL = DEFAULT_IMAGE_URL;
         }
         product.setImageURL(imageURL);
         productRepository.save(product);
@@ -64,7 +65,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Cacheable
     public Product findById(Long id) {
         return productRepository.findOne(id);
     }
@@ -98,21 +98,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void update(Product product, String title, String description, BigDecimal price, Long promoId,
-                       int qtyInStock, String imageURL, Long categoryId, Long brandId) {
+                       int qtyInStock, String imageURL, Long categoryId, Long brandId) throws OptimisticLockException {
         product.setTitle(title);
         product.setDescription(description);
         product.setPrice(price);
-        product.setPromotion(promotionService.findById(promoId));
+        if (promoId != null) {
+            Promotion promotion = promotionService.findById(promoId);
+            product.setPromotion(promotion);
+        } else {
+            product.setPromotion(null);
+        }
         product.setQtyInStock(qtyInStock);
         if ("".equals(imageURL)) {
-            imageURL = null;
+            imageURL = DEFAULT_IMAGE_URL;
         }
         product.setImageURL(imageURL);
         Category category = categoryService.findById(categoryId);
         product.setCategory(category);
         Brand brand = brandService.findById(brandId);
         product.setBrand(brand);
-        productRepository.save(product);
+        try {
+            productRepository.save(product);
+        } catch (OptimisticLockException ole) {
+            throw new OptimisticLockException("OptimisticLockException!");
+        }
     }
 }

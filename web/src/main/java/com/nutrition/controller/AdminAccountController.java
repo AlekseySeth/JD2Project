@@ -35,7 +35,6 @@ public class AdminAccountController {
     private final CategoryService categoryService;
     private final BrandService brandService;
 
-
     @Autowired
     public AdminAccountController(ProductService productService, OrderService orderService,
                                   UserService userService, CategoryService categoryService,

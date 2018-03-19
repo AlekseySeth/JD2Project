@@ -4,6 +4,8 @@ import com.nutrition.entity.product.Brand;
 import com.nutrition.repository.product.BrandRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 @Transactional
 @NoArgsConstructor
+@CacheConfig(cacheNames = "brands")
 public class BrandServiceImpl implements BrandService {
 
     private BrandRepository brandRepository;
@@ -31,6 +34,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    @Cacheable
     public List<Brand> findAll() {
         return brandRepository.findAll();
     }

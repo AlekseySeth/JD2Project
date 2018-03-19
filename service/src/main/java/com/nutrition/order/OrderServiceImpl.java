@@ -66,6 +66,9 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         order.removeOrderContent(orderContentToDelete);
+        Product product = productService.findById(productId);
+        int actualQtyInStock = product.getQtyInStock();
+        product.setQtyInStock(actualQtyInStock + productQty);
     }
 
     @Override
