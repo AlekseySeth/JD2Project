@@ -62,8 +62,7 @@ public class ProductRepositoryTest {
 
     @Test
     public void countProductsByFilter() throws Exception {
-        long productsCount = productRepository.countProductsByFilter(null, null, null);
-        assertThat(productsCount, equalTo(35L));
+        long productsCount = productRepository.countProductsByFilter(null, 1L, null);
+        assertThat(productsCount, equalTo(7L));
     }
-
 }
