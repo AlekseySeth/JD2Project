@@ -149,6 +149,7 @@ public class AdminAccountController {
         Product product = (Product) asMap.get("productToUpdate");
         try {
             productService.update(product, title, description, price, promoId, qtyInStock, imageURL, categoryId, brandId);
+//      TargetInvocationException proxy
         } catch (Exception e) {
             return "optimistic-lock";
         }
