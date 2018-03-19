@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.OptimisticLockException;
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * @author a.shestovsky
@@ -141,15 +142,17 @@ public class AdminAccountController {
     }
 
     @PostMapping("/update-product")
-    public String updateProduct(Long productId, String title, String description, BigDecimal price, Long promoId,
+    public String updateProduct(Model model, String title, String description, BigDecimal price, Long promoId,
                                 int qtyInStock, String imageURL, Long categoryId, Long brandId) {
-        Product product = productService.findById(productId);
+//        Product product = productService.findById(productId);
+        Map<String, Object> asMap = model.asMap();
+        Product product = (Product) asMap.get("productToUpdate");
         try {
             productService.update(product, title, description, price, promoId, qtyInStock, imageURL, categoryId, brandId);
-        } catch (OptimisticLockException e) {
+        } catch (Exception e) {
             return "optimistic-lock";
         }
-        return "redirect:/update-product?productId=" + productId;
+        return "redirect:/update-product?productId=" + product.getId();
     }
 
     @PostMapping("/update-order/show")

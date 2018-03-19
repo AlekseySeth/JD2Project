@@ -9,8 +9,10 @@ import com.nutrition.marketing.PromotionService;
 import com.nutrition.repository.product.ProductRepository;
 import com.nutrition.util.ProductSearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.OptimisticLockException;
@@ -121,8 +123,8 @@ public class ProductServiceImpl implements ProductService {
         product.setBrand(brand);
         try {
             productRepository.save(product);
-        } catch (OptimisticLockException ole) {
-            throw new OptimisticLockException("OptimisticLockException!");
+        } catch (ObjectOptimisticLockingFailureException ole) {
+            throw new OptimisticLockException("OptimisticLockException during product update!");
         }
     }
 }

@@ -46,13 +46,11 @@ public class Logging {
         Object result = null;
         try {
             result = joinPoint.proceed();
+            logger.info("Method " + methodName + " returns " + result);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
+            logger.error("OptimisticLockException caught!", throwable);
         }
-
-        logger.info("Method " + methodName + " returns " + result);
-
         return result;
     }
-
 }
